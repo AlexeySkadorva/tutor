@@ -10,4 +10,3 @@ public interface TutorNoteRepository extends BaseRepository<TutorNote> {
     List<TutorNote> findByTutor(Tutor tutor);
 
 }
-
