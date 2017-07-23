@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Репетиторы</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('subjects')"></div>
+
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-30" th:object="${tutor}">
+                <div class="col-md-12">
+                    <h2>Репетитор</h2>
+                    <div class="row">
+                        <div class="col-md-6 animate fadeIn">
+                            <img th:src="@{'/users/' + *{user.id} + '/photo/download'}" alt="about-me" class="margin-top-10"/>
+                            <ul class="list-inline about-me-icons margin-vert-20">
+                                <li>
+                                    <a th:href="*{vkLink}" th:alert="*{vkLink}">
+                                        <i class="fa-lg fa-border fa-vk"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="'skype:' + *{skypeLink}" th:alert="*{skypeLink}">
+                                        <i class="fa-lg fa-border fa-skype"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="'mailto:' + *{user.email}" th:alert="*{user.email}">
+                                        <i class="fa-lg fa-border fa-google-plus"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 margin-bottom-10 animate fadeInRight">
+                            <h3 class="padding-top-10 pull-left">
+                                <p th:text="*{user.getFullName()}"></p>
+                            </h3>
+                            <div class="clearfix"></div>
+                            <!--<h4>-->
+                                <!--<em th:text="*{status}"></em>-->
+                            <!--</h4>-->
+                            <div>
+                                <b>Возраст:</b> <span th:text="*{user.age}"></span>
+                            </div>
+                            <div>
+                                <b>Предметы:</b>
+                                <span type="span" class="label label-primary" th:each="s : *{subjects}" th:text="${s.name}"></span>
+                            </div>
+                            <div>
+                                <b>Образование:</b> <span th:text="*{education}"></span>
+                            </div>
+                            <div>
+                                <b>Опыт работы:</b> <span th:text="*{experienceInYear}"></span>
+                            </div>
+                            <div>
+                                <b>О себе:</b> <span th:text="*{comment}"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row animate fadeInUp">
+                        <h2 class="text-center margin-top-10" th:text="*{status}"></h2>
+                    </div>
+                    <!--<hr class="margin-bottom-40"/>-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-6 animate fadeIn">-->
+                            <!--&lt;!&ndash; My Skills &ndash;&gt;-->
+                            <!--<h3 class="margin-bottom-10">Рейтинг</h3>-->
+                            <!--<h3 class="progress-label">Средняя оценка за занятие-->
+                                <!--<span class="pull-right" th:text="${evaluation.evaluation} + '%'"></span>-->
+                            <!--</h3>-->
+                            <!--<div class="progress progress-sm">-->
+                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.evaluation}"-->
+                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.evaluation} + '%'">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<h3 class="progress-label">Комунекабельность-->
+                                <!--<span class="pull-right" th:text="${evaluation.sociability} + '%'"></span>-->
+                            <!--</h3>-->
+                            <!--<div class="progress progress-sm">-->
+                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.sociability}"-->
+                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.sociability} + '%'">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<h3 class="progress-label">Умение заинтересовать ребёнка-->
+                                <!--<span class="pull-right" th:text="${evaluation.interest} + '%'"></span>-->
+                            <!--</h3>-->
+                            <!--<div class="progress progress-sm">-->
+                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.interest}"-->
+                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.interest} + '%'">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<h3 class="progress-label">Умение объяснять материал-->
+                                <!--<span class="pull-right" th:text="${evaluation.explanations} + '%'"></span>-->
+                            <!--</h3>-->
+                            <!--<div class="progress progress-sm">-->
+                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.explanations}"-->
+                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.explanations} + '%'">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash; End My Skills &ndash;&gt;-->
+                        <!--</div>-->
+                            <!--&lt;!&ndash; Comments &ndash;&gt;-->
+                        <!--</div>-->
+                        <!--<div class="col-md-9">-->
+
+                        <!--<div class="blog-item">-->
+                            <!--<div class="clearfix"></div>-->
+                        <!--<div class="blog-item-footer">-->
+
+                        <!--<div class="blog-recent-comments panel panel-default margin-bottom-30" th:if="!${#lists.isEmpty(tutor.notes)}">-->
+                                <!--<div class="panel-heading">-->
+                                    <!--<h3>Comments</h3>-->
+                                <!--</div>-->
+                                <!--<ul class="list-group">-->
+                                    <!--<li class="list-group-item" th:each="note : ${tutor.notes}">-->
+                                        <!--<div class="row">-->
+                                            <!--<div class="col-md-2 profile-thumb">-->
+                                                <!--<a href="#">-->
+                                                    <!--<img class="media-object"-->
+                                                         <!--th:src="@{'/administration/users/' + ${note.client.user.id} + '/photo/download'}"/>-->
+                                                <!--</a>-->
+                                            <!--</div>-->
+                                            <!--<div class="col-md-10">-->
+                                                <!--<h4 th:text="${note.client.user.getFullName()}"></h4>-->
+                                                <!--<p  th:text="${note.note}"></p>-->
+                                                            <!--<span class="date" th:text="${note.createdDate}">-->
+                                                                <!--<i class="fa fa-clock-o color-gray-light"></i></span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</li>-->
+                                    <!--<li class="list-group-item">-->
+                                        <!--<div class="blog-comment-form">-->
+                                            <!--<div class="row margin-top-20">-->
+                                                <!--<div class="col-md-12">-->
+                                                    <!--<div class="pull-left">-->
+                                                        <!--<h3>Оставить комментарий</h3>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="row margin-top-20">-->
+                                                <!--<div class="col-md-12">-->
+                                                    <!--<form>-->
+                                                        <!--<label>Комментарий</label>-->
+                                                        <!--<div class="row margin-bottom-20">-->
+                                                            <!--<div class="col-md-11 col-md-offset-0">-->
+                                                                <!--<textarea class="form-control" rows="8"></textarea>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--<p>-->
+                                                            <!--<button class="btn btn-primary" type="submit">Отправить</button>-->
+                                                        <!--</p>-->
+                                                    <!--</form>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash; End Comments &ndash;&gt;-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+
+<script th:src="@{/js/knockout/knockout.js}"></script>
+<script th:src="@{/js/knockout/knockout-validation-min.js}"></script>
+<script th:src="@{/js/tutor.js}"></script>
+</body>
+</html>

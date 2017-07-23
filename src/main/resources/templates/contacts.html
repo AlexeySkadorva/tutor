@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Контакты</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('contact')"></div>
+
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-30">
+                <!-- Main Column -->
+                <div class="col-md-9">
+                    <!-- Main Content -->
+                    <div class="headline">
+                        <h2>Контактная форма</h2>
+                    </div>
+                    <p>Оставте нам сообщениеи и мы ответим Вам в максимально короткий срок.</p>
+                    <br/>
+                    <!-- Contact Form -->
+                    <form th:object="${contact}" th:action="@{/contacts}" method="POST">
+                        <label>Имя Фамилия</label>
+                        <div class="row margin-bottom-20">
+                            <div class="col-md-6 col-md-offset-0">
+                                <input class="form-control" type="text" th:field="*{name}"/>
+                            </div>
+                        </div>
+                        <label>Email
+                            <span class="color-red">*</span>
+                        </label>
+                        <div class="row margin-bottom-20">
+                            <div class="col-md-6 col-md-offset-0">
+                                <input class="form-control" type="text" th:field="*{email}"/>
+                            </div>
+                        </div>
+                        <label>Сообщение</label>
+                        <div class="row margin-bottom-20">
+                            <div class="col-md-8 col-md-offset-0">
+                                <textarea rows="8" class="form-control" th:field="*{message}"></textarea>
+                            </div>
+                        </div>
+                        <p>
+                            <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                        </p>
+                    </form>
+                    <!-- End Contact Form -->
+                    <!-- End Main Content -->
+                </div>
+                <!-- End Main Column -->
+                <!-- Side Column -->
+                <div class="col-md-3">
+                    <!-- Recent Posts -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Контактная информация</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p></p>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <i class="fa-phone color-primary"></i>+375-44-703-59-97</li>
+                                <li>
+                                    <i class="fa-envelope color-primary"></i>repetitornadomu@gmail.com</li>
+                                <li>
+                                    <i class="fa-home color-primary"></i>г. Минск</li>
+                            </ul>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <strong class="color-primary">Пн-Пт:</strong> с 9 до 18</li>
+                                <li>
+                                    <strong class="color-primary">Сб:</strong> с 10 до 17</li>
+                                <li>
+                                    <strong class="color-primary">Вс:</strong> выходной</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--<div class="panel panel-default">-->
+                        <!--<div class="panel-heading">-->
+                            <!--<h3 class="panel-title">О нас</h3>-->
+                        <!--</div>-->
+                        <!--<div class="panel-body">-->
+                            <!--Мы молодое репетиторское агенство готовое помочь Вам восполнить пробелы и подтянуть знания по школьных дисциплинам-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+</head>
+<body>
+<div id="hornav" class="bottom-border-shadow" th:fragment="menu(activeTab)">
+    <div class="container no-padding border-bottom">
+        <div class="row">
+            <div class="col-md-10 no-padding">
+                <div class="visible-lg">
+                    <ul id="hornavmenu" class="nav navbar-nav">
+                        <li>
+                            <a class="fa-home" th:classappend="${activeTab == 'main'} ? 'active'" th:href="@{/}">Главная</a>
+                        </li>
+                        <!--<li>-->
+                            <!--<a class="fa-user" th:classappend="${activeTab == 'tutors'} ? 'active'" th:href="@{/tutors}">Репетиторы</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a class="fa-users" th:classappend="${activeTab == 'tutors'} ? 'active'" th:href="@{/tutors}">Репетиторы</a>
+                        </li>
+                        <li>
+                            <a class="fa-comment" th:classappend="${activeTab == 'notes'} ? 'active'" th:href="@{/notes}">Отзывы</a>
+                        </li>
+                        <li>
+                            <a class="fa-dollar" th:classappend="${activeTab == 'price'} ? 'active'" th:href="@{/price}">Цены</a>
+                        </li>
+                        <!--<li>-->
+                            <!--<a class="fa-user" th:classappend="${activeTab == 'sales'} ? 'active'" th:href="@{/sales}">Скидки</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a class="fa-phone" th:classappend="${activeTab == 'contact'} ? 'active'" th:href="@{/contacts}">Контакты</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--<div class="col-md-2 no-padding">-->
+                <!--<ul class="social-icons pull-right">-->
+                    <!--<li class="glyphicon glyphicon-log-in">-->
+                        <!--<a href="#" target="_blank" title="login"></a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

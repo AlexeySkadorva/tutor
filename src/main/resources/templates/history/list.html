@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>История занятий</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('tutors')"></div>
+
+    <div class="container">
+        <h2>История занятий</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Репетитор</th>
+                <th>Клиент</th>
+                <th>Дата</th>
+                <th>Домашнее задание</th>
+                <th>Пройденый материал</th>
+                <th>Оценка</th>
+            </tr>
+            </thead>
+            <tbody th:each="h : ${history}">
+            <tr>
+                <td><a th:href="@{'/tutors/' + ${h.relation.tutor.id}}">
+                    <span th:text="${h.relation.tutor.user.getFullName()}"></span></a></td>
+                <td><a th:href="@{'/clients/' + ${h.relation.client.id}}">
+                    <span th:text="${h.relation.client.user.getFullName()}"></span></a></td>
+                <td th:text="${h.date}"></td>
+                <td th:text="${h.homework}"></td>
+                <td th:text="${h.completedMaterial}"></td>
+                <td th:text="${h.rating}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+</body>
+</html>

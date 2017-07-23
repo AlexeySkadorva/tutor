@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Отзывы</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('notes')"></div>
+
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-40">
+                <div class="col-md-12">
+                        <h2>Отзывы</h2>
+                        <p>Здесь предоставлены отзывы клиентов нашего агентства. Если Вам есть что сказать, заполните
+                        пожалуйста форму внизу.</p>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-12" th:if="!${#lists.isEmpty(notes)}">
+                                <div class="carousel slide testimonials" id="testimonials4">
+                                    <div class="carousel-inner">
+                                        <div class="item active"  th:each="note, index : ${notes}">
+                                            <div class="col-md-8 animate" th:classappend="${index.index % 2 != 0} ?
+                                             'slideInRight testimonials-bg-dark col-md-offset-4' : 'slideInLeft testimonials-bg'">
+                                                <p th:text="${note.note}"></p>
+                                                <div class="testimonial-info">
+                                                    <!--<img alt="" src="assets/img/profiles/37.jpg" class="img-circle img-responsive" />-->
+                                                        <h3 th:text="${note.name}"></h3>
+                                                            <!--<em>-->
+                                                                <!--Javascript Developer, Business Inc.-->
+                                                            <!--</em>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="col-md-9">
+                                <form th:object="${note}" th:action="@{/notes}" method="POST">
+                                    <label>Имя Фамилия Отчество</label>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-6 col-md-offset-0">
+                                            <input class="form-control" type="text" th:field="*{name}"/>
+                                        </div>
+                                    </div>
+                                    <label>Комментарий</label>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-8 col-md-offset-0">
+                                            <textarea rows="8" class="form-control" th:field="*{note}"></textarea>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <button type="submit" class="btn btn-primary">Отправить</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Цены</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('price')"></div>
+
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-30">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 text-right animate fadeInLeft">
+                            <h3>Гуманитарные предметы</h3>
+                            <p>Занятия проводятся с детьми 1-9 классов. Восполнение пробелов в школьной программе.
+                            Не готовим для сдачи экзаменов по данным предметам.</p>
+                            <h3>Технические специальность</h3>
+                            <p>Занятия проводятся с детьми 1-9 классов. Восполнение пробелов в школьной программе, а
+                            так же подготовка ребенка для сдачи экзаменов.</p>
+                        </div>
+                        <div class="col-md-6 animate fadeInRight">
+                            <h3>Иностранные языки</h3>
+                            <p>Занятия проводятся с детьми 1-9 классов. Восполнение пробелов в школьной программе.
+                                Не готовим для сдачи экзаменов по данным предметам.</p>
+                            <h3>Программирование с нуля</h3>
+                            <p>Занятия проводятся как со школьниками так и со студентами. Обучение программированию на
+                            языке java.</p>
+                        </div>
+                    </div>
+                    <hr class="margin-top-20 margin-bottom-30"/>
+                    <!-- Top Panels -->
+                    <div class="row padding-top-20">
+                        <div class="col-md-3 animate swing">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center">
+                                    <i class="fa fa-group fa-4x"></i>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3 class="margin-bottom-10">Гуманитарные предметы</h3>
+                                    25 рублей
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 animate swing">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center">
+                                    <i class="fa fa-superscript fa-4x"></i>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3 class="margin-bottom-10">Технические предметы</h3>
+                                    25 рублей
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 animate swing">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center">
+                                    <i class="fa fa-comments-o fa-4x"></i>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3 class="margin-bottom-10">Иностранные языки</h3>
+                                    30 рублей
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 animate swing">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center">
+                                    <i class="fa fa-keyboard-o fa-4x"></i>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3 class="margin-bottom-10">Программирвоание с нуля</h3>
+                                    40 рублей
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Top Panels -->
+                    <hr class="margin-top-3	0"/>
+                    <!-- Middle Text -->
+                    <div class="row">
+                        <div class="col-md-12 text-center margin-top-10 animate fadeInUp">
+                            <h2 class="text-center">Саммые ценные вклады - это вклады в будущее...</h2>
+                            <!--<p class="text-center margin-bottom-20">Aenean venenatis egestas iaculis. Donec non urna quam. Nullam consectetur condimentum dolor at bibendum.</p>-->
+                        </div>
+                    </div>
+                    <!-- End Middle Text -->
+                    <hr/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+</body>
+</html>

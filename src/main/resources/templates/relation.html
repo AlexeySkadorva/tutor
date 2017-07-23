@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Репетиторы</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('tutors')"></div>
+
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-30">
+                <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+                    <form class="signup-page" th:object="${relation}" th:action="@{/administration/relations}" method="POST">
+                        <div class="signup-header">
+                            <h2>Регистрания нового пользователя</h2>
+                        </div>
+
+
+                        <label>Клиент
+                            <span class="color-red">*</span>
+                        </label>
+                        <select id="genderSelect" class="form-control margin-bottom-20" name="gender"
+                                th:field="*{client}">
+                            <option value=""></option>
+                            <option th:each="c : ${clients}" th:value="${c.id}" th:text="${c.user.getFullName()}"/>
+                        </select>
+
+                        <label>Репетитор
+                            <span class="color-red">*</span>
+                        </label>
+                        <select id="genderSelect" class="form-control margin-bottom-20" name="gender"
+                                th:field="*{tutor}">
+                            <option value=""></option>
+                            <option th:each="t : ${tutors}" th:value="${t.id}" th:text="${t.user.getFullName()}"/>
+                        </select>
+
+                        <label>Периодичность
+                            <span class="color-red">*</span>
+                        </label>
+                        <input class="form-control margin-bottom-20" type="text" th:field="*{periodicity}"/>
+
+                        <hr/>
+
+                        <div class="row">
+                            <div class="col-lg-4 text-right">
+                                <button class="btn btn-primary" type="submit">Регистрация</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+
+</body>
+</html>

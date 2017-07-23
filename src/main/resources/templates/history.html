@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>История занятий</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('tutors')"></div>
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-30">
+                <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                    <div id="accordion" class="panel-group">
+                        <div class="panel panel-default" th:each="relation : ${relations}">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" th:href="'#collapse-' + ${relation.id}" data-parent="#accordion"
+                                       data-toggle="collapse" th:text="${relation.client.user.getFullName()}">
+                                    </a>
+                                </h4>
+                            </div>
+                            <div th:id="'collapse-' + ${relation.id}" class="accordion-body collapse">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form class="signup-page" th:object="${history}"
+                                              th:action="@{'/relations/' + ${relation.id} + '/history'}" method="POST">
+                                        <div class="col-md-12">
+                                            <div class="row">
+
+                                            <label>Пройденный материал</label>
+                                            <textarea class="form-control margin-bottom-20"
+                                                   th:field="*{completedMaterial}" type="text" maxlength="100"/>
+                                            </div>
+                                            <label>Домашнее задание</label>
+                                            <textarea class="form-control margin-bottom-20"
+                                                   th:field="*{homework}" type="text" maxlength="100"/>
+
+                                            <label>Оценка</label>
+                                            <input class="form-control margin-bottom-20"
+                                                   th:field="*{rating}" type="text" maxlength="100"/>
+
+                                            <div class="row">
+                                                <div class="col-lg-4 text-right">
+                                                    <button class="btn btn-primary" type="submit">Регистрация</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+
+</body>
+</html>
