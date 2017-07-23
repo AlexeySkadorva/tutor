@@ -4,8 +4,8 @@ import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.repositories.ClientRepository;
 import by.bsu.tutor.service.administration.UserService;
-import by.bsu.tutor.service.client.ClientService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
+import by.bsu.tutor.service.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

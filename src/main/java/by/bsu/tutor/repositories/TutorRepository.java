@@ -3,7 +3,6 @@ package by.bsu.tutor.repositories;
 import by.bsu.tutor.models.entity.tutor.Subject;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

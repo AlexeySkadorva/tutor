@@ -3,9 +3,9 @@ package by.bsu.tutor.service.administration.impl;
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.administration.HistoryLesson;
 import by.bsu.tutor.repositories.HistoryLessonRepository;
-import by.bsu.tutor.service.client.ClientTutorRelationService;
 import by.bsu.tutor.service.administration.HistoryLessonService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
+import by.bsu.tutor.service.client.ClientTutorRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

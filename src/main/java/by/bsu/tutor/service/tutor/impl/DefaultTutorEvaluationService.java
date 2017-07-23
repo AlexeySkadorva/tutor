@@ -3,9 +3,9 @@ package by.bsu.tutor.service.tutor.impl;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.tutor.TutorEvaluation;
 import by.bsu.tutor.repositories.TutorEvaluationRepository;
+import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.client.ClientTutorRelationService;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
-import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

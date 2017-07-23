@@ -1,7 +1,6 @@
 package by.bsu.tutor.repositories;
 
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 

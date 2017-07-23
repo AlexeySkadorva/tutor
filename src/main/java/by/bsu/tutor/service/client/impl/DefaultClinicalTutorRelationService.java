@@ -2,8 +2,8 @@ package by.bsu.tutor.service.client.impl;
 
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.repositories.ClientTutorRelationRepository;
-import by.bsu.tutor.service.client.ClientTutorRelationService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
+import by.bsu.tutor.service.client.ClientTutorRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

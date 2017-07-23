@@ -4,19 +4,14 @@ import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.dto.SearchForm;
 import by.bsu.tutor.models.entity.tutor.Subject;
 import by.bsu.tutor.models.entity.tutor.Tutor;
-import by.bsu.tutor.models.entity.user.User;
-import by.bsu.tutor.models.enums.Gender;
-import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "tutors")

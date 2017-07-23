@@ -5,8 +5,6 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

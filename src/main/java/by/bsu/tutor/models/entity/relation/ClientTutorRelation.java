@@ -1,7 +1,7 @@
 package by.bsu.tutor.models.entity.relation;
 
-import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.administration.HistoryLesson;
+import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import lombok.Data;
