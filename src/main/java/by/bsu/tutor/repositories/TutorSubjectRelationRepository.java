@@ -5,9 +5,6 @@ import by.bsu.tutor.models.entity.tutor.Subject;
 
 import java.util.List;
 
-/**
- * Created by lesha on 09.05.2017.
- */
 public interface TutorSubjectRelationRepository extends BaseRepository<TutorSubjectRelation> {
 
     List<TutorSubjectRelation> findBySubject(Subject subject);

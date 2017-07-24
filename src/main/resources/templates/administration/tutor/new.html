@@ -11,6 +11,7 @@
     <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
     <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
     <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link th:href="@{/css/jquery-ui-datepicker.css}" rel="stylesheet"/>
     <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
 </head>
 <body>
@@ -75,16 +76,16 @@
                                    th:field="*{user.secondName}" maxlength="100"/>
                         </div>
 
-                        <!--<div class="row">-->
-                            <!--<label>Дата рождения-->
-                                <!--<span class="color-red">*</span>-->
-                            <!--</label>-->
-                            <!--<i class="datepicker-icon">-->
-                                <!--<input type="text" id="birthDateInput" class="form-control margin-bottom-20"-->
-                                       <!--data-bind="datepicker: birthDate, inputmask: $element, inputmaskOptions: {type: 'date'}"-->
-                                       <!--th:field="*{user.birthDate}"/>-->
-                            <!--</i>-->
-                        <!--</div>-->
+                        <div class="row">
+                            <label>Дата рождения
+                                <span class="color-red">*</span>
+                            </label>
+                            <i class="datepicker-icon">
+                                <input type="text" id="birthDateInput" class="form-control margin-bottom-20"
+                                       data-bind="datepicker: birthDate, inputmask: $element, inputmaskOptions: {type: 'date'}"
+                                       th:field="*{user.birthDate}"/>
+                            </i>
+                        </div>
 
                         <div class="row">
                             <label>Адрес
@@ -180,6 +181,8 @@
     <div th:replace="fragments/footer :: footer"></div>
 </div>
 <script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/jquery-ui.min.js}"/>
+<script th:src="@{/js/moment.min.js}"/>
 <script th:src="@{/js/bootstrap.min.js}"/>
 <script th:src="@{/js/scripts.js}"/>
 <script th:src="@{/js/jquery.isotope.js}"/>
@@ -188,5 +191,19 @@
 <script th:src="@{/js/jquery.sticky.js}"/>
 <script th:src="@{/js/slimbox2.js}"/>
 <script th:src="@{/js/modernizr.custom.js}"/>
+
+<script th:src="@{/js/jquery.inputmask.bundle.min.js}"/>
+<script th:src="@{/js/knockout/knockout.js}"/>
+<script th:src="@{/js/knockout/knockout.inputmask.js}"/>
+<script th:src="@{/js/knockout/knockout-validation-min.js}"/>
+<script th:src="@{/js/datepicker-ru.js}"/>
+<script th:src="@{/js/user.js}"/>
+<script th:src="@{/js/knockout.validation.rules.js}"/>
+<script th:src="@{/js/knockout/knockout.datepicker.js}"/>
+<script th:inline="javascript">
+    $(function () {
+        ko.applyBindings(new User());
+    });
+</script>
 </body>
 </html>

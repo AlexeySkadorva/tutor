@@ -55,7 +55,7 @@ public class Tutor extends BaseEntity {
     @PostLoad
     private void calculateFields(){
         LocalDate currentDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-      //  this.experienceInYear = currentDate.getYear() - this.firstExperience;
+        this.experienceInYear = currentDate.getYear() - this.firstExperience;
     }
 
 }

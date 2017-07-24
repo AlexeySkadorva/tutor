@@ -58,6 +58,12 @@
                             <!--</h4>-->
                             <div>
                                 <b>Возраст:</b> <span th:text="*{user.age}"></span>
+                                <span th:if="*{user.age &lt; 21}">лет</span>
+                                <span th:if="*{user.age == 21 or user.age == 31}">год</span>
+                                <span th:if="*{user.age &gt; 21 and user.age &lt; 25}">года</span>
+                                <span th:if="*{user.age &gt; 31 and user.age &lt; 35}">года</span>
+                                <span th:if="*{user.age &gt; 24 and user.age &lt; 31}">лет</span>
+                                <span th:if="*{user.age &gt; 34 and user.age &lt; 41}">лет</span>
                             </div>
                             <div>
                                 <b>Предметы:</b>
@@ -67,7 +73,12 @@
                                 <b>Образование:</b> <span th:text="*{education}"></span>
                             </div>
                             <div>
-                                <b>Опыт работы:</b> <span th:text="*{experienceInYear}"></span>
+                                <b>Опыт работы:</b>
+                                <span th:if="*{experienceInYear == 0}">Без опыта</span>
+                                <span th:if="*{experienceInYear != 0}" th:text="*{experienceInYear}"></span>
+                                <span th:if="*{experienceInYear == 1}">год</span>
+                                <span th:if="*{experienceInYear &gt; 1 and experienceInYear &lt; 5}">года</span>
+                                <span th:if="*{experienceInYear &gt; 4}">лет</span>
                             </div>
                             <div>
                                 <b>О себе:</b> <span th:text="*{comment}"></span>

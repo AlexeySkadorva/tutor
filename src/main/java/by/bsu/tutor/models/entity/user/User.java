@@ -3,8 +3,11 @@ package by.bsu.tutor.models.entity.user;
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,8 +33,9 @@ public class User extends BaseEntity {
     @Column(name = "secondname")
     private String secondName;
 
-//    @Column(name = "birthdate")
-//    private Date birthDate;
+    @DateTimeFormat(pattern="dd.MM.yyyy")
+    @Column(name = "birthdate")
+    private Date birthDate;
 
     @Column(name = "address")
     private String address;
@@ -68,14 +72,14 @@ public class User extends BaseEntity {
 //        }
 //    }
 
-//    @PostLoad
-//    private void calculateAge(){
-//        if(null != this.birthDate) {
-//            LocalDate currentDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            LocalDate birthDate = this.birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            this.age = currentDate.getYear() - birthDate.getYear() + 1;
-//        }
-//    }
+    @PostLoad
+    private void calculateAge(){
+        if(null != this.birthDate) {
+            LocalDate currentDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate birthDate = this.birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            this.age = currentDate.getYear() - birthDate.getYear() + 1;
+        }
+    }
 
     public String getFullName() {
         return Stream.of(lastName, firstName, secondName).filter(n -> n != null)
