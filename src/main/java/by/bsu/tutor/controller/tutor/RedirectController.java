@@ -16,4 +16,10 @@ public class RedirectController {
         return "photo";
     }
 
+
+    @RequestMapping(value = "tutors/info")
+    public String getTutorsInfo() {
+        return "tutor/info";
+    }
+
 }

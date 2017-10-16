@@ -54,7 +54,7 @@
                             </h3>
                             <div class="clearfix"></div>
                             <!--<h4>-->
-                                <!--<em th:text="*{status}"></em>-->
+                            <!--<em th:text="*{status}"></em>-->
                             <!--</h4>-->
                             <div>
                                 <b>Возраст:</b> <span th:text="*{user.age}"></span>
@@ -86,109 +86,148 @@
 
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <a th:href="@{*{id} + '/order'}" class="btn btn-default">Заказать</a>
+                        </div>
+                    </div>
                     <hr/>
                     <div class="row animate fadeInUp">
                         <h2 class="text-center margin-top-10" th:text="*{status}"></h2>
                     </div>
-                    <!--<hr class="margin-bottom-40"/>-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-6 animate fadeIn">-->
-                            <!--&lt;!&ndash; My Skills &ndash;&gt;-->
-                            <!--<h3 class="margin-bottom-10">Рейтинг</h3>-->
-                            <!--<h3 class="progress-label">Средняя оценка за занятие-->
-                                <!--<span class="pull-right" th:text="${evaluation.evaluation} + '%'"></span>-->
-                            <!--</h3>-->
-                            <!--<div class="progress progress-sm">-->
-                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.evaluation}"-->
-                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.evaluation} + '%'">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<h3 class="progress-label">Комунекабельность-->
-                                <!--<span class="pull-right" th:text="${evaluation.sociability} + '%'"></span>-->
-                            <!--</h3>-->
-                            <!--<div class="progress progress-sm">-->
-                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.sociability}"-->
-                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.sociability} + '%'">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<h3 class="progress-label">Умение заинтересовать ребёнка-->
-                                <!--<span class="pull-right" th:text="${evaluation.interest} + '%'"></span>-->
-                            <!--</h3>-->
-                            <!--<div class="progress progress-sm">-->
-                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.interest}"-->
-                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.interest} + '%'">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<h3 class="progress-label">Умение объяснять материал-->
-                                <!--<span class="pull-right" th:text="${evaluation.explanations} + '%'"></span>-->
-                            <!--</h3>-->
-                            <!--<div class="progress progress-sm">-->
-                                <!--<div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.explanations}"-->
-                                     <!--aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.explanations} + '%'">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; End My Skills &ndash;&gt;-->
-                        <!--</div>-->
-                            <!--&lt;!&ndash; Comments &ndash;&gt;-->
-                        <!--</div>-->
-                        <!--<div class="col-md-9">-->
+
+                    <div class="col-md-12">
+                        <hr/>
+                        <div class="col-md-1 margin-vert-20">
+                            <a th:href="@{'/tutors/' + *{id} + '/history'}">
+                                <i class="fa-plus-square fa-2x color-primary"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-10 margin-vert-10">
+                            <h4><a th:href="@{'/tutors/' + *{id} + '/history'}">Добавить новое занятие</a></h4>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-6 animate fadeIn" th:if="!${evaluation.id == null or evaluation.id == null}">
+                            <!-- My Skills -->
+                            <h3 class="margin-bottom-10">Рейтинг</h3>
+                            <h3 class="progress-label">Средняя оценка за занятие
+                                <span class="pull-right" th:text="${evaluation.evaluation} + '%'"></span>
+                            </h3>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.evaluation}"
+                                     aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.evaluation} + '%'">
+                                </div>
+                            </div>
+                            <h3 class="progress-label">Комунекабельность
+                                <span class="pull-right" th:text="${evaluation.sociability} + '%'"></span>
+                            </h3>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.sociability}"
+                                     aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.sociability} + '%'">
+                                </div>
+                            </div>
+                            <h3 class="progress-label">Умение заинтересовать ребёнка
+                                <span class="pull-right" th:text="${evaluation.interest} + '%'"></span>
+                            </h3>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.interest}"
+                                     aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.interest} + '%'">
+                                </div>
+                            </div>
+                            <h3 class="progress-label">Умение объяснять материал
+                                <span class="pull-right" th:text="${evaluation.explanations} + '%'"></span>
+                            </h3>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" th:aria-valuenow="${evaluation.explanations}"
+                                     aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.explanations} + '%'">
+                                </div>
+                            </div>
+                            <!-- End My Skills -->
+                        </div>
+
+                        <div class="col-md-6" th:if="!${#lists.isEmpty(tutor.notes)}">
+                            <h3 class="margin-bottom-10">Комментарии</h3>
+                            <div id="accordion" class="panel-group">
+                                <div class="panel panel-default accordion-toggle" th:each="note : ${tutor.notes}">
+                                    <div class="panel-heading" th:href="'#collapse-' + *{id}"
+                                         data-parent="#accordion" data-toggle="collapse">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" href="#collapse-One" data-parent="#accordion"
+                                               data-toggle="collapse" th:text="${note.client.user.getFullName()}">
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div th:id="'collapse-' + *{id}" class="accordion-body collapse">
+                                        <div class="panel-body">
+                                            <p th:text="${note.note}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Accordion -->
+                        </div>
+                        <!-- Comments -->
+                    </div>
+                    <!--<div class="col-md-9">-->
 
                         <!--<div class="blog-item">-->
                             <!--<div class="clearfix"></div>-->
-                        <!--<div class="blog-item-footer">-->
+                            <!--<div class="blog-item-footer">-->
 
-                        <!--<div class="blog-recent-comments panel panel-default margin-bottom-30" th:if="!${#lists.isEmpty(tutor.notes)}">-->
-                                <!--<div class="panel-heading">-->
-                                    <!--<h3>Comments</h3>-->
-                                <!--</div>-->
-                                <!--<ul class="list-group">-->
-                                    <!--<li class="list-group-item" th:each="note : ${tutor.notes}">-->
-                                        <!--<div class="row">-->
-                                            <!--<div class="col-md-2 profile-thumb">-->
-                                                <!--<a href="#">-->
-                                                    <!--<img class="media-object"-->
-                                                         <!--th:src="@{'/administration/users/' + ${note.client.user.id} + '/photo/download'}"/>-->
-                                                <!--</a>-->
-                                            <!--</div>-->
-                                            <!--<div class="col-md-10">-->
-                                                <!--<h4 th:text="${note.client.user.getFullName()}"></h4>-->
-                                                <!--<p  th:text="${note.note}"></p>-->
+                                <!--<div class="blog-recent-comments panel panel-default margin-bottom-30" th:if="!${#lists.isEmpty(tutor.notes)}">-->
+                                    <!--<div class="panel-heading">-->
+                                        <!--<h3>Comments</h3>-->
+                                    <!--</div>-->
+                                    <!--<ul class="list-group">-->
+                                        <!--<li class="list-group-item" th:each="note : ${tutor.notes}">-->
+                                            <!--<div class="row">-->
+                                                <!--<div class="col-md-2 profile-thumb">-->
+                                                    <!--<a href="#">-->
+                                                        <!--<img class="media-object"-->
+                                                             <!--th:src="@{'/administration/users/' + ${note.client.user.id} + '/photo/download'}"/>-->
+                                                    <!--</a>-->
+                                                <!--</div>-->
+                                                <!--<div class="col-md-10">-->
+                                                    <!--<h4 th:text="${note.client.user.getFullName()}"></h4>-->
+                                                    <!--<p  th:text="${note.note}"></p>-->
                                                             <!--<span class="date" th:text="${note.createdDate}">-->
                                                                 <!--<i class="fa fa-clock-o color-gray-light"></i></span>-->
+                                                <!--</div>-->
                                             <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</li>-->
-                                    <!--<li class="list-group-item">-->
-                                        <!--<div class="blog-comment-form">-->
-                                            <!--<div class="row margin-top-20">-->
-                                                <!--<div class="col-md-12">-->
-                                                    <!--<div class="pull-left">-->
-                                                        <!--<h3>Оставить комментарий</h3>-->
+                                        <!--</li>-->
+                                        <!--<li class="list-group-item">-->
+                                            <!--<div class="blog-comment-form">-->
+                                                <!--<div class="row margin-top-20">-->
+                                                    <!--<div class="col-md-12">-->
+                                                        <!--<div class="pull-left">-->
+                                                            <!--<h3>Оставить комментарий</h3>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                                <!--<div class="row margin-top-20">-->
+                                                    <!--<div class="col-md-12">-->
+                                                        <!--<form>-->
+                                                            <!--<label>Комментарий</label>-->
+                                                            <!--<div class="row margin-bottom-20">-->
+                                                                <!--<div class="col-md-11 col-md-offset-0">-->
+                                                                    <!--<textarea class="form-control" rows="8"></textarea>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                            <!--<p>-->
+                                                                <!--<button class="btn btn-primary" type="submit">Отправить</button>-->
+                                                            <!--</p>-->
+                                                        <!--</form>-->
                                                     <!--</div>-->
                                                 <!--</div>-->
                                             <!--</div>-->
-                                            <!--<div class="row margin-top-20">-->
-                                                <!--<div class="col-md-12">-->
-                                                    <!--<form>-->
-                                                        <!--<label>Комментарий</label>-->
-                                                        <!--<div class="row margin-bottom-20">-->
-                                                            <!--<div class="col-md-11 col-md-offset-0">-->
-                                                                <!--<textarea class="form-control" rows="8"></textarea>-->
-                                                            <!--</div>-->
-                                                        <!--</div>-->
-                                                        <!--<p>-->
-                                                            <!--<button class="btn btn-primary" type="submit">Отправить</button>-->
-                                                        <!--</p>-->
-                                                    <!--</form>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</li>-->
-                                <!--</ul>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
                             <!--</div>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; End Comments &ndash;&gt;-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; End Comments &ndash;&gt;-->
                     <!--</div>-->
                 </div>
             </div>

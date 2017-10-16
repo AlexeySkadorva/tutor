@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserDetails userDetails;
         User user = userService.findByLogin(login);
         if (user != null) {
-            Set<GrantedAuthority> roles = Stream.of(user.getRole()).map(r -> new SimpleGrantedAuthority(r.getCode())).collect(Collectors.toSet());
+            Set<GrantedAuthority> roles = Stream.of(user.getRole()).map(r -> new SimpleGrantedAuthority(r.getCode().name())).collect(Collectors.toSet());
             userDetails = new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), true, true, true, true, roles);
         } else {
             userDetails = new org.springframework.security.core.userdetails.User("none", "none", new HashSet<>());

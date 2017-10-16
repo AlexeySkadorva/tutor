@@ -12,9 +12,8 @@ import by.bsu.tutor.service.administration.UserService;
 import by.bsu.tutor.service.client.ClientService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -69,4 +68,5 @@ public class DirectoryController {
     public List<Subject> getSubjects() {
         return subjectRepository.findAll();
     }
+
 }

@@ -5775,3 +5775,11 @@ button.close {
 .validationMessage {
   color: #e51c23;
 }
+
+.dropdown-menu {
+  background: white;
+}
+
+.right-block {
+  margin-bottom: 10px;
+}

@@ -21,6 +21,8 @@
     <div th:replace="fragments/menu :: menu('tutors')"></div>
 
     <div class="container">
+        <div class="container background-white">
+            <div class="row margin-vert-30">
         <h2>История занятий</h2>
         <table class="table">
             <thead>
@@ -39,13 +41,14 @@
                     <span th:text="${h.relation.tutor.user.getFullName()}"></span></a></td>
                 <td><a th:href="@{'/clients/' + ${h.relation.client.id}}">
                     <span th:text="${h.relation.client.user.getFullName()}"></span></a></td>
-                <td th:text="${h.date}"></td>
+                <td th:text="${#dates.format(h.date, 'dd-MM-yyyy')}"></td>
                 <td th:text="${h.homework}"></td>
                 <td th:text="${h.completedMaterial}"></td>
                 <td th:text="${h.rating}"></td>
             </tr>
             </tbody>
         </table>
+                </div></div>
     </div>
 
     <div th:replace="fragments/footer :: contacts"></div>
