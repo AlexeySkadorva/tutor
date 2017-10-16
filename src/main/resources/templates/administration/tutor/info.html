@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Список пользователей</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('tutors')"></div>
+
+    <div class="container">
+        <h2>Репетиторы</h2>
+        Добро пожаловать дорой соискатель. Наш ресурс не просто каталог репетиторов, это нечно большее. Это дневник занятий, который
+        будет полезен на всем этапе обучения. Вы сможете отслеживать свои успехи в обучении, смсотреть историю всех занятий и т.д.
+
+
+        - Личный кабинет пользователя. В котором доступны:
+           - история всех занятий с Вашими репетиторами
+           - просмотр всех домашних заданий
+           - простор оценок, репетитора за каждое занятие
+           - отслеживание своего прогресса
+           - и многое другое.
+
+        1) Зарегистрируйтесь
+        2) Выберите подходящего Вам репетитора
+        3) Закажите его услуги. Репетитору будет отправлено письмо и он ответит Вам в кратчайший срок.
+        4) Наслаждайтесь занятиями и удобствами нашего ресурса.
+
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+</body>
+</html>

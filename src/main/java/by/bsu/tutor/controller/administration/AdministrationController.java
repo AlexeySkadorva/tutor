@@ -3,6 +3,7 @@ package by.bsu.tutor.controller.administration;
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
+import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.enums.Gender;
 import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
@@ -35,6 +36,12 @@ public class AdministrationController {
         return "administration/administration";
     }
 
+    @RequestMapping(value = "/calendar", method = RequestMethod.GET)
+    public String sadveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) {
+
+        return "calendar";
+    }
+
     @RequestMapping(value = "/tutors/new", method = RequestMethod.GET)
     public Object getNewUser(Model model) {
         model.addAttribute("subjects", subjectRepository.findAll());
@@ -46,7 +53,7 @@ public class AdministrationController {
 
     @RequestMapping(value = "/tutors", method = RequestMethod.POST)
     public String saveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) {
-        tutor.getUser().setRole(roleRepository.findByCode("TUTOR"));
+        tutor.getUser().setRole(roleRepository.findByCode(Role.Code.TUTOR.name()));
 
         tutorService.save(tutor);
         model.addAttribute("userId", tutor.getUser().getId());

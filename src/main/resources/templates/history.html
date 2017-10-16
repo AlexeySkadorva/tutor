@@ -27,25 +27,28 @@
                 <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                     <div id="accordion" class="panel-group">
                         <div class="panel panel-default" th:each="relation : ${relations}">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle" th:href="'#collapse-' + ${relation.id}" data-parent="#accordion"
-                                       data-toggle="collapse" th:text="${relation.client.user.getFullName()}">
-                                    </a>
-                                </h4>
+                            <div class="panel-heading" >
+                                <div class="col-md-12 margin-vert-20 accordion-toggle"
+                                     th:href="'#collapse-' + ${relation.id}" data-parent="#accordion" data-toggle="collapse">
+                                    <div class="col-md-2">
+                                    <i class="fa-plus-square-o fa-3x color-primary"></i>
+                                        </div>
+                                    <div class="col-md-10 margin-vert-5">
+                                    <h3 th:text="${relation.client.user.getFullName()}"></h3>
+                                    </div>
+                                </div>
                             </div>
                             <div th:id="'collapse-' + ${relation.id}" class="accordion-body collapse">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <form class="signup-page" th:object="${history}"
+                                        <form th:object="${history}"
                                               th:action="@{'/relations/' + ${relation.id} + '/history'}" method="POST">
                                         <div class="col-md-12">
-                                            <div class="row">
 
                                             <label>Пройденный материал</label>
                                             <textarea class="form-control margin-bottom-20"
                                                    th:field="*{completedMaterial}" type="text" maxlength="100"/>
-                                            </div>
+
                                             <label>Домашнее задание</label>
                                             <textarea class="form-control margin-bottom-20"
                                                    th:field="*{homework}" type="text" maxlength="100"/>
@@ -55,8 +58,8 @@
                                                    th:field="*{rating}" type="text" maxlength="100"/>
 
                                             <div class="row">
-                                                <div class="col-lg-4 text-right">
-                                                    <button class="btn btn-primary" type="submit">Регистрация</button>
+                                                <div class="col-lg-12 text-right">
+                                                    <button class="btn btn-primary" type="submit">Сохранить</button>
                                                 </div>
                                             </div>
                                         </div>

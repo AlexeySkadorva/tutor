@@ -49,6 +49,26 @@ ko.validation.rules["emailPattern"] = {
     message: "E-mail должен содержать буквы, символ @ и точку. Пример: example@gmail.com"
 };
 
+ko.validation.rules["required"] = {
+    validator: function(a,b) {
+        if (ko.isObservable(a)) {
+            if (a() == null) return false;
+            else return true;
+        }
+        var c;
+        return void 0 === a || null === a ? !b : (c = a, "string" == typeof a && (c = String.prototype.trim ? a.trim() : a.replace(/^\s+|\s+$/g, "")), b ? (c + "").length > 0 : !0)
+    },
+    message: "Поле обязательно для заполнения"
+};
+
+ko.validation.rules["minLength"] = {
+    validator: function(value, param) {
+        if (!value) { return true }
+        return value.toString().length >= param;
+    },
+    message: "Длина поля должна быть больше " + 1 + " символов"
+};
+
 ko.validation.rules["loginPattern"] = {
     validator: function(value, params) {
         return loginMask.test(value);

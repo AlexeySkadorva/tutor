@@ -1,22 +1,25 @@
 package by.bsu.tutor.models.entity.user;
 
 import by.bsu.tutor.models.entity.base.BaseEntity;
+import by.bsu.tutor.models.entity.base.BaseEnum;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 
 @Entity
 @Table(name = "roles")
-public class Role extends BaseEntity {
+public class Role extends BaseEnum {
 
-    @Column(name = "code")
-    private String code;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "code", nullable = false)
+    private Code code;
 
-    @Column(name = "name")
-    private String name;
+    public enum Code {
+        ADMIN,
+        TUTOR,
+        CLIENT
+    }
 
 }
