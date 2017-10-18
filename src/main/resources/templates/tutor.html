@@ -91,6 +91,16 @@
                             <a th:href="@{*{id} + '/order'}" class="btn btn-default">Заказать</a>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <h3 class="padding-top-10 pull-left">
+                            Текущая процентная ставка: <p th:text="*{invoice.rate}"></p>
+                            К оплате : <p th:text="*{invoice.amount}"></p> BYN
+                        </h3>
+                        <div class="col-lg-12 text-right">
+                            <a th:href="@{*{id} + '/order'}" class="btn btn-default">Текущая ставка</a>
+                        </div>
+                    </div>
                     <hr/>
                     <div class="row animate fadeInUp">
                         <h2 class="text-center margin-top-10" th:text="*{status}"></h2>

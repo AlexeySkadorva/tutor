@@ -23,6 +23,9 @@ public class Tutor extends BaseEntity {
     @Column(name = "first_experience")
     private Integer firstExperience;
 
+    @Column(name = "price")
+    private Integer price;
+
     @Column(name = "vk_link")
     private String vkLink;
 
@@ -32,6 +35,10 @@ public class Tutor extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "tutor_id")
+    TutorInvoice invoice;
 
     @OneToMany
     @JoinColumn(name = "tutor_id")

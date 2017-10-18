@@ -3,10 +3,12 @@ package by.bsu.tutor.service.tutor.impl;
 import by.bsu.tutor.models.dto.SearchForm;
 import by.bsu.tutor.models.entity.tutor.Subject;
 import by.bsu.tutor.models.entity.tutor.Tutor;
+import by.bsu.tutor.models.entity.tutor.TutorInvoice;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.repositories.TutorRepository;
 import by.bsu.tutor.service.administration.UserService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
+import by.bsu.tutor.service.tutor.TutorInvoiceService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,24 +23,28 @@ import java.util.List;
 @Service
 public class DefaultTutorService extends DefaultCrudService<Tutor, TutorRepository> implements TutorService {
 
-    private TutorRepository tutorRepository;
-    private UserService userService;
-
+    private final TutorRepository tutorRepository;
+    private final UserService userService;
+    private final TutorInvoiceService tutorInvoiceService;
 
     @Autowired
     public DefaultTutorService(@NotNull TutorRepository repository, TutorRepository tutorRepository,
-                               UserService userService) {
+                               UserService userService, TutorInvoiceService tutorInvoiceService) {
         super(repository);
         this.tutorRepository = tutorRepository;
         this.userService = userService;
+        this.tutorInvoiceService = tutorInvoiceService;
     }
 
     @Override
     public Tutor save(@NotNull Tutor tutor) {
         User user = userService.save(tutor.getUser());
         tutor.setUser(user);
+        Tutor savesTutor = super.save(tutor);
 
-        return super.save(tutor);
+        tutorInvoiceService.save(new TutorInvoice(tutor));
+
+        return savesTutor;
     }
 
 

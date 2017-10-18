@@ -22,8 +22,6 @@ public class OrderController {
 
     @GetMapping(value = "/tutors/{id}/order")
     public String saveOrder(@PathVariable Long id, @AuthenticationPrincipal User user) throws LogicException {
-        user = new User();
-        user.setId(1L);
         orderService.save(id, user);
         return "/main";
     }

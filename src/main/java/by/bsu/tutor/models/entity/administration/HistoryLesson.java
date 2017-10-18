@@ -29,6 +29,9 @@ public class HistoryLesson extends BaseEntity {
     @Column(name = "rating")
     private Integer rating;
 
+    @Column(name = "is_paid")
+    private Boolean isPaid;
+
     @PrePersist
     private void updateCreatedDate(){
         if(null == this.date) {
