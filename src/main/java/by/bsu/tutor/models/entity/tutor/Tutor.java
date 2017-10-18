@@ -36,13 +36,14 @@ public class Tutor extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "tutor_id")
-    TutorInvoice invoice;
+    @Transient
+    //@OneToOne
+    //@JoinColumn(name = "tutor_id")
+    private TutorInvoice invoice;
 
     @OneToMany
     @JoinColumn(name = "tutor_id")
-    List<TutorNote> notes;
+    private List<TutorNote> notes;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "tutor_subject_relations", joinColumns = { @JoinColumn(name = "tutor_id") },

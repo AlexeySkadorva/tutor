@@ -62,6 +62,11 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
     }
 
     @Override
+    public Tutor getByUser(User user) {
+        return repository.findByUser(user);
+    }
+
+    @Override
     public long getCountBySubject(Subject subject) {
         return tutorRepository.findBySubjects(Collections.singletonList(subject)).size();
     }

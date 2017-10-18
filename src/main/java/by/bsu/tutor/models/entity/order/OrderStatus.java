@@ -16,7 +16,8 @@ public class OrderStatus extends BaseEnum {
     private Code code;
 
     public enum Code {
-        NEW
+        NEW,
+        APPROVED
     }
 
 }

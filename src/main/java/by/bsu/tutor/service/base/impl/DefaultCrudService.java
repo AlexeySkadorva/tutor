@@ -63,7 +63,6 @@ public class DefaultCrudService<T extends BaseEntity, R extends BaseRepository<T
     @NotNull
     @Override
     public T save(@NotNull T entity) {
-        Assert.isNull(entity.getId(), String.format("Entity with id %s already exist", entity.getId()));
         return repository.save(entity);
     }
 
