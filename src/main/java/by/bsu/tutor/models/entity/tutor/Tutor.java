@@ -2,6 +2,7 @@ package by.bsu.tutor.models.entity.tutor;
 
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.note.TutorNote;
+import by.bsu.tutor.models.entity.order.LessonType;
 import by.bsu.tutor.models.entity.user.User;
 import lombok.Data;
 
@@ -36,11 +37,6 @@ public class Tutor extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Transient
-    //@OneToOne
-    //@JoinColumn(name = "tutor_id")
-    private TutorInvoice invoice;
-
     @OneToMany
     @JoinColumn(name = "tutor_id")
     private List<TutorNote> notes;
@@ -49,6 +45,11 @@ public class Tutor extends BaseEntity {
     @JoinTable(name = "tutor_subject_relations", joinColumns = { @JoinColumn(name = "tutor_id") },
             inverseJoinColumns = { @JoinColumn(name = "subject_id") })
     private List<Subject> subjects;
+
+    @OneToMany
+    @JoinTable(name = "tutors_lesson_types", joinColumns = { @JoinColumn(name = "tutor_id") },
+            inverseJoinColumns = { @JoinColumn(name = "lesson_type_id") })
+    private List<LessonType> lessonTypes;
 
     @Column(name = "comment")
     private String comment;

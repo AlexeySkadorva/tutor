@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HistoryLessonController {
 
-    @Autowired ClientTutorRelationService clientTutorRelationService;
+    @Autowired private ClientTutorRelationService clientTutorRelationService;
     @Autowired private HistoryLessonService historyLessonService;
 
     @RequestMapping(value = "/tutors/{id}/history")

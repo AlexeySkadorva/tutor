@@ -3,7 +3,6 @@ package by.bsu.tutor.models.entity.order;
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
-import by.bsu.tutor.models.entity.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +28,10 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "status_id")
     private OrderStatus orderStatus;
 
+    @OneToOne
+    @JoinColumn(name = "lesson_type_id")
+    private LessonType lessonType;
+
     @Column(name = "message")
     private String message;
 
@@ -36,10 +39,10 @@ public class Order extends BaseEntity {
     private Date createdDate;
 
 
-    public Order(Tutor tutor, Client client, String message) {
+    public Order(Tutor tutor, Client client, OrderStatus orderStatus) {
         this.tutor = tutor;
         this.client = client;
-        this.message = message;
+        this.orderStatus = orderStatus;
     }
 
 }

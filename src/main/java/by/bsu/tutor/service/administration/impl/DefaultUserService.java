@@ -18,7 +18,7 @@ import java.io.IOException;
 @Service
 public class DefaultUserService extends DefaultCrudService<User, UserRepository> implements UserService {
 
-    private ShaPasswordEncoder passwordEncoder;
+    private final ShaPasswordEncoder passwordEncoder;
 
 
     @Autowired

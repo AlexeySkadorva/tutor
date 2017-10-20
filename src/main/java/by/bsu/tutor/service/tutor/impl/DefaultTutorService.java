@@ -27,6 +27,7 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
     private final UserService userService;
     private final TutorInvoiceService tutorInvoiceService;
 
+
     @Autowired
     public DefaultTutorService(@NotNull TutorRepository repository, TutorRepository tutorRepository,
                                UserService userService, TutorInvoiceService tutorInvoiceService) {

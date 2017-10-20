@@ -7,10 +7,7 @@ import by.bsu.tutor.service.tutor.TutorEvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class EvaluationController {
@@ -18,7 +15,7 @@ public class EvaluationController {
     @Autowired private ClientTutorRelationService relationService;
     @Autowired private TutorEvaluationService tutorEvaluationService;
 
-    @RequestMapping(value = "/relations/{id}/evaluation")
+    @GetMapping(value = "/relations/{id}/evaluation")
     public String log(@PathVariable Long id, Model model) throws LogicException {
         TutorEvaluation evaluation = new TutorEvaluation();
         evaluation.setRelation(relationService.get(id));
@@ -26,7 +23,7 @@ public class EvaluationController {
         return "evaluation";
     }
 
-    @RequestMapping(value = "/evaluation", method = RequestMethod.POST)
+    @PostMapping(value = "/evaluation")
     public String save(@ModelAttribute TutorEvaluation evaluation) {
         tutorEvaluationService.save(evaluation);
         return "main";

@@ -19,10 +19,16 @@ import java.util.stream.Stream;
 @Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private final UserService userService;
+    private final ShaPasswordEncoder passwordEncoder;
+
+
     @Autowired
-    private UserService userService;
-    @Autowired
-    private ShaPasswordEncoder passwordEncoder;
+    public UserDetailsServiceImpl(UserService userService, ShaPasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         UserDetails userDetails;
@@ -35,5 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return userDetails;
     }
+
 
 }

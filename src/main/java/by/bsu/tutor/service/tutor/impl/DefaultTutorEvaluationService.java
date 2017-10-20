@@ -17,7 +17,7 @@ import java.util.List;
 public class DefaultTutorEvaluationService extends DefaultCrudService<TutorEvaluation, TutorEvaluationRepository>
         implements TutorEvaluationService {
 
-    private ClientTutorRelationService relationService;
+    private final ClientTutorRelationService relationService;
 
 
     @Autowired
@@ -42,4 +42,5 @@ public class DefaultTutorEvaluationService extends DefaultCrudService<TutorEvalu
         }
         return evaluation;
     }
+
 }

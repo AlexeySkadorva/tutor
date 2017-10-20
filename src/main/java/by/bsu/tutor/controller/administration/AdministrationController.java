@@ -5,10 +5,12 @@ import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.enums.Gender;
+import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
 import by.bsu.tutor.service.administration.UserService;
 import by.bsu.tutor.service.client.ClientService;
+import by.bsu.tutor.service.order.OrderService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,15 +23,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AdministrationController {
 
-    @Autowired
-    private TutorService tutorService;
-
-    @Autowired
-    private ClientService clientService;
-
     @Autowired private UserService userService;
+    @Autowired private TutorService tutorService;
+    @Autowired private ClientService clientService;
+    @Autowired private OrderService orderService;
+
     @Autowired private RoleRepository roleRepository;
     @Autowired private SubjectRepository subjectRepository;
+    @Autowired private LessonTypeRepository lessonTypeRepository;
+
 
     @RequestMapping
     public Object getAdministration() {
@@ -44,6 +46,7 @@ public class AdministrationController {
 
     @RequestMapping(value = "/tutors/new", method = RequestMethod.GET)
     public Object getNewUser(Model model) {
+        model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
         model.addAttribute("subjects", subjectRepository.findAll());
         model.addAttribute("tutor", new Tutor());
         model.addAttribute("roles", roleRepository.findAll());
@@ -89,6 +92,12 @@ public class AdministrationController {
     public String getClientList(Model model){
         model.addAttribute("clients", clientService.getAll());
         return "administration/client/list";
+    }
+
+    @RequestMapping(value = "/orders")
+    public String getOrders(Model model){
+        model.addAttribute("orders", orderService.getAll());
+        return "administration/order/list";
     }
 
     @RequestMapping(value = "/users")

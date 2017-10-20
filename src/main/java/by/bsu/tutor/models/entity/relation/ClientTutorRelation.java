@@ -5,6 +5,7 @@ import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 
 @Entity
 @Table(name = "client_tutor_relations")
@@ -41,6 +43,7 @@ public class ClientTutorRelation extends BaseEntity {
     @JoinColumn(name = "client_tutor_relation_id")
     List<HistoryLesson> historyLessons;
 
+
     @PrePersist
     private void updateCreatedDate(){
         if(null == this.createdDate) {
@@ -51,6 +54,11 @@ public class ClientTutorRelation extends BaseEntity {
     @PostLoad
     private void updateNotes(){
         notes = this.historyLessons.stream().map(HistoryLesson::getRating).collect(Collectors.toList());
+    }
+
+    public ClientTutorRelation(Client client, Tutor tutor) {
+        this.client = client;
+        this.tutor = tutor;
     }
 
 }

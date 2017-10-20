@@ -23,6 +23,7 @@ public class DefaultTutorInvoiceService extends DefaultCrudService<TutorInvoice,
     private final ClientTutorRelationService clientTutorRelationService;
     private final HistoryLessonService historyLessonService;
 
+
     public DefaultTutorInvoiceService(@NotNull TutorInvoiceRepository repository, ClientTutorRelationService
             clientTutorRelationService, HistoryLessonService historyLessonService) {
         super(repository);

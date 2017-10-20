@@ -24,8 +24,13 @@ public class MailMessageSenderService implements MessageSenderService {
     private final static String EMAIL_VALUE = "Email:";
     private final static String WHITESPACE_VALUE = " ";
 
-    @Autowired private GmailProperties gmailProperties;
+    private final GmailProperties gmailProperties;
 
+
+    @Autowired
+    public MailMessageSenderService(GmailProperties gmailProperties) {
+        this.gmailProperties = gmailProperties;
+    }
 
     @Override
     public void send(@NotNull Object contact) {
@@ -48,8 +53,7 @@ public class MailMessageSenderService implements MessageSenderService {
 
     private Session getMailSession() {
         Properties mailServerProperties = getMailServerProperties();
-        Session mailSession = Session.getDefaultInstance(mailServerProperties, null);
-        return mailSession;
+        return Session.getDefaultInstance(mailServerProperties, null);
     }
 
     private MimeMessage getGenerateMailMessage(Session mailSession, ContactDto contactDto) {

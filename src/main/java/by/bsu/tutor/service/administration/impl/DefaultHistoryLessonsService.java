@@ -16,7 +16,7 @@ import java.util.List;
 public class DefaultHistoryLessonsService extends DefaultCrudService<HistoryLesson, HistoryLessonRepository>
         implements HistoryLessonService {
 
-    private ClientTutorRelationService clientTutorRelationService;
+    private final ClientTutorRelationService clientTutorRelationService;
 
 
     @Autowired

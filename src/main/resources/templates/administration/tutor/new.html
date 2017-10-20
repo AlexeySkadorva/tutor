@@ -210,6 +210,15 @@
                                             th:text="${sub.name}"></option>
                                 </select>
                             </div>
+                            <div class="row">
+                                <label>Тип занятий
+                                    <span class="color-red">*</span>
+                                </label>
+                                <select id="lessonTypes" class="form-control margin-bottom-20" th:field="*{lessonTypes}">
+                                    <option value=""></option>
+                                    <option th:each="l : ${lessonTypes}" th:value="${l.id}" th:text="${l.name}"/>
+                                </select>
+                            </div>
                         </div>
 
                         <hr/>

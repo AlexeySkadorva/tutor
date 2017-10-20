@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class DefaultTutorNoteService extends DefaultCrudService<TutorNote, TutorNoteRepository> implements TutorNoteService {
 
-    private TutorNoteRepository tutorNoteRepository;
+    private final TutorNoteRepository tutorNoteRepository;
 
 
     @Autowired
@@ -27,4 +27,5 @@ public class DefaultTutorNoteService extends DefaultCrudService<TutorNote, Tutor
     public List<TutorNote> getNotesForTutor(@NotNull Tutor tutor){
         return tutorNoteRepository.findByTutor(tutor);
     }
+
 }

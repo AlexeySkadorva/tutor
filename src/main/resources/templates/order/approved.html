@@ -24,10 +24,20 @@
     <div class="container">
         <div class="container background-white">
             <div class="row margin-vert-30">
-                <p>Approved</p>
+                <p>Заказ подтвержден. Для связи с клиентом и оговорки деталей первого занятия, свяжитесь с ним по телефону указанному ниже.</p>
 
-            </div></div>
-    </div>
+                <div class="row">
+                    <div>
+                        <b>ФИО:</b> <span th:text="*{client.getFullname()}"></span>
+                    </div>
+                    <div>
+                        <b>Номер мобильного:</b> <span th:text="*{client.phoneNumber}"></span>
+                    </div>
+                    <div>
+                        <b>Адрес:</b> <span th:text="*{client.address}"></span>
+                    </div>
+                </div>
+            </div>
     <div th:replace="fragments/footer :: contacts"></div>
 
     <div th:replace="fragments/footer :: footer"></div>

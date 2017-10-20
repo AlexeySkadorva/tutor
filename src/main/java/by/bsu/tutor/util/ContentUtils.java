@@ -8,7 +8,6 @@ import java.io.UnsupportedEncodingException;
  */
 public final class ContentUtils {
 
-    /** Constructor. */
     private ContentUtils() {
     }
 

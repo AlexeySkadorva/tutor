@@ -15,8 +15,7 @@ import java.io.IOException;
 @RequestMapping(value = "/notes")
 public class NotesController {
 
-    @Autowired
-    private SystemNoteService noteService;
+    @Autowired private SystemNoteService noteService;
 
     @RequestMapping
     public String notePage(Model model) throws IOException {

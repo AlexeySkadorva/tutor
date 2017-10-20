@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Service
 public class DefaultClientService extends DefaultCrudService<Client, ClientRepository> implements ClientService {
 
-    private UserService userService;
+    private final UserService userService;
 
 
     @Autowired
@@ -35,4 +35,5 @@ public class DefaultClientService extends DefaultCrudService<Client, ClientRepos
 
         return super.save(client);
     }
+
 }
