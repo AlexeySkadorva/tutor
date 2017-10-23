@@ -80,7 +80,7 @@
                                 <span th:if="*{experienceInYear &gt; 1 and experienceInYear &lt; 5}">года</span>
                                 <span th:if="*{experienceInYear &gt; 4}">лет</span>
                             </div>
-                            <div>
+                            <div th:if="*{comment != null}">
                                 <b>О себе:</b> <span th:text="*{comment}"></span>
                             </div>
 
@@ -94,8 +94,8 @@
 
                     <div class="row">
                         <h3 class="padding-top-10 pull-left">
-                            Текущая процентная ставка: <p th:text="*{invoice.rate}"></p>
-                            К оплате : <p th:text="*{invoice.amount}"></p> BYN
+                            Текущая процентная ставка: <p th:text="${invoice.rate}"></p>
+                            К оплате : <p th:text="${invoice.amount}"></p> BYN
                         </h3>
                         <div class="col-lg-12 text-right">
                             <a th:href="@{*{id} + '/order'}" class="btn btn-default">Текущая ставка</a>

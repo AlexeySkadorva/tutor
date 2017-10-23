@@ -43,7 +43,7 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
         tutor.setUser(user);
         Tutor savesTutor = super.save(tutor);
 
-        tutorInvoiceService.save(new TutorInvoice(tutor));
+        tutorInvoiceService.save(new TutorInvoice(savesTutor));
 
         return savesTutor;
     }

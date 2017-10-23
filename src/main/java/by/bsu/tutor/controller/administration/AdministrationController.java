@@ -28,10 +28,6 @@ public class AdministrationController {
     @Autowired private ClientService clientService;
     @Autowired private OrderService orderService;
 
-    @Autowired private RoleRepository roleRepository;
-    @Autowired private SubjectRepository subjectRepository;
-    @Autowired private LessonTypeRepository lessonTypeRepository;
-
 
     @RequestMapping
     public Object getAdministration() {
@@ -42,44 +38,6 @@ public class AdministrationController {
     public String sadveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) {
 
         return "calendar";
-    }
-
-    @RequestMapping(value = "/tutors/new", method = RequestMethod.GET)
-    public Object getNewUser(Model model) {
-        model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
-        model.addAttribute("subjects", subjectRepository.findAll());
-        model.addAttribute("tutor", new Tutor());
-        model.addAttribute("roles", roleRepository.findAll());
-        model.addAttribute("genders", Gender.values());
-        return "administration/tutor/new";
-    }
-
-    @RequestMapping(value = "/tutors", method = RequestMethod.POST)
-    public String saveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) {
-        tutor.getUser().setRole(roleRepository.findByCode(Role.Code.TUTOR.name()));
-
-        tutorService.save(tutor);
-        model.addAttribute("userId", tutor.getUser().getId());
-        return "photo";
-    }
-
-    @RequestMapping(value = "/clients/new")
-    public Object getNewClient(Model model) throws LogicException {
-        Client client = new Client();
-
-        model.addAttribute("client", client);
-        model.addAttribute("genders", Gender.values());
-        model.addAttribute("tutors", tutorService.getAll());
-        return "administration/client/new";
-    }
-
-    @RequestMapping(value = "/clients", method = RequestMethod.POST)
-    public String saveClient(@ModelAttribute(value = "client") Client client, Model model) {
-        client.getUser().setRole(roleRepository.findByCode("CLIENT"));
-
-        clientService.save(client);
-        model.addAttribute("userId", client.getUser().getId());
-        return "photo";
     }
 
     @RequestMapping(value = "/tutors")

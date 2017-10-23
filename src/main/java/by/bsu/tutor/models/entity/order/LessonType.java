@@ -16,7 +16,7 @@ public class LessonType extends BaseEnum {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "code", nullable = false)
-    private by.bsu.tutor.models.entity.order.OrderStatus.Code code;
+    private LessonType.Code code;
 
     public enum Code {
         BY_SKYPE,

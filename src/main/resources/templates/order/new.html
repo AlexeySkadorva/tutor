@@ -60,20 +60,20 @@
                     <label>Количество занятий в месяц (Если вы хотите заниматься 1 ра в неделю, то 4, если 2, то 8 и т.д.)
                         <span class="color-red">*</span>
                     </label>
-                    <input rows="8" class="form-control" th:field="*{pereodicity}">
+                    <input rows="8" class="form-control" th:field="*{pereodicity}"/>
 
 
                     <label>Тип занятия
                         <span class="color-red">*</span>
                     </label>
-                    <select id="roles" class="form-control margin-bottom-20" th:field="*{lessonTypes}" >
+                    <select id="roles" class="form-control margin-bottom-20" th:field="*{lessonType}" >
                         <option value=""></option>
                         <option th:each="l : ${lessonTypes}" th:value="${l.id}" th:text="${l.name}"/>
                     </select>
 
-                    <input type="hidden" th:field="*{client}">
-                    <input type="hidden" th:field="*{tutor}">
-                    <input type="hidden" th:field="*{orderStatus}">
+                    <input type="hidden" th:field="*{client}"/>
+                    <input type="hidden" th:field="*{tutor}"/>
+                    <input type="hidden" th:field="*{orderStatus}"/>
 
                     <div class="row">
                         <button type="submit" class="btn btn-primary">Отправить</button>

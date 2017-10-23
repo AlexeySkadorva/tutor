@@ -38,11 +38,14 @@ public class OrderController {
     @PostMapping(value = "/orders")
     public String saveOrder(@ModelAttribute Order order) throws LogicException {
         orderService.save(order);
-        return "/send";
+        return "/order/send";
     }
 
     @GetMapping(value = "/tutors/{id}/order")
     public String saveOrder(@PathVariable Long id, @AuthenticationPrincipal UserDetails user, Model model) throws LogicException {
+        if(null == user) {
+            return "redirect:/clients/new";
+        }
         Tutor tutor = tutorService.get(id);
         Client client = clientService.getByUser(userService.findByLogin(user.getUsername()));
         Order order = new Order(tutor, client, orderStatusRepository.findByCode(OrderStatus.Code.NEW));

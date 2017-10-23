@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity implements UserDetails{
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "login")
     private String login;

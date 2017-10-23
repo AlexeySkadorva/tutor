@@ -4,14 +4,18 @@ import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.dto.SearchForm;
 import by.bsu.tutor.models.entity.tutor.Subject;
 import by.bsu.tutor.models.entity.tutor.Tutor;
+import by.bsu.tutor.models.entity.user.Role;
+import by.bsu.tutor.models.enums.Gender;
+import by.bsu.tutor.repositories.LessonTypeRepository;
+import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
+import by.bsu.tutor.service.tutor.TutorInvoiceService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "tutors")
@@ -19,19 +23,41 @@ public class TutorController {
 
     @Autowired private TutorService tutorService;
     @Autowired private TutorEvaluationService tutorEvaluationService;
+    @Autowired private TutorInvoiceService tutorInvoiceService;
 
+    @Autowired private LessonTypeRepository lessonTypeRepository;
     @Autowired private SubjectRepository subjectRepository;
+    @Autowired private RoleRepository roleRepository;
 
+    @GetMapping(value = "/new")
+    public Object getNewUser(Model model) {
+        model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
+        model.addAttribute("subjects", subjectRepository.findAll());
+        model.addAttribute("tutor", new Tutor());
+        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("genders", Gender.values());
+        return "administration/tutor/new";
+    }
 
-    @RequestMapping(value = "/{id}")
+    @PostMapping
+    public String saveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) {
+        tutor.getUser().setRole(roleRepository.findByCode(Role.Code.TUTOR));
+
+        tutorService.save(tutor);
+        model.addAttribute("userId", tutor.getUser().getId());
+        return "photo";
+    }
+
+    @GetMapping(value = "/{id}")
     public String getTutor(@PathVariable Long id, Model model) throws LogicException {
         Tutor tutor = tutorService.get(id);
         model.addAttribute("tutor", tutor);
+        model.addAttribute("invoice", tutorInvoiceService.getByTutorId(id));
         model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
         return "tutor";
     }
 
-    @RequestMapping
+    @GetMapping
     public String getTutors(SearchForm searchForm, Model model){
         Iterable<Tutor> tutors = tutorService.getBySearchForm(searchForm);
         searchForm.adjust(tutorService.getCount());
@@ -41,7 +67,7 @@ public class TutorController {
         return "tutors";
     }
 
-    @RequestMapping(value ="/subjects/{id}")
+    @GetMapping(value ="/subjects/{id}")
     public String getTutorsList(SearchForm searchForm, @PathVariable Integer id, Model model){
         Subject subject = subjectRepository.getOne(id);
         Iterable<Tutor> tutors = tutorService.getBySubject(subject, searchForm);

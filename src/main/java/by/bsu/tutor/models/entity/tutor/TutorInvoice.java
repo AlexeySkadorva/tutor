@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -16,6 +18,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tutors_invoice")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TutorInvoice extends BaseEntity {
 
     @OneToOne
@@ -23,7 +26,7 @@ public class TutorInvoice extends BaseEntity {
     @JoinColumn(name = "tutor_id")
     private Tutor tutor;
 
-    @Column(name = "interest_rate")
+    @Column(name = "rate")
     private byte rate;
 
     @Column(name = "amount")

@@ -1,12 +1,15 @@
 package by.bsu.tutor.service.tutor.impl;
 
+import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
+import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.tutor.TutorInvoice;
 import by.bsu.tutor.repositories.TutorInvoiceRepository;
 import by.bsu.tutor.service.administration.HistoryLessonService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.client.ClientTutorRelationService;
 import by.bsu.tutor.service.tutor.TutorInvoiceService;
+import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -39,17 +42,17 @@ public class DefaultTutorInvoiceService extends DefaultCrudService<TutorInvoice,
     }
 
     @Override
-    public void updateInvoices(@NotNull Long tutorId) {
+    public void updateInvoices(@NotNull Long tutorId) throws LogicException {
+        TutorInvoice tutorInvoice = super.get(tutorId);
+
         List<ClientTutorRelation> clientTutorRelations = clientTutorRelationService.getByTutorId(tutorId);
         int sum = 0;
         for(ClientTutorRelation relation : clientTutorRelations) {
             int countOfLessons = (int) historyLessonService.getByRelationId(relation.getId()).stream()
                     .filter(lesson -> !lesson.getIsPaid())
                     .count();
-            sum += (relation.getTutor().getPrice() * countOfLessons * relation.getTutor().getInvoice().getRate()) / 100;
+            sum += (relation.getTutor().getPrice() * countOfLessons * tutorInvoice.getRate()) / 100;
         }
-        TutorInvoice tutorInvoice = getByTutorId(tutorId);
-
         tutorInvoice.setAmount(sum - tutorInvoice.getPaid());
         super.save(tutorInvoice);
     }

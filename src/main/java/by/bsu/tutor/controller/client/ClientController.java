@@ -2,8 +2,12 @@ package by.bsu.tutor.controller.client;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.administration.HistoryLesson;
+import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
+import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.entity.user.User;
+import by.bsu.tutor.models.enums.Gender;
+import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.service.administration.HistoryLessonService;
 import by.bsu.tutor.service.client.ClientService;
 import by.bsu.tutor.service.client.ClientTutorRelationService;
@@ -15,8 +19,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -28,8 +31,27 @@ public class ClientController {
     @Autowired private ClientService clientService;
     @Autowired private HistoryLessonService historyLessonService;
     @Autowired private ClientTutorRelationService clientTutorRelationService;
+    @Autowired private RoleRepository roleRepository;
 
-    @RequestMapping
+    @GetMapping(value = "/new")
+    public Object getNewClient(Model model) throws LogicException {
+        Client client = new Client();
+
+        model.addAttribute("client", client);
+        model.addAttribute("genders", Gender.values());
+        return "administration/client/new";
+    }
+
+    @PostMapping
+    public String saveClient(@ModelAttribute(value = "client") Client client, Model model) {
+        client.getUser().setRole(roleRepository.findByCode(Role.Code.CLIENT));
+
+        clientService.save(client);
+        model.addAttribute("userId", client.getUser().getId());
+        return "photo";
+    }
+
+    @GetMapping
     public String getClients(Model model) {
         model.addAttribute("clients", clientService.getAll());
         return "clients";
@@ -37,7 +59,7 @@ public class ClientController {
 
     //@PreAuthorize("hasRole('TUTOR')")
     //@PreAuthorize("hasRole('ROLE_Репетитор')")
-    @RequestMapping(value = "/{id}")
+    @GetMapping(value = "/{id}")
     public String getClient(@PathVariable Long id, Model model, Principal principal) throws LogicException {
         List<ClientTutorRelation> relations = clientTutorRelationService.getByClientId(id);
         model.addAttribute("client", clientService.get(id));

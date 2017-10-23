@@ -27,92 +27,18 @@
     <div id="content">
         <div class="container background-white">
             <div class="row margin-vert-30">
-                <form data-bind="submit: save" th:object="${client}" th:action="@{/administration/clients}" method="POST">
+                <h3>Для того чтобы начать занятия с репетитором необходимо сначала зарегистрироваться.</h3>
+
+                <form data-bind="submit: save" th:object="${client}" th:action="@{/clients}" method="POST">
+
+                    <div th:replace="fragments/user_form :: user_form"></div>
+
+                    <div th:replace="fragments/login_form :: login_form"></div>
 
                     <div class="col-md-6">
                         <div class="signup-page">
                             <div class="signup-header">
-                                <h3>Личные данные ученика</h3>
-                            </div>
-
-                            <div class="row">
-                                <label>Фамилия
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" data-bind="value: lastName"
-                                       th:field="*{user.lastName}" maxlength="100"/>
-                            </div>
-
-                            <div class="row">
-                                <label>Имя
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" data-bind="value: firstName"
-                                       th:field="*{user.firstName}" maxlength="100"/>
-                            </div>
-
-                            <div class="row">
-                                <label>Отчество
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" data-bind="value: secondName"
-                                       th:field="*{user.secondName}" maxlength="100"/>
-                            </div>
-
-                            <div class="row">
-                                <label>Дата рождения
-                                    <span class="color-red">*</span>
-                                </label>
-                                <i class="datepicker-icon">
-                                    <input type="text" id="birthDateInput" class="form-control margin-bottom-20"
-                                           data-bind="datepicker: birthDate, inputmask: $element, inputmaskOptions: {type: 'date'}"
-                                           th:field="*{user.birthDate}"/>
-                                </i>
-                            </div>
-
-                            <div class="row">
-                                <label>Адрес
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" th:field="*{user.address}"
-                                       data-bind="value: address" maxlength="200"/>
-                            </div>
-
-                            <div class="row">
-                                <label>Номер телефона
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" th:field="*{user.phoneNumber}"
-                                       data-bind="value: phoneNumber" maxlength="20"/>
-                            </div>
-
-                            <div class="row">
-                                <label>Email
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" th:field="*{user.email}"
-                                       data-bind="value: email" maxlength="100"/>
-                            </div>
-
-                            <div class="row">
-
-                                <label>Пол
-                                    <span class="color-red">*</span>
-                                </label>
-                                <select id="genderSelect" class="form-control margin-bottom-20"
-                                        data-bind="value: gender" name="gender"
-                                        th:field="*{user.gender}">
-                                    <option value=""></option>
-                                    <option th:each="g : ${genders}" th:value="${g.value}" th:text="${g.text}"/>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="signup-page">
-                            <div class="signup-header">
-                                <h3>Личные данные родителя (для школьников)</h3>
+                                <h3>Личные данные родителя (для дошкольников и школьников)</h3>
                             </div>
 
                             <div class="row">
@@ -156,39 +82,6 @@
                                 </label>
                                 <input class="form-control margin-bottom-20" type="text" th:field="*{user.phoneNumber}"
                                        data-bind="value: phoneNumber" maxlength="20"/>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-6">
-                        <div class="signup-page right-block">
-                            <div class="signup-header">
-                                <h3>Логин и пароль</h3>
-                            </div>
-                            <div class="row">
-                                <label>Логин
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" th:field="*{user.login}"
-                                       data-bind="value: login" maxlength="100"/>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label>Пароль
-                                        <span class="color-red">*</span>
-                                    </label>
-                                    <input class="form-control margin-bottom-20" type="password"
-                                           th:field="*{user.password}"
-                                           data-bind="value: password" maxlength="100"/>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Повторить пароль
-                                        <span class="color-red">*</span>
-                                    </label>
-                                    <input class="form-control margin-bottom-20" type="password"
-                                           data-bind="value: repeatpassword"/>
-                                </div>
                             </div>
                         </div>
                     </div>

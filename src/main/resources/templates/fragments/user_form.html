@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+<div th:fragment="user_form">
+<div class="col-md-6">
+    <div class="signup-page">
+        <div class="signup-header">
+            <h3>Личные данные</h3>
+        </div>
+
+        <div class="row">
+            <label>Фамилия
+                <span class="color-red">*</span>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: lastName"
+                   th:field="*{user.lastName}" maxlength="100"/>
+        </div>
+
+        <div class="row">
+            <label>Имя
+                <span class="color-red">*</span>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: firstName"
+                   th:field="*{user.firstName}" maxlength="100"/>
+        </div>
+
+        <div class="row">
+            <label>Отчество
+                <span class="color-red">*</span>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: secondName"
+                   th:field="*{user.secondName}" maxlength="100"/>
+        </div>
+
+        <div class="row">
+            <label>Дата рождения
+                <span class="color-red">*</span>
+            </label>
+            <i class="datepicker-icon">
+                <input type="text" id="birthDateInput" class="form-control margin-bottom-20"
+                       data-bind="datepicker: birthDate, inputmask: $element, inputmaskOptions: {type: 'date'}"
+                       th:field="*{user.birthDate}"/>
+            </i>
+        </div>
+
+        <div class="row">
+            <label>Адрес
+                <span class="color-red">*</span>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" th:field="*{user.address}"
+                   data-bind="value: address" maxlength="200"/>
+        </div>
+
+        <div class="row">
+            <label>Номер телефона
+                <span class="color-red">*</span>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" th:field="*{user.phoneNumber}"
+                   data-bind="value: phoneNumber" maxlength="20"/>
+        </div>
+        <div class="row">
+            <label>Пол
+                <span class="color-red">*</span>
+            </label>
+            <div>
+                <div th:each="gender : ${genders}">
+                    <input type="checkbox" th:field="*{user.gender}" th:value="${gender.value}" />
+                    <label th:text="${gender.text}"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

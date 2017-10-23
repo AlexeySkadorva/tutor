@@ -35,6 +35,9 @@ public class Order extends BaseEntity {
     @Column(name = "message")
     private String message;
 
+    @Column(name = "pereodicity")
+    private String pereodicity;
+
     @Column(name = "created_date")
     private Date createdDate;
 
