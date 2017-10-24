@@ -20,11 +20,10 @@ public class Subject extends BaseEnum {
         PHYSICS,
         CHEMISTRY,
         BIOLOGY,
+        GEOGRAPHY,
+        LITERATURE,
         INFORMATICS,
-        RUSSIAN_LANGUAGE,
-        BELARUSSIAN_LANGUAGE,
-        ENGLISH_LANGUAGE,
-        GERMAN_LANGUAGE,
+        LANGUAGES,
         HISTORY,
         PROGRAMMING
     }

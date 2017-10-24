@@ -17,9 +17,11 @@ public class ClientType extends BaseEnum {
 
     public enum Code {
         PRESCHOOLER,
-        SCHOOLBOY,
+        PRIMARY_SCHOOL,
+        SECONDARY_SCHOOL,
+        HIGH_SCHOOL,
         STUDENT,
-        ADULT
+        ADULT;
     }
 
 }
