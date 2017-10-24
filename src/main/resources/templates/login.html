@@ -18,6 +18,10 @@
     <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
+
+<div th:replace="fragments/menu :: menu('subjects')"></div>
+
 <div id="content">
     <div class="container background-white">
         <div class="container">
@@ -44,11 +48,19 @@
                                 <button class="btn btn-primary pull-right" type="submit">Войти</button>
                             </div>
                         </div>
+                        <p>
+                            <a class="fa-sign-in" th:href="@{/tutors/new}">Зарегистрироваться как репетитор</a>
+                        </p>
+                        <p>
+                            <a class="fa-sign-in" th:href="@{/clients/new}">Зарегистрироваться как ученик</a>
+                        </p>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <div th:replace="fragments/footer :: contacts"></div>
+    <div th:replace="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

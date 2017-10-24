@@ -44,7 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
                 .antMatchers("/administration/**").hasRole("ADMIN")
                 .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll();
+                .and()
+                .logout()
+                .logoutSuccessUrl("/").permitAll();
 
         http.csrf().disable();
     }

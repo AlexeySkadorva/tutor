@@ -52,7 +52,6 @@ public class TutorController {
     public String getTutor(@PathVariable Long id, Model model) throws LogicException {
         Tutor tutor = tutorService.get(id);
         model.addAttribute("tutor", tutor);
-        model.addAttribute("invoice", tutorInvoiceService.getByTutorId(id));
         model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
         return "tutor";
     }
