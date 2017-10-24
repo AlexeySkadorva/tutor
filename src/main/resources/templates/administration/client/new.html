@@ -22,14 +22,14 @@
 
     <div th:replace="fragments/header :: header"></div>
 
-    <div th:replace="fragments/menu :: menu('tutors')"></div>
+    <div th:replace="fragments/menu :: menu('register_client')"></div>
 
     <div id="content">
         <div class="container background-white">
             <div class="row margin-vert-30">
-                <h3>Для того чтобы начать занятия с репетитором необходимо сначала зарегистрироваться.</h3>
 
                 <form data-bind="submit: save" th:object="${client}" th:action="@{/clients}" method="POST">
+                    <h3>Для того чтобы начать занятия с репетитором необходимо сначала зарегистрироваться.</h3>
 
                     <div th:replace="fragments/user_form :: user_form"></div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 </head>
 <body>
@@ -24,11 +24,20 @@
                         <li>
                             <a class="fa-dollar" th:classappend="${activeTab == 'price'} ? 'active'" th:href="@{/price}">Цены</a>
                         </li>
-                        <!--<li>-->
-                            <!--<a class="fa-user" th:classappend="${activeTab == 'sales'} ? 'active'" th:href="@{/sales}">Скидки</a>-->
-                        <!--</li>-->
                         <li>
                             <a class="fa-phone" th:classappend="${activeTab == 'contact'} ? 'active'" th:href="@{/contacts}">Контакты</a>
+                        </li>
+                        <li>
+                            <a class="fa-sign-in" th:href="@{/login}">Войти</a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a class="fa-sign-out" th:href="@{/logout}">Выйти</a>
+                        </li>
+                        <li>
+                            <a class="fa-sign-in" th:classappend="${activeTab == 'register_tutor'} ? 'active'" th:href="@{/tutors/new}">Регистрация репетитора</a>
+                        </li>
+                        <li>
+                            <a class="fa-sign-in" th:classappend="${activeTab == 'register_client'} ? 'active'" th:href="@{/clients/new}">Регистрация клиента</a>
                         </li>
                     </ul>
                 </div>
