@@ -22,10 +22,10 @@
                             <a class="fa-comment" th:classappend="${activeTab == 'notes'} ? 'active'" th:href="@{/notes}">Отзывы</a>
                         </li>
                         <li>
-                            <a class="fa-dollar" th:classappend="${activeTab == 'price'} ? 'active'" th:href="@{/price}">Цены</a>
-                        </li>
-                        <li>
                             <a class="fa-phone" th:classappend="${activeTab == 'contact'} ? 'active'" th:href="@{/contacts}">Контакты</a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a class="fa-phone" th:classappend="${activeTab == 'account'} ? 'active'" th:href="@{/account}">Кабинет</a>
                         </li>
                         <li sec:authorize="!isAuthenticated()">
                             <a class="fa-sign-in" th:href="@{/login}">Войти</a>

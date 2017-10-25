@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 
 @Entity
-@Table(name = "client")
+@Table(name = "client_parent_info")
 public class ClientParent extends BaseEntity {
 
     @OneToOne
@@ -26,10 +26,6 @@ public class ClientParent extends BaseEntity {
 
     @Column(name = "secondname")
     private String secondName;
-
-    @DateTimeFormat(pattern="dd.MM.yyyy")
-    @Column(name = "birthdate")
-    private Date birthDate;
 
     @Column(name = "phone_number")
     private String phoneNumber;

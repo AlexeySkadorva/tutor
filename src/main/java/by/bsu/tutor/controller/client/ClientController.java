@@ -63,8 +63,8 @@ public class ClientController {
     public String getClient(@PathVariable Long id, Model model, Principal principal) throws LogicException {
         List<ClientTutorRelation> relations = clientTutorRelationService.getByClientId(id);
         model.addAttribute("client", clientService.get(id));
-        List<HistoryLesson> historyLessons = historyLessonService.getByRelationId(relations.get(0).getId());
-        if(!CollectionUtils.isEmpty(historyLessons)) {
+        if(!CollectionUtils.isEmpty(relations)) {
+            List<HistoryLesson> historyLessons = historyLessonService.getByRelationId(relations.get(0).getId());
             model.addAttribute("lastLesson", historyLessons.get(historyLessons.size() - 1));
         }
         return "client";

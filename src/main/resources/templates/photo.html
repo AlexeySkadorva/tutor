@@ -32,7 +32,7 @@
                 <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
                     <div class="signup-page">
 
-                        <form action="uploadSuccess.html" th:action="@{'/administration/users/' + ${userId} + '/photo/upload'}" method="post" enctype="multipart/form-data">
+                        <form action="uploadSuccess.html" th:action="@{'/users/' + ${userId} + '/photo/upload'}" method="post" enctype="multipart/form-data">
                                 <input type="file" name="file" id="file-2" class="inputfile inputfile-2" data-multiple-caption="{count} files selected" multiple="multiple" />
                                 <label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
                                     <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8

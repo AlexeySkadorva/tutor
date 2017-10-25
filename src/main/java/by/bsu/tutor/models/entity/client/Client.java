@@ -27,9 +27,8 @@ public class Client extends BaseEntity {
     @JoinColumn(name = "client_type_id")
     private ClientType clientType;
 
-//    @OneToOne
-//    @JoinColumn(name = "client_id")
-//    private ClientParent clientParent;
+    @Transient
+    private ClientParent clientParent;
 
     @Column(name = "institution_of_education")
     private String institutionOfEducation;

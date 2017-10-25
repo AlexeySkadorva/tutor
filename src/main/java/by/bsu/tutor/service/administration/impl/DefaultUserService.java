@@ -43,6 +43,7 @@ public class DefaultUserService extends DefaultCrudService<User, UserRepository>
     @Override
     public void addPhotoToUser(@NotNull MultipartFile file, @NotNull Long userId) throws IOException, LogicException {
         User user = super.get(userId);
+        user.setLogin(user.getEmail());
         user.setPhoto(file.getBytes());
     }
 

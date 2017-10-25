@@ -29,7 +29,7 @@ public class HistoryLesson extends BaseEntity {
     @Column(name = "rating")
     private Integer rating;
 
-    @Column(name = "is_paid")
+    @Column(name = "paid")
     private Boolean isPaid;
 
     @PrePersist

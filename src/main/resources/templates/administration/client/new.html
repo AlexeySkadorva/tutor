@@ -42,46 +42,26 @@
                             </div>
 
                             <div class="row">
-                                <label>Фамилия
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" data-bind="value: lastName"
-                                       th:field="*{user.lastName}" maxlength="100"/>
+                                <label>Фамилия</label>
+                                <input class="form-control margin-bottom-20" type="text"
+                                       th:field="*{clientParent.lastName}" maxlength="100"/>
                             </div>
 
                             <div class="row">
-                                <label>Имя
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" data-bind="value: firstName"
-                                       th:field="*{user.firstName}" maxlength="100"/>
+                                <label>Имя</label>
+                                <input class="form-control margin-bottom-20" type="text"
+                                       th:field="*{clientParent.firstName}" maxlength="100"/>
                             </div>
 
                             <div class="row">
-                                <label>Отчество
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" data-bind="value: secondName"
-                                       th:field="*{user.secondName}" maxlength="100"/>
+                                <label>Отчество</label>
+                                <input class="form-control margin-bottom-20" type="text"
+                                       th:field="*{clientParent.secondName}" maxlength="100"/>
                             </div>
-
                             <div class="row">
-                                <label>Дата рождения
-                                    <span class="color-red">*</span>
-                                </label>
-                                <i class="datepicker-icon">
-                                    <input type="text" id="birthDateInput" class="form-control margin-bottom-20"
-                                           data-bind="datepicker: birthDate, inputmask: $element, inputmaskOptions: {type: 'date'}"
-                                           th:field="*{user.birthDate}"/>
-                                </i>
-                            </div>
-
-                            <div class="row">
-                                <label>Номер телефона
-                                    <span class="color-red">*</span>
-                                </label>
-                                <input class="form-control margin-bottom-20" type="text" th:field="*{user.phoneNumber}"
-                                       data-bind="value: phoneNumber" maxlength="20"/>
+                                <label>Номер телефона</label>
+                                <input class="form-control margin-bottom-20" type="text" th:field="*{clientParent.phoneNumber}"
+                                        maxlength="20"/>
                             </div>
                         </div>
                     </div>
@@ -93,12 +73,20 @@
                             </div>
                             <div class="row">
                                 <input type="checkbox"
-                                       data-bind="click: $root.changeClientType(1)" th:field="*{clientType.id}" th:value="1"/>
+                                       data-bind="click: $root.changeClientType(1)" th:field="*{clientType}" th:value="1"/>
                                 <label class="">Дошкольник</label>
                             </div>
                             <div class="row">
-                                <input type="checkbox" data-bind="click: $root.changeClientType(2)" th:field="*{clientType.id}" th:value="2"/>
+                                <input type="checkbox" data-bind="click: $root.changeClientType(2)" th:field="*{clientType}" th:value="2"/>
                                 <label class="">Школьник</label>
+                            </div>
+                            <div class="row">
+                                <input data-bind="click: $root.changeClientType(3)" type="checkbox" th:field="*{clientType}" th:value="3"/>
+                                <label class="">Студент</label>
+                            </div>
+                            <div class="row">
+                                <input data-bind="click: $root.changeClientType(4)" type="checkbox" th:field="*{clientType}" th:value="4"/>
+                                <label class="">Взрослый</label>
                             </div>
                             <div class="row">
                                 <label>Класс
@@ -119,10 +107,6 @@
                                        data-bind="attr : {'disabled' : isGradeDisabled}" maxlength="100"/>
                             </div>
                             <div class="row">
-                                <input data-bind="click: $root.changeClientType(3)" type="checkbox" th:field="*{clientType.id}" th:value="3"/>
-                                <label class="">Студент</label>
-                            </div>
-                            <div class="row">
                                 <label>Курс
                                     <span class="color-red">*</span>
                                 </label>
@@ -139,10 +123,6 @@
                                 </label>
                                 <input class="form-control margin-bottom-20" type="text" th:text="*{institutionOfEducation}"
                                        data-bind="attr : {'disabled' : isCourseDisabled}" maxlength="100"/>
-                            </div>
-                            <div class="row">
-                                <input data-bind="click: $root.changeClientType(4)" type="checkbox" th:field="*{clientType.id}" th:value="4"/>
-                                <label class="">Взрослый</label>
                             </div>
                         </div>
 

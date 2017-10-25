@@ -15,13 +15,13 @@ public class PhotoController {
     @Autowired private UserService userService;
 
 
-    @PostMapping(value = "administration/users/{id}/photo/upload")
+    @PostMapping(value = "/users/{id}/photo/upload")
     public String uploadFile(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException, LogicException {
         userService.addPhotoToUser(file, id);
         return "main";
     }
 
-    @RequestMapping(value = "users/{id}/photo/download")
+    @RequestMapping(value = "/users/{id}/photo/download")
     @ResponseBody
     public byte[] downloadFile(@PathVariable Long id) throws IOException, LogicException {
         return userService.getUserPhoto(id);

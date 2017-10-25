@@ -1,6 +1,5 @@
 var User = function() {
     var self = this;
-    self.login = ko.observable().extend({ required: true, minLength: 6, loginPattern: true });
     self.password = ko.observable().extend({ required: true, minLength: 6, passwordPattern: true });
     self.repeatpassword = ko.observable().extend({ required: true, passwordValidation: [self.password], passwordPattern: true});
     self.birthDate = ko.observable().extend({ required: true, pastDate: true });
@@ -10,7 +9,6 @@ var User = function() {
     self.lastName = ko.observable().extend({ required: true });
     self.firstName = ko.observable().extend({ required: true });
     self.secondName = ko.observable().extend({ required: true });
-    self.gender = ko.observable().extend({ required: true });
     self.grade = ko.observable();
 
     self.course = ko.observable();

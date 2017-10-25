@@ -1,8 +1,12 @@
 package by.bsu.tutor.service.client.impl;
 
 import by.bsu.tutor.models.entity.client.Client;
+import by.bsu.tutor.models.entity.client.ClientParent;
+import by.bsu.tutor.models.entity.client.ClientType;
 import by.bsu.tutor.models.entity.user.User;
+import by.bsu.tutor.repositories.ClientParentRepository;
 import by.bsu.tutor.repositories.ClientRepository;
+import by.bsu.tutor.repositories.ClientTypeRepository;
 import by.bsu.tutor.service.administration.UserService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.client.ClientService;
@@ -15,12 +19,15 @@ import javax.validation.constraints.NotNull;
 public class DefaultClientService extends DefaultCrudService<Client, ClientRepository> implements ClientService {
 
     private final UserService userService;
+    private final ClientParentRepository clientParentRepository;
 
 
     @Autowired
-    public DefaultClientService(@NotNull ClientRepository repository, UserService userService) {
+    public DefaultClientService(@NotNull ClientRepository repository, UserService userService,
+                                ClientParentRepository clientParentRepository) {
         super(repository);
         this.userService = userService;
+        this.clientParentRepository = clientParentRepository;
     }
 
     @Override
@@ -32,8 +39,13 @@ public class DefaultClientService extends DefaultCrudService<Client, ClientRepos
     public Client save(@NotNull Client client) {
         User user = userService.save(client.getUser());
         client.setUser(user);
-
-        return super.save(client);
+        Client savedClient = super.save(client);
+        if(ClientType.Code.PRESCHOOLER.equals(client.getClientType().getCode())){
+            ClientParent clientParent = client.getClientParent();
+            clientParent.setClient(savedClient);
+            clientParentRepository.save(clientParent);
+        }
+        return  savedClient;
     }
 
 }
