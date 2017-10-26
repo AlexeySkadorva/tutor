@@ -20,7 +20,7 @@
 
     <div th:replace="fragments/header :: header"></div>
 
-    <div th:replace="fragments/menu :: menu('tutors')"></div>
+    <div th:replace="fragments/menu :: menu('account')"></div>
 
     <div id="content">
         <div class="container background-white">
@@ -48,6 +48,15 @@
                             <div>
                                 <b>Возраст:</b> <span th:text="*{user.age}"></span>
                             </div>
+                            <div>
+                                <b>Дата рождения:</b> <span th:text="*{#dates.format(user.birthDate, 'dd-MM-yyyy')}"></span>
+                            </div>
+                            <div>
+                                <b>Адрес:</b> <span th:text="*{user.address}"></span>
+                            </div>
+                            <div>
+                                <b>Номер телефона:</b> <span th:text="*{user.phoneNumber}"></span>
+                            </div>
                             <!--<div>-->
                             <!--Предметы:-->
                             <!--<span type="span" class="label label-primary" th:each="s : *{subjects}" th:text="${s.name}"></span>-->
@@ -60,12 +69,20 @@
                                     <b>Учреждение образования:</b> <span th:text="*{institutionOfEducation}"></span>
                                 </div>
                             </div>
+                            <div th:if="${clientParent != null}">
+                                <h3 class="padding-top-10 pull-left">
+                                    Родитель: <p th:text="*{user.getFullName()}"></p>
+                                </h3>
+                                <div>
+                                    <b>Номер телефона:</b> <span th:text="*{user.phoneNumber}"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <hr/>
                 <div class="col-md-12">
-                    <div th:each="relation : *{relations}">
+                    <div th:each="relation : ${relations}">
                         <hr/>
                         <div class="row">
                         <div class="col-md-1 margin-vert-20">
@@ -76,34 +93,34 @@
                                                        th:href="@{'/tutors/' + ${relation.tutor.id}}"></a></h3>
                         </div>
                         </div>
-                        <div class="row">
+                        <div class="row"  th:if="!${#lists.isEmpty(relation.historyLessons)}">
                         <div class="col-md-1 margin-vert-20">
                             <i class="fa-home fa-3x color-primary"></i>
                         </div>
 
-                        <div class="col-md-11 margin-vert-30"  th:if="${lastLesson != null}">
-                            <h3 class="panel-title" th:text="${'Домашнее задание ' + lastLesson.homework}"></h3>
+                        <div class="col-md-11 margin-vert-30">
+                            <h3 class="panel-title" th:text="${'Домашнее задание: ' + relation.historyLessons[0].homework}"></h3>
                         </div>
                         </div>
-                        <div class="row">
+                        <div class="row" th:if="!${#lists.isEmpty(relation.historyLessons)}">
                         <div class="col-md-1 margin-vert-20">
                             <i class="fa-list fa-3x color-primary"></i>
                         </div>
 
                         <div class="col-md-11 margin-vert-30">
-                            <h3 th:if="${lastLesson != null}">
+                            <h3 >
                                 История занятий
                                 <a th:href="@{'/relations/' + ${relation.id} + '/history'}">Просмотреть</a></h3>
                         </div>
                         </div>
-                        <!--<div class="col-md-4">-->
-                            <!--<i class="fa-signal fa-3x color-primary"></i>-->
-                        <!--</div>-->
-                        <!--<div class="panel-body">-->
-                            <!--<p>Оценить</p>-->
-
-                            <!--&lt;!&ndash;<p><a th:href="@{'/relations/' + ${relation.id} + '/evaluation'">Оценить репетитора</a></p>&ndash;&gt;-->
-                        <!--</div>-->
+                        <div class="row">
+                        <div class="col-md-1 margin-vert-20">
+                            <i class="fa-signal fa-3x color-primary"></i>
+                        </div>
+                        <div class="col-md-11 margin-vert-30">
+                            <h3><a th:href="@{'/relations/' + ${relation.id} + '/evaluation'}">Оценить репетитора</a></h3>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>

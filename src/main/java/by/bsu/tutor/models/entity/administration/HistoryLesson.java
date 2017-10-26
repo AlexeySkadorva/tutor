@@ -16,9 +16,8 @@ public class HistoryLesson extends BaseEntity {
     @Column(name = "date")
     private Date date;
 
-    @OneToOne
-    @JoinColumn(name = "client_tutor_relation_id")
-    private ClientTutorRelation relation;
+    @Column(name = "client_tutor_relation_id")
+    private Long relationId;
 
     @Column(name = "homework")
     private String homework;

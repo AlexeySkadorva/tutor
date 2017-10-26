@@ -38,9 +38,4 @@ public class Client extends BaseEntity {
             inverseJoinColumns = { @JoinColumn(name = "tutor_id") })
     private Tutor tutor;
 
-    @OneToMany
-    @JoinTable(name = "client_tutor_relations", joinColumns = { @JoinColumn(name = "client_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") })
-    private List<ClientTutorRelation> relations;
-
 }

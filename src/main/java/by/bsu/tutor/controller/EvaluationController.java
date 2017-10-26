@@ -19,7 +19,7 @@ public class EvaluationController {
     public String log(@PathVariable Long id, Model model) throws LogicException {
         TutorEvaluation evaluation = new TutorEvaluation();
         evaluation.setRelation(relationService.get(id));
-        model.addAttribute("evaluation", new TutorEvaluation());
+        model.addAttribute("evaluation", evaluation);
         return "evaluation";
     }
 

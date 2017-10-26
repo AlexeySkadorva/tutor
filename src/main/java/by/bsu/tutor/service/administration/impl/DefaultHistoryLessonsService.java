@@ -33,7 +33,7 @@ public class DefaultHistoryLessonsService extends DefaultCrudService<HistoryLess
 
     @Override
     public HistoryLesson save(@NotNull Long id, @NotNull HistoryLesson historyLesson) throws LogicException {
-        historyLesson.setRelation(clientTutorRelationService.get(id));
+        historyLesson.setRelationId(id);
         return super.save(historyLesson);
     }
 

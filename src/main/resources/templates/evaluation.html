@@ -23,12 +23,13 @@
     <div id="content">
         <div class="container background-white">
             <div class="row margin-vert-30">
-                <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+                <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                     <form class="signup-page" th:object="${evaluation}" th:action="@{/evaluation}" method="POST">
                         <div class="signup-header">
                             <h2>Оценка репетитора за четверть</h2>
+                            <h2 th:text="*{relation.tutor.user.getFullName()}"></h2>
                         </div>
-
+                        <label>Оценка за все характеристики выставляется от 0 до 100 баллов</label>
                         <label>Общая оценка за занятие
                             <span class="color-red">*</span>
                         </label>
@@ -37,24 +38,28 @@
                         <label>Комунекабельность
                             <span class="color-red">*</span>
                         </label>
+                        <label>Оцените насколько Вам было комфортно общаться с репетитором. Насколько репетитор был
+                        интересным собеседником и ощущался ли дискомфорт при общении с ним</label>
                         <input class="form-control margin-bottom-20" type="text" th:field="*{sociability}"/>
 
-                        <label>Умение заинтересовать ребенка
+                        <label>Умение заинтересовать
                             <span class="color-red">*</span>
                         </label>
+                        <label>Оцените насколько репетитор смог заинтересовать Вас при изучении материала, и старался ли
+                        он пробудить у Вас интерес к материалу</label>
                         <input class="form-control margin-bottom-20" type="text" th:field="*{interest}"/>
 
                         <label>Умение объянить материал
                             <span class="color-red">*</span>
                         </label>
+                        <label>Оцените насколько репетитор смог найти к Вам подход, насколько доступно он излагал
+                        материал</label>
                         <input class="form-control margin-bottom-20" type="text" th:field="*{explanations}"/>
 
-                        <input type="hidden" th:field="*{client}"/>
-
-                        <input type="hidden" th:field="*{tutor}"/>
+                        <input type="hidden" th:field="*{relation}"/>
 
                         <div class="row">
-                            <div class="col-lg-4 text-right">
+                            <div class="col-lg-2 text-right">
                                 <button class="btn btn-primary" type="submit">Отправить</button>
                             </div>
                         </div>

@@ -5,9 +5,11 @@ import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.entity.user.User;
+import by.bsu.tutor.repositories.ClientParentRepository;
 import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.service.administration.UserService;
 import by.bsu.tutor.service.client.ClientService;
+import by.bsu.tutor.service.client.ClientTutorRelationService;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class AccountController {
     @Autowired private TutorService tutorService;
     @Autowired private ClientService clientService;
     @Autowired private TutorEvaluationService tutorEvaluationService;
+    @Autowired private ClientParentRepository clientParentRepository;
+    @Autowired private ClientTutorRelationService clientTutorRelationService;
+
 
     @GetMapping
     public String getTutor(Model model, @AuthenticationPrincipal UserDetails user) throws LogicException {
@@ -47,6 +52,9 @@ public class AccountController {
         if(roles.get(0).contains(Role.Code.CLIENT.name())) {
             User user1 = userService.findByLogin(user.getUsername());
             Client client=clientService.getByUser(user1);
+            model.addAttribute("clientParent", clientParentRepository.findByClient(client));
+            model.addAttribute("relations", clientTutorRelationService.getByClientId(client.getId()));
+
             model.addAttribute("client", client);
           return "/client";
         }
