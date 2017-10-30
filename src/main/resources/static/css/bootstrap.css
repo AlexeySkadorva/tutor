@@ -5775,6 +5775,13 @@ button.close {
 .validationMessage {
   color: #e51c23;
 }
+.login-form {
+ padding-top:10px;
+}
+
+#parent-info {
+  display: none;
+}
 
 .dropdown-menu {
   background: white;

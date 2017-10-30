@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:fragment="user_form">
-<div class="col-md-6">
+<div>
     <div class="signup-page">
         <div class="signup-header">
             <h3>Личные данные</h3>
@@ -68,7 +68,7 @@
             </label>
             <div>
                 <div th:each="gender : ${genders}">
-                    <input type="checkbox" th:field="*{user.gender}" th:value="${gender.value}" />
+                    <input th:checked="*{user.gender}" type="checkbox" th:field="*{user.gender}" th:value="${gender.value}" />
                     <label th:text="${gender.text}"></label>
                 </div>
             </div>

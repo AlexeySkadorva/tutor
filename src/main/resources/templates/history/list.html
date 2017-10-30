@@ -27,8 +27,8 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Репетитор</th>
-                <th>Клиент</th>
+                <!--<th>Репетитор</th>-->
+                <!--<th>Клиент</th>-->
                 <th>Дата</th>
                 <th>Домашнее задание</th>
                 <th>Пройденый материал</th>
@@ -37,10 +37,10 @@
             </thead>
             <tbody th:each="h : ${history}">
             <tr>
-                <td><a th:href="@{'/tutors/' + ${h.relation.tutor.id}}">
-                    <span th:text="${h.relation.tutor.user.getFullName()}"></span></a></td>
-                <td><a th:href="@{'/clients/' + ${h.relation.client.id}}">
-                    <span th:text="${h.relation.client.user.getFullName()}"></span></a></td>
+                <!--<td><a th:href="@{'/tutors/' + ${h.relation.tutor.id}}">-->
+                    <!--<span th:text="${h.relation.tutor.user.getFullName()}"></span></a></td>-->
+                <!--<td><a th:href="@{'/clients/' + ${h.relation.client.id}}">-->
+                    <!--<span th:text="${h.relation.client.user.getFullName()}"></span></a></td>-->
                 <td th:text="${#dates.format(h.date, 'dd-MM-yyyy')}"></td>
                 <td th:text="${h.homework}"></td>
                 <td th:text="${h.completedMaterial}"></td>

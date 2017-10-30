@@ -52,7 +52,7 @@ public class AccountController {
         if(roles.get(0).contains(Role.Code.CLIENT.name())) {
             User user1 = userService.findByLogin(user.getUsername());
             Client client=clientService.getByUser(user1);
-            model.addAttribute("clientParent", clientParentRepository.findByClient(client));
+            model.addAttribute("clientParent", clientParentRepository.findByClientId(client.getId()));
             model.addAttribute("relations", clientTutorRelationService.getByClientId(client.getId()));
 
             model.addAttribute("client", client);
@@ -61,6 +61,7 @@ public class AccountController {
         User user1 = userService.findByLogin(user.getUsername());
         Tutor tutor=tutorService.getByUser(user1);
         model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
+        model.addAttribute("account", true);
 
         model.addAttribute("tutor", tutor);
         return "/tutor";

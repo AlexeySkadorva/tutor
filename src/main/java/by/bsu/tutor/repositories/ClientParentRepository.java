@@ -5,5 +5,5 @@ import by.bsu.tutor.models.entity.client.ClientParent;
 
 public interface ClientParentRepository extends BaseRepository<ClientParent> {
 
-    ClientParent findByClient(Client client);
+    ClientParent findByClientId(Long clientId);
 }

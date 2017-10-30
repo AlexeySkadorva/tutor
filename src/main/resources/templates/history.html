@@ -29,20 +29,20 @@
                         <div class="panel panel-default" th:each="relation : ${relations}">
                             <div class="panel-heading" >
                                 <div class="col-md-12 margin-vert-20 accordion-toggle"
-                                     th:href="'#collapse-' + ${relation.id}" data-parent="#accordion" data-toggle="collapse">
+                                     th:href="'#collapse-' + ${relationId}" data-parent="#accordion" data-toggle="collapse">
                                     <div class="col-md-2">
                                     <i class="fa-plus-square-o fa-3x color-primary"></i>
                                         </div>
-                                    <div class="col-md-10 margin-vert-5">
-                                    <h3 th:text="${relation.client.user.getFullName()}"></h3>
-                                    </div>
+                                    <!--<div class="col-md-10 margin-vert-5">-->
+                                    <!--<h3 th:text="${relation.client.user.getFullName()}"></h3>-->
+                                    <!--</div>-->
                                 </div>
                             </div>
-                            <div th:id="'collapse-' + ${relation.id}" class="accordion-body collapse">
+                            <div th:id="'collapse-' + ${relationId}" class="accordion-body collapse">
                                 <div class="panel-body">
                                     <div class="row">
                                         <form th:object="${history}"
-                                              th:action="@{'/relations/' + ${relation.id} + '/history'}" method="POST">
+                                              th:action="@{'/relations/' + ${relationId} + '/history'}" method="POST">
                                         <div class="col-md-12">
 
                                             <label>Пройденный материал</label>

@@ -42,7 +42,7 @@ public class DefaultClientService extends DefaultCrudService<Client, ClientRepos
         Client savedClient = super.save(client);
         if(ClientType.Code.PRESCHOOLER.equals(client.getClientType().getCode())){
             ClientParent clientParent = client.getClientParent();
-            clientParent.setClient(savedClient);
+            clientParent.setClientId(savedClient.getId());
             clientParentRepository.save(clientParent);
         }
         return  savedClient;

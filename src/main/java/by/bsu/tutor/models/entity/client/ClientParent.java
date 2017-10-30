@@ -14,9 +14,8 @@ import java.util.Date;
 @Table(name = "client_parent_info")
 public class ClientParent extends BaseEntity {
 
-    @OneToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @Column(name = "client_id")
+    private Long clientId;
 
     @Column(name = "firstname")
     private String firstName;

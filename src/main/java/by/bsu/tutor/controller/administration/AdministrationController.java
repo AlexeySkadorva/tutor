@@ -12,12 +12,14 @@ import by.bsu.tutor.service.administration.UserService;
 import by.bsu.tutor.service.client.ClientService;
 import by.bsu.tutor.service.order.OrderService;
 import by.bsu.tutor.service.tutor.TutorService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+@Api(description = "Controller for administration logic", produces = "application/json")
 
 @RequestMapping("/administration")
 @Controller

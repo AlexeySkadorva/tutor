@@ -37,8 +37,9 @@ public class Tutor extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
-    @JoinColumn(name = "tutor_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "client_tutor_relations", joinColumns = { @JoinColumn(name = "tutor_id") },
+            inverseJoinColumns = { @JoinColumn(name = "id") })
     private List<TutorNote> notes;
 
     @OneToMany(cascade = CascadeType.ALL)

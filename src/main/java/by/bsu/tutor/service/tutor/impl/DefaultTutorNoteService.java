@@ -25,7 +25,7 @@ public class DefaultTutorNoteService extends DefaultCrudService<TutorNote, Tutor
 
     @Override
     public List<TutorNote> getNotesForTutor(@NotNull Tutor tutor){
-        return tutorNoteRepository.findByTutor(tutor);
+        return tutorNoteRepository.findByClientTutorRelationTutor(tutor);
     }
 
 }

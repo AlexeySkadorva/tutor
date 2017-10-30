@@ -100,6 +100,12 @@
                         </div>
                     </div>
 
+                    <div class="row" th:if="${account}">
+                        <div class="col-lg-12 text-right">
+                            <a th:href="@{'/tutors/' + *{id} + '/edit'}" class="btn btn-default">Редактировать данные</a>
+                        </div>
+                    </div>
+
                     <!--<div class="row">-->
                         <!--<h3 class="padding-top-10 pull-left">-->
                             <!--Текущая процентная ставка: <p th:text="${invoice.rate}"></p>-->
@@ -164,91 +170,42 @@
                                      aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${evaluation.explanations} + '%'">
                                 </div>
                             </div>
-                            <!-- End My Skills -->
                         </div>
+                    </div>
+                    <div class="col-md-9">
 
-                        <div class="col-md-6" th:if="!${#lists.isEmpty(tutor.notes)}">
-                            <h3 class="margin-bottom-10">Комментарии</h3>
-                            <div id="accordion" class="panel-group">
-                                <div class="panel panel-default accordion-toggle" th:each="note : ${tutor.notes}">
-                                    <div class="panel-heading" th:href="'#collapse-' + *{id}"
-                                         data-parent="#accordion" data-toggle="collapse">
-                                        <h4 class="panel-title">
-                                            <a class="accordion-toggle" href="#collapse-One" data-parent="#accordion"
-                                               data-toggle="collapse" th:text="${note.client.user.getFullName()}">
-                                            </a>
-                                        </h4>
+                        <div class="blog-item" th:if="!*{#strings.isEmpty(notes)}">
+                            <div class="clearfix"></div>
+                            <div class="blog-item-footer">
+
+                                <div class="blog-recent-comments panel panel-default margin-bottom-30">
+                                    <div class="panel-heading">
+                                        <h3>Comments</h3>
                                     </div>
-                                    <div th:id="'collapse-' + *{id}" class="accordion-body collapse">
-                                        <div class="panel-body">
-                                            <p th:text="${note.note}"></p>
-                                        </div>
-                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" th:each="note : ${notes}">
+                                            <div class="row">
+                                                <div class="col-md-2 profile-thumb">
+                                                    <a href="#">
+                                                        <img class="media-object"
+                                                             th:src="@{'/administration/users/' +
+                                                             ${note.clientTutorRelation.client.user.id} + '/photo/download'}"/>
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <h4 th:text="${note.clientTutorRelation.client.user.getFullName()}"></h4>
+                                                    <p  th:text="${note.note}"></p>
+                                                            <span class="date" th:text="${note.createdDate}">
+                                                                <i class="fa fa-clock-o color-gray-light"></i></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <!-- End Accordion -->
                         </div>
-                        <!-- Comments -->
+                        <!-- End Comments -->
                     </div>
-                    <!--<div class="col-md-9">-->
-
-                        <!--<div class="blog-item">-->
-                            <!--<div class="clearfix"></div>-->
-                            <!--<div class="blog-item-footer">-->
-
-                                <!--<div class="blog-recent-comments panel panel-default margin-bottom-30" th:if="!${#lists.isEmpty(tutor.notes)}">-->
-                                    <!--<div class="panel-heading">-->
-                                        <!--<h3>Comments</h3>-->
-                                    <!--</div>-->
-                                    <!--<ul class="list-group">-->
-                                        <!--<li class="list-group-item" th:each="note : ${tutor.notes}">-->
-                                            <!--<div class="row">-->
-                                                <!--<div class="col-md-2 profile-thumb">-->
-                                                    <!--<a href="#">-->
-                                                        <!--<img class="media-object"-->
-                                                             <!--th:src="@{'/administration/users/' + ${note.client.user.id} + '/photo/download'}"/>-->
-                                                    <!--</a>-->
-                                                <!--</div>-->
-                                                <!--<div class="col-md-10">-->
-                                                    <!--<h4 th:text="${note.client.user.getFullName()}"></h4>-->
-                                                    <!--<p  th:text="${note.note}"></p>-->
-                                                            <!--<span class="date" th:text="${note.createdDate}">-->
-                                                                <!--<i class="fa fa-clock-o color-gray-light"></i></span>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</li>-->
-                                        <!--<li class="list-group-item">-->
-                                            <!--<div class="blog-comment-form">-->
-                                                <!--<div class="row margin-top-20">-->
-                                                    <!--<div class="col-md-12">-->
-                                                        <!--<div class="pull-left">-->
-                                                            <!--<h3>Оставить комментарий</h3>-->
-                                                        <!--</div>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                                <!--<div class="row margin-top-20">-->
-                                                    <!--<div class="col-md-12">-->
-                                                        <!--<form>-->
-                                                            <!--<label>Комментарий</label>-->
-                                                            <!--<div class="row margin-bottom-20">-->
-                                                                <!--<div class="col-md-11 col-md-offset-0">-->
-                                                                    <!--<textarea class="form-control" rows="8"></textarea>-->
-                                                                <!--</div>-->
-                                                            <!--</div>-->
-                                                            <!--<p>-->
-                                                                <!--<button class="btn btn-primary" type="submit">Отправить</button>-->
-                                                            <!--</p>-->
-                                                        <!--</form>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; End Comments &ndash;&gt;-->
-                    <!--</div>-->
                 </div>
             </div>
         </div>

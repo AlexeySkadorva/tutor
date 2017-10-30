@@ -73,6 +73,7 @@
                                 <h3 class="padding-top-10 pull-left">
                                     Родитель: <p th:text="*{user.getFullName()}"></p>
                                 </h3>
+                                <div class="clearfix"></div>
                                 <div>
                                     <b>Номер телефона:</b> <span th:text="*{user.phoneNumber}"></span>
                                 </div>
@@ -121,6 +122,16 @@
                             <h3><a th:href="@{'/relations/' + ${relation.id} + '/evaluation'}">Оценить репетитора</a></h3>
                         </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-1 margin-vert-20">
+                                <i class="fa-signal fa-3x color-primary"></i>
+                            </div>
+                            <div class="col-md-11 margin-vert-30">
+                                <h3><a th:href="@{'/notes/relations/' + ${relation.id}}">Оставить коммент</a></h3>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.models.enums.Gender;
+import by.bsu.tutor.repositories.ClientParentRepository;
 import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.service.administration.HistoryLessonService;
 import by.bsu.tutor.service.client.ClientService;
@@ -29,6 +30,7 @@ import java.util.List;
 public class ClientController {
 
     @Autowired private ClientService clientService;
+    @Autowired private ClientParentRepository clientParentRepository;
     @Autowired private HistoryLessonService historyLessonService;
     @Autowired private ClientTutorRelationService clientTutorRelationService;
     @Autowired private RoleRepository roleRepository;
@@ -40,6 +42,23 @@ public class ClientController {
         model.addAttribute("client", client);
         model.addAttribute("genders", Gender.values());
         return "administration/client/new";
+    }
+
+    @GetMapping(value = "/{id}/edit")
+    public Object h(@PathVariable Long id, Model model) throws LogicException {
+        Client client = clientService.get(id);
+        client.setClientParent(clientParentRepository.findByClientId(id));
+
+        model.addAttribute("client", client);
+        model.addAttribute("genders", Gender.values());
+        return "administration/client/edit";
+    }
+
+    @PostMapping(value = "/{id}")
+    public String saveClient(@PathVariable Long id, @ModelAttribute(value = "client") Client client, Model model) {
+        client.setId(id);
+        clientService.save(client);
+        return "";
     }
 
     @PostMapping

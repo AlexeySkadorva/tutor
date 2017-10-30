@@ -1,6 +1,7 @@
 package by.bsu.tutor.models.entity.note;
 
 import by.bsu.tutor.models.entity.client.Client;
+import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import lombok.Data;
 
@@ -13,14 +14,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tutor_notes")
-public class TutorNote extends Note{
+public class TutorNote extends Note {
 
     @ManyToOne
-    @JoinColumn(name = "tutor_id")
-    private Tutor tutor;
-
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @JoinColumn(name = "client_tutor_id")
+    private ClientTutorRelation clientTutorRelation;
 
 }

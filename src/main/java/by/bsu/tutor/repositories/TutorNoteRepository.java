@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TutorNoteRepository extends BaseRepository<TutorNote> {
 
-    List<TutorNote> findByTutor(Tutor tutor);
+    List<TutorNote> findByClientTutorRelationTutor(Tutor tutor);
 
 }
 

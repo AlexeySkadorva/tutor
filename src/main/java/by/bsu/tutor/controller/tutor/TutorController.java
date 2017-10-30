@@ -2,6 +2,7 @@ package by.bsu.tutor.controller.tutor;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.dto.SearchForm;
+import by.bsu.tutor.models.entity.note.TutorNote;
 import by.bsu.tutor.models.entity.tutor.Subject;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.user.Role;
@@ -11,6 +12,7 @@ import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
 import by.bsu.tutor.service.tutor.TutorInvoiceService;
+import by.bsu.tutor.service.tutor.TutorNoteService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ public class TutorController {
     @Autowired private TutorService tutorService;
     @Autowired private TutorEvaluationService tutorEvaluationService;
     @Autowired private TutorInvoiceService tutorInvoiceService;
+    @Autowired private TutorNoteService tutorNoteService;
 
     @Autowired private LessonTypeRepository lessonTypeRepository;
     @Autowired private SubjectRepository subjectRepository;
@@ -39,6 +42,24 @@ public class TutorController {
         return "administration/tutor/new";
     }
 
+    @GetMapping(value = "/{id}/edit")
+    public Object р(@PathVariable Long id,  Model model) throws LogicException {
+        model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
+        model.addAttribute("subjects", subjectRepository.findAll());
+        model.addAttribute("tutor", tutorService.get(id));
+        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("genders", Gender.values());
+        return "administration/tutor/edit";
+    }
+
+
+    @PostMapping(value = "/{id}")
+    public Object s(@PathVariable Long id,  @ModelAttribute(value = "tutor") Tutor tutor) throws LogicException {
+        tutor.setId(id);
+        tutorService.save(tutor);
+        return "";
+    }
+
     @PostMapping
     public String saveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) {
         tutor.getUser().setRole(roleRepository.findByCode(Role.Code.TUTOR));
@@ -48,10 +69,19 @@ public class TutorController {
         return "photo";
     }
 
+    @PostMapping(value = "/{id}/note")
+    public String saveNote(@ModelAttribute(value = "tutor") TutorNote tutorNote, Model model) {
+        tutorNoteService.save(tutorNote);
+        return "main";
+    }
+
     @GetMapping(value = "/{id}")
     public String getTutor(@PathVariable Long id, Model model) throws LogicException {
         Tutor tutor = tutorService.get(id);
         model.addAttribute("tutor", tutor);
+        model.addAttribute("note", new TutorNote());
+
+        model.addAttribute("notes", tutorNoteService.getNotesForTutor(tutor));
         model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
         return "tutor";
     }
