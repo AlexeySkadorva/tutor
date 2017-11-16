@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public interface UserService extends CrudService<User> {
 
-    @NotNull User findByLogin(@NotNull String login);
+    @NotNull User findByEmail(@NotNull String email);
 
     void addPhotoToUser(@NotNull MultipartFile file, @NotNull Long userId) throws IOException, LogicException;
 

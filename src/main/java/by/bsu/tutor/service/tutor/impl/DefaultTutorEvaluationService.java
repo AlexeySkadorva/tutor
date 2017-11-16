@@ -40,6 +40,10 @@ public class DefaultTutorEvaluationService extends DefaultCrudService<TutorEvalu
             evaluation.setExplanations(evaluations.stream().mapToInt(TutorEvaluation::getExplanations).sum() / evaluations.size());
             evaluation.setId(evaluations.get(0).getId());
         }
+        evaluation.setEvaluation(1);
+        evaluation.setExplanations(1);
+        evaluation.setInterest(1);
+        evaluation.setSociability(2);
         return evaluation;
     }
 

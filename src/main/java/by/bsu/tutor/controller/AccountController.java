@@ -2,6 +2,7 @@ package by.bsu.tutor.controller;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.client.Client;
+import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.entity.user.User;
@@ -50,7 +51,7 @@ public class AccountController {
         }
 
         if(roles.get(0).contains(Role.Code.CLIENT.name())) {
-            User user1 = userService.findByLogin(user.getUsername());
+            User user1 = userService.findByEmail(user.getUsername());
             Client client=clientService.getByUser(user1);
             model.addAttribute("clientParent", clientParentRepository.findByClientId(client.getId()));
             model.addAttribute("relations", clientTutorRelationService.getByClientId(client.getId()));
@@ -58,8 +59,11 @@ public class AccountController {
             model.addAttribute("client", client);
           return "/client";
         }
-        User user1 = userService.findByLogin(user.getUsername());
+
+        User user1 = userService.findByEmail(user.getUsername());
         Tutor tutor=tutorService.getByUser(user1);
+        List<ClientTutorRelation> clientTutorRelations = clientTutorRelationService.getByTutorId(tutor.getId());
+        model.addAttribute("relations", clientTutorRelations);
         model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
         model.addAttribute("account", true);
 

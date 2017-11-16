@@ -29,21 +29,25 @@ public class DefaultUserService extends DefaultCrudService<User, UserRepository>
 
     @Override
     public User save(@NotNull User user) {
+        boolean isUserExists = null != findByEmail(user.getEmail());
+        if(isUserExists) {
+            return null;
+        }
         user.setPassword(passwordEncoder.encodePassword(user.getPassword(), StringUtils.EMPTY));
         return super.save(user);
     }
 
     @NotNull
     @Override
-    public User findByLogin(@NotNull String login) {
-        return repository.findByLogin(login);
+    public User findByEmail(@NotNull String email) {
+        return repository.findByEmail(email);
     }
 
     @Transactional
     @Override
     public void addPhotoToUser(@NotNull MultipartFile file, @NotNull Long userId) throws IOException, LogicException {
         User user = super.get(userId);
-        user.setLogin(user.getEmail());
+        user.setEmail(user.getEmail());
         user.setPhoto(file.getBytes());
     }
 

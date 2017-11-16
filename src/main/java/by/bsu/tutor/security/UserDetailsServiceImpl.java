@@ -23,12 +23,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserDetails userDetails;
-        User user = userService.findByLogin(login);
+        User user = userService.findByEmail(email);
         if (user != null) {
             Set<GrantedAuthority> roles = Stream.of(user.getRole()).map(r -> new SimpleGrantedAuthority(r.getCode().name())).collect(Collectors.toSet());
-            userDetails = new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), true, true, true, true, roles);
+            userDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true, true, true, roles);
         } else {
             userDetails = new org.springframework.security.core.userdetails.User("none", "none", new HashSet<>());
         }

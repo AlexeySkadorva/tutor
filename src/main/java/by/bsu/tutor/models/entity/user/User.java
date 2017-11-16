@@ -21,9 +21,6 @@ import java.util.stream.Stream;
 @Table(name = "users")
 public class User extends BaseEntity implements UserDetails {
 
-    @Column(name = "login")
-    private String login;
-
     @Column(name = "password")
     private String password;
 

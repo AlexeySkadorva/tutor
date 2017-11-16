@@ -47,7 +47,7 @@ public class OrderController {
             return "redirect:/clients/new";
         }
         Tutor tutor = tutorService.get(id);
-        Client client = clientService.getByUser(userService.findByLogin(user.getUsername()));
+        Client client = clientService.getByUser(userService.findByEmail(user.getUsername()));
         Order order = new Order(tutor, client, orderStatusRepository.findByCode(OrderStatus.Code.NEW));
 
         model.addAttribute("order", order);

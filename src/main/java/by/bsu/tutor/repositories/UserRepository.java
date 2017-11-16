@@ -4,7 +4,7 @@ import by.bsu.tutor.models.entity.user.User;
 
 public interface UserRepository extends BaseRepository<User> {
 
-    User findByLogin(String login);
+    User findByEmail(String email);
 
 }
 

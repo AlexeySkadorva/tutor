@@ -33,6 +33,9 @@ public class Tutor extends BaseEntity {
     @Column(name = "skype_link")
     private String skypeLink;
 
+    @Column(name = "telegram")
+    private String telegram;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
