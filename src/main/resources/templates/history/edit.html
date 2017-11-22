@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Контакты</title>
-    <meta charset="utf-8"/>
+    <title>История занятий</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
@@ -18,38 +20,25 @@
 
     <div th:replace="fragments/header :: header"></div>
 
-    <div th:replace="fragments/menu :: menu('contact')"></div>
-
+    <div th:replace="fragments/menu :: menu('tutors')"></div>
     <div id="content">
         <div class="container background-white">
             <div class="row margin-vert-30">
-                <!-- Main Column -->
-                <div class="col-md-9">
-                    <!-- Main Content -->
-                    <div class="headline">
-                        <h2>Контактная форма</h2>
-                    </div>
-                    <p>Оставте нам сообщениеи и мы ответим Вам в максимально короткий срок.</p>
-                    <br/>
-                    <!-- Contact Form -->
-                    <form th:object="${note}" th:action="@{'/notes/tutor'}" method="POST">
-                        <label>Сообщение</label>
-                        <div class="row margin-bottom-20">
-                            <div class="col-md-8 col-md-offset-0">
-                                <textarea rows="8" class="form-control" th:field="*{comment}"></textarea>
+                <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                    <div id="accordion" class="panel-group">
+                        <div class="panel-body">
+                            <div class="row">
+                                <form th:object="${history}"
+                                      th:action="@{'/history/' + *{id}}" method="POST">
+                                    <div th:replace="fragments/history/update :: update"></div>
+                                </form>
                             </div>
                         </div>
-                        <input type="hidden" th:field="*{clientTutorRelation}"/>
-
-                        <p>
-                            <button type="submit" class="btn btn-primary">Отправить сообщение</button>
-                        </p>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div th:replace="fragments/footer :: contacts"></div>
 
     <div th:replace="fragments/footer :: footer"></div>
@@ -63,5 +52,6 @@
 <script th:src="@{/js/jquery.sticky.js}"/>
 <script th:src="@{/js/slimbox2.js}"/>
 <script th:src="@{/js/modernizr.custom.js}"/>
+
 </body>
 </html>

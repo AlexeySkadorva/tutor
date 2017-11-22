@@ -3,12 +3,13 @@ package by.bsu.tutor.models.entity.administration;
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
-
+@NoArgsConstructor
 @Entity
 @Table(name = "history_lessons")
 public class HistoryLesson extends BaseEntity {
@@ -38,4 +39,7 @@ public class HistoryLesson extends BaseEntity {
         }
     }
 
+    public HistoryLesson(Long relationId) {
+        this.relationId = relationId;
+    }
 }

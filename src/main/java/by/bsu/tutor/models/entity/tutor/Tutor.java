@@ -4,7 +4,9 @@ import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.note.TutorNote;
 import by.bsu.tutor.models.entity.order.LessonType;
 import by.bsu.tutor.models.entity.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,7 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tutors")
 public class Tutor extends BaseEntity {
@@ -40,9 +43,10 @@ public class Tutor extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "client_tutor_relations", joinColumns = { @JoinColumn(name = "tutor_id") },
-            inverseJoinColumns = { @JoinColumn(name = "id") })
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "client_tutor_relations", joinColumns = { @JoinColumn(name = "tutor_id", referencedColumnName = "id") },
+//            inverseJoinColumns = { @JoinColumn(name = "id", referencedColumnName = "client_tutor_id") })
+    @Transient
     private List<TutorNote> notes;
 
     @OneToMany(cascade = CascadeType.ALL)

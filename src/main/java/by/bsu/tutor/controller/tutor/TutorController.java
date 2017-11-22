@@ -10,6 +10,7 @@ import by.bsu.tutor.models.enums.Gender;
 import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
+import by.bsu.tutor.service.order.OrderService;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
 import by.bsu.tutor.service.tutor.TutorInvoiceService;
 import by.bsu.tutor.service.tutor.TutorNoteService;
@@ -57,7 +58,7 @@ public class TutorController {
     public Object s(@PathVariable Long id,  @ModelAttribute(value = "tutor") Tutor tutor) throws LogicException {
         tutor.setId(id);
         tutorService.save(tutor);
-        return "";
+        return "redirect:/account";
     }
 
     @PostMapping
@@ -81,7 +82,6 @@ public class TutorController {
         model.addAttribute("tutor", tutor);
         model.addAttribute("note", new TutorNote());
 
-        model.addAttribute("notes", tutorNoteService.getNotesForTutor(tutor));
         model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
         return "tutor";
     }

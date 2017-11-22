@@ -1,6 +1,7 @@
 package by.bsu.tutor.service.administration.impl;
 
 import by.bsu.tutor.models.dto.ContactDto;
+import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.properties.GmailProperties;
 import by.bsu.tutor.service.administration.MessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,32 @@ public class MailMessageSenderService implements MessageSenderService {
         Session mailSession = getMailSession();
         MimeMessage mailMessage = getGenerateMailMessage(mailSession, (ContactDto) contact);
 
-        sendMailMessage(mailSession, mailMessage);
+        sendMailMessage(mailSession, mailMessage, gmailProperties.getEmail());
     }
 
-    private void sendMailMessage(Session mailSession, MimeMessage mailMessage) {
+    @Override
+    public void sendToUser(@NotNull Object contact, @NotNull User user) {
+        Session mailSession = getMailSession();
+        MimeMessage mailMessage = getGenerateMailMessage(mailSession, contact,user);
+
+        sendMailMessage(mailSession, mailMessage, user.getEmail());
+    }
+
+    private MimeMessage getGenerateMailMessage(Session mailSession, Object object, User user) {
+        MimeMessage mailMessage = null;
+        try {
+            mailMessage = new MimeMessage(mailSession);
+            mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+            mailMessage.setSubject("1111");
+
+            mailMessage.setContent("111", MAIL_FORMAT + MAIL_CHARSET);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return mailMessage;
+    }
+
+    private void sendMailMessage(Session mailSession, MimeMessage mailMessage, String email) {
         try {
             Transport transport = mailSession.getTransport(gmailProperties.getTransport());
             transport.connect(gmailProperties.getHost(), gmailProperties.getEmail(), gmailProperties.getPassword());

@@ -1,7 +1,7 @@
 var User = function(tutor) {
     var self = this;
-    self.password = ko.observable().extend({ required: true, minLength: 6, passwordPattern: true });
-    self.repeatpassword = ko.observable().extend({ required: true, passwordValidation: [self.password], passwordPattern: true});
+    self.password = ko.observable(tutor.user.password).extend({ required: true, minLength: 6, passwordPattern: true });
+    self.repeatpassword = ko.observable(tutor.user.password).extend({ required: true, passwordValidation: [self.password], passwordPattern: true});
     self.birthDate = ko.observable(tutor.user.birthDate).extend({ required: true, pastDate: true });
     self.address = ko.observable(tutor.user.address).extend({ required: true });
     self.phoneNumber = ko.observable(tutor.user.phoneNumber).extend({ required: true });
@@ -13,6 +13,7 @@ var User = function(tutor) {
     self.firstExperience = ko.observable(tutor.firstExperience);
     self.vkLink = ko.observable(tutor.vkLink);
     self.skypeLink = ko.observable(tutor.skypeLink);
+    self.telegram = ko.observable(tutor.telegram);
     self.price = ko.observable(tutor.price).extend({ required: true });
     self.comment = ko.observable(tutor.comment);
     self.status = ko.observable(tutor.status);

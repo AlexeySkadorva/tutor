@@ -18,17 +18,27 @@ public class HistoryLessonController {
     @Autowired private ClientTutorRelationService clientTutorRelationService;
     @Autowired private HistoryLessonService historyLessonService;
 
-    @RequestMapping(value = "/tutors/{id}/history")
-    public String log(@PathVariable Long id, Model model) {
-        model.addAttribute("relations", clientTutorRelationService.getByTutorId(id));
-        model.addAttribute("history", new HistoryLesson());
-        return "history";
+    @RequestMapping(value = "/relations/{relationId}/history")
+    public String log(@PathVariable Long relationId, Model model) throws LogicException {
+        model.addAttribute("history", new HistoryLesson(relationId));
+        return "history/new";
     }
 
-    @RequestMapping(value = "/relations/{relationId}/history", method = RequestMethod.POST)
-    public String log(@PathVariable Long relationId, @ModelAttribute(value = "history") HistoryLesson historyLesson) throws LogicException {
-        historyLessonService.save(relationId, historyLesson);
-        return "redirect:/main";
+    @RequestMapping(value = "/history", method = RequestMethod.POST)
+    public String save(@ModelAttribute(value = "history") HistoryLesson historyLesson) throws LogicException {
+        historyLessonService.save(historyLesson);
+        return "redirect:/account";
+    }
+
+    @RequestMapping(value = "/history/{id}", method = RequestMethod.POST)
+    public String log(@ModelAttribute(value = "history") HistoryLesson historyLesson,@PathVariable Long id) throws LogicException {
+            HistoryLesson history = historyLessonService.get(historyLesson.getId());
+        history.setCompletedMaterial(historyLesson.getCompletedMaterial());
+        history.setHomework(historyLesson.getHomework());
+        history.setRating(historyLesson.getRating());
+
+            historyLessonService.save(history);
+            return "redirect:/account";
     }
 
     @RequestMapping(value = "/history")
@@ -37,7 +47,13 @@ public class HistoryLessonController {
         return "history/list";
     }
 
-    @RequestMapping(value = "/relations/{id}/history")
+    @RequestMapping(value = "/history/{id}")
+    public String log(Model model, @PathVariable Long id) throws LogicException {
+        model.addAttribute("history", historyLessonService.get(id));
+        return "history/edit";
+    }
+
+    @RequestMapping(value = "/relations/{id}/history/list")
     public String getHistory(@PathVariable Long id, Model model){
         model.addAttribute("history", historyLessonService.getByRelationId(id));
         return "history/list";

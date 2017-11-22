@@ -28,26 +28,22 @@
         <div class="container background-white">
             <div class="row margin-vert-30">
                 <form data-bind="submit: save" th:object="${tutor}" th:action="@{/tutors}" method="POST">
-
                     <div class="col-md-6">
                         <div th:replace="fragments/user_form :: user_form"></div>
 
-                        <div th:replace="fragments/login_form :: login_form"></div>
-
-                        <div th:replace="fragments/tutor/status :: status"></div>
+                        <div th:replace="fragments/tutor/update :: update"></div>
                     </div>
 
-                    <div th:replace="fragments/tutor/update :: update"></div>
-
-                    <div th:replace="fragments/tutor/social :: social"></div>
-
                     <div class="col-md-6">
+                    <div th:replace="fragments/login_form :: login_form"></div>
+                        <div th:replace="fragments/tutor/status :: status"></div>
+
+                        <div th:replace="fragments/tutor/social :: social"></div>
+
                         <hr/>
-                        <div class="row">
-                            <div class="col-lg-4 text-right">
+                            <div class="text-right">
                                 <button class="btn btn-primary" type="submit">Регистрация</button>
                             </div>
-                        </div>
                     </div>
                 </form>
             </div>

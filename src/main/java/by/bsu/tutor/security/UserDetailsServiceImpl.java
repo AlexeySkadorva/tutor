@@ -3,7 +3,6 @@ package by.bsu.tutor.security;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.service.administration.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

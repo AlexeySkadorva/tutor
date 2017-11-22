@@ -3,8 +3,10 @@ package by.bsu.tutor.service.order.impl;
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.order.Order;
 import by.bsu.tutor.models.entity.order.OrderStatus;
+import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.repositories.OrderRepository;
 import by.bsu.tutor.repositories.OrderStatusRepository;
+import by.bsu.tutor.service.administration.MessageSenderService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.List;
 public class DefaultOrderService extends DefaultCrudService<Order, OrderRepository> implements OrderService {
 
     private final OrderStatusRepository orderStatusRepository;
+    @Autowired private MessageSenderService messageSenderService;
 
 
     @Autowired
@@ -26,9 +29,14 @@ public class DefaultOrderService extends DefaultCrudService<Order, OrderReposito
     }
 
     @Override
-    public Order saveNewOrder(@NotNull Order order) {
-        order.setOrderStatus(orderStatusRepository.findByCode(OrderStatus.Code.NEW));
+    public Order save(@NotNull Order order) {
+        messageSenderService.sendToUser(order, order.getTutor().getUser());
         return super.save(order);
+    }
+
+    @Override
+    public List<Order> getNewByTutorId(@NotNull Long tutorId) {
+        return repository.findByTutorIdAndOrderStatusCode(tutorId, OrderStatus.Code.NEW);
     }
 
     @Override

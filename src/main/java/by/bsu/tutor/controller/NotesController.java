@@ -39,10 +39,10 @@ public class NotesController {
         return "note";
     }
 
-    @RequestMapping(value = "/relations/{id}", method = RequestMethod.POST)
-    public String save(@PathVariable Long id, @ModelAttribute(value = "note") TutorNote note) throws IOException, LogicException {
+    @RequestMapping(value = "/tutor", method = RequestMethod.POST)
+    public String save(@ModelAttribute(value = "note") TutorNote note) throws IOException, LogicException {
         tutorNoteService.save(note);
-        return "redirect:/";
+        return "redirect:/account";
     }
 
     @RequestMapping(method = RequestMethod.POST)

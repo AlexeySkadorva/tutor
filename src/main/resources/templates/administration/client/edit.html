@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Создание клиента</title>
+    <title>Редактирование клиента</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link href="favicon.ico" rel="shortcut icon"/>
@@ -28,30 +28,24 @@
         <div class="container background-white">
             <div class="row margin-vert-30">
 
-                <form data-bind="submit: save" th:object="${client}" th:action="@{'/clients' + ${id}}" method="POST">
-                    <h3>Редактирование</h3>
+                <form data-bind="submit: save" th:object="${client}" th:action="@{'/clients/' + ${id}}" method="POST">
+                    <div class="col-md-12 margin-bottom-20">
+                        <h3>Редактирование</h3>
+                    </div>
 
                     <div class="col-md-6">
                         <div th:replace="fragments/user_form :: user_form"></div>
-
-                        <div th:replace="fragments/login_form :: login_form"></div>
                     </div>
-
-                    <div th:replace="fragments/client/update:: update"></div>
-
-                    <input type="hidden" th:field="*{user.photo}"/>
-
-                    <input type="hidden" th:field="*{user.id}"/>
-
-                    <input type="hidden" th:field="*{user.role}"/>
 
                     <div class="col-md-6">
-                    <hr/>
-                    <div class="row">
-                        <div class="col-lg-4 text-right">
+                        <div th:replace="fragments/login_form :: login_form"></div>
+
+                        <div th:replace="fragments/client/update:: update"></div>
+
+                        <hr/>
+                        <div class="text-right">
                             <button class="btn btn-primary" type="submit">Регистрация</button>
                         </div>
-                    </div>
                     </div>
                 </form>
             </div>

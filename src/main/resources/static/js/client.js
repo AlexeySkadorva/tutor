@@ -1,7 +1,7 @@
 var User = function(client) {
     var self = this;
-    self.password = ko.observable().extend({ required: true, minLength: 6, passwordPattern: true });
-    self.repeatpassword = ko.observable().extend({ required: true, passwordValidation: [self.password], passwordPattern: true});
+    self.password = ko.observable(client.user.password).extend({ required: true, minLength: 6, passwordPattern: true });
+    self.repeatpassword = ko.observable(client.user.password).extend({ required: true, passwordValidation: [self.password], passwordPattern: true});
     self.birthDate = ko.observable(client.user.birthDate).extend({ required: true, pastDate: true });
     self.address = ko.observable(client.user.address).extend({ required: true });
     self.phoneNumber = ko.observable(client.user.phoneNumber).extend({ required: true });

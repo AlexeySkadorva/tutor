@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="ru">
 <head>
-    <title>Репетиторы</title>
+    <title>Репетитор</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
@@ -94,10 +94,16 @@
                             </div>
                         </div>
                     </div>
+                    <div th:if="!*{#strings.isEmpty(status)}">
+                        <hr/>
+                        <div class="row animate fadeInUp">
+                            <h2 class="text-center margin-top-10" th:text="*{status}"></h2>
+                        </div>
+                        <hr/>
+                    </div>
 
                     <div class="col-md-12">
                         <div th:each="relation : ${relations}">
-                            <hr/>
                             <div class="row">
                                 <div class="col-md-1 margin-vert-20">
                                     <i class="fa-user fa-3x color-primary"></i>
@@ -105,6 +111,16 @@
                                 <div class="col-md-11 margin-vert-30">
                                     <h3>Ученик <a th:text="${relation.client.user.getFullName()}"
                                                      th:href="@{'/clients/' + ${relation.client.id}}"></a></h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1 margin-vert-20">
+                                    <a th:href="@{'/relations/' + ${relation.id} + '/history'}">
+                                        <i class="fa-plus-square fa-2x color-primary"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-10 margin-vert-10">
+                                    <h4><a th:href="@{'/relations/' + ${relation.id} + '/history'}">Добавить новое занятие</a></h4>
                                 </div>
                             </div>
                             <div class="row"  th:if="!${#lists.isEmpty(relation.historyLessons)}">
@@ -124,7 +140,7 @@
                                 <div class="col-md-11 margin-vert-30">
                                     <h3 >
                                         История занятий
-                                        <a th:href="@{'/relations/' + ${relation.id} + '/history'}">Просмотреть</a></h3>
+                                        <a th:href="@{'/relations/' + ${relation.id} + '/history/list'}">Просмотреть</a></h3>
                                 </div>
 
                                 <div class="col-md-1 margin-vert-20">
@@ -141,18 +157,20 @@
                         </div>
                     </div>
 
-                    <div sec:authorize="${hasRole('CLIENT')}" class="row">
+                    <div sec:authorize="${!hasAuthority('TUTOR')}" class="row">
                         <div class="col-lg-12 text-right">
                             <a th:href="@{*{id} + '/order'}" class="btn btn-default">Заказать</a>
                         </div>
                     </div>
 
                     <div class="row" th:if="${account}">
+                        <div th:if="${hasNewOrder}">
+                            <a th:href="@{'/tutors/' + *{id} + '/orders'}" class="btn btn-default">Заказы</a>
+                        </div>
                         <div class="col-lg-12 text-right">
                             <a th:href="@{'/tutors/' + *{id} + '/edit'}" class="btn btn-default">Редактировать данные</a>
                         </div>
                     </div>
-
 
 
                     <!--<div class="row">-->
@@ -164,27 +182,9 @@
                             <!--<a th:href="@{*{id} + '/order'}" class="btn btn-default">Текущая ставка</a>-->
                         <!--</div>-->
                     <!--</div>-->
-                    <div th:if="!*{#strings.isEmpty(status)}">
                     <hr/>
-                    <div class="row animate fadeInUp">
-                        <h2 class="text-center margin-top-10" th:text="*{status}"></h2>
-                    </div>
-
-                    <!--<div class="col-md-12">-->
-                        <!--<hr/>-->
-                        <!--<div class="col-md-1 margin-vert-20">-->
-                            <!--<a th:href="@{'/tutors/' + *{id} + '/history'}">-->
-                                <!--<i class="fa-plus-square fa-2x color-primary"></i>-->
-                            <!--</a>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-10 margin-vert-10">-->
-                            <!--<h4><a th:href="@{'/tutors/' + *{id} + '/history'}">Добавить новое занятие</a></h4>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <hr/>
-                    </div>
                     <div class="row">
-                        <div class="col-md-6 animate fadeIn" th:if="${evaluation != null}">
+                        <div class="col-md-6 animate fadeIn" th:if="${evaluation.id != null}">
                             <!-- My Skills -->
                             <h3 class="margin-bottom-10">Рейтинг</h3>
                             <h3 class="progress-label">Средняя оценка за занятие
@@ -232,7 +232,7 @@
                                         <h3>Comments</h3>
                                     </div>
                                     <ul class="list-group">
-                                        <li class="list-group-item" th:each="note : ${notes}">
+                                        <li class="list-group-item" th:each="note : *{notes}">
                                             <div class="row">
                                                 <div class="col-md-2 profile-thumb">
                                                     <a href="#">

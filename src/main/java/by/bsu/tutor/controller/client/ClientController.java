@@ -58,7 +58,7 @@ public class ClientController {
     public String saveClient(@PathVariable Long id, @ModelAttribute(value = "client") Client client, Model model) {
         client.setId(id);
         clientService.save(client);
-        return "";
+        return "redirect:/account";
     }
 
     @PostMapping
@@ -84,6 +84,7 @@ public class ClientController {
         model.addAttribute("client", clientService.get(id));
         if(!CollectionUtils.isEmpty(relations)) {
             List<HistoryLesson> historyLessons = historyLessonService.getByRelationId(relations.get(0).getId());
+            if(!CollectionUtils.isEmpty(historyLessons))
             model.addAttribute("lastLesson", historyLessons.get(historyLessons.size() - 1));
         }
         return "client";

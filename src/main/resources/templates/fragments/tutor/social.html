@@ -6,7 +6,6 @@
 </head>
 <body>
 <div th:fragment="social">
-    <div class="col-md-6">
         <div class="signup-page right-block">
             <div class="signup-header">
                 <h3>Социальные сети</h3>
@@ -33,11 +32,10 @@
                     <p>Укажите Ваш логин в telegram, подписавшись на нашего бота Вы сможете узнавать список Ваших ближайших
                         занятий, узнавать количество проведенных занятий в этом месяце и многое другое.</p>
                 </label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: skypeLink"
+                <input class="form-control margin-bottom-20" type="text" data-bind="value: telegram"
                        th:field="*{telegram}"/>
             </div>
         </div>
-    </div>
 </div>
 </body>
 </html>

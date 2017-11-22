@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Создание репетитора</title>
+    <title>Редактирование репетитора</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link href="favicon.ico" rel="shortcut icon"/>
@@ -27,32 +27,26 @@
     <div id="content">
         <div class="container background-white">
             <div class="row margin-vert-30">
-                Редактирование личных данных
                 <form data-bind="submit: save" th:object="${tutor}" th:action="@{'/tutors/' + ${id}}" method="POST">
+                    <div class="col-md-12 margin-bottom-20">
+                        <h3>Редактирование</h3>
+                    </div>
+
                     <div class="col-md-6">
                         <div th:replace="fragments/user_form :: user_form"></div>
 
-                        <div th:replace="fragments/login_form :: login_form"></div>
-
-                        <div th:replace="fragments/tutor/status :: status"></div>
+                        <div th:replace="fragments/tutor/update :: update"></div>
                     </div>
 
-                    <div th:replace="fragments/tutor/update :: update"></div>
-
-                    <div th:replace="fragments/tutor/social :: social"></div>
-
-                    <input type="hidden" th:field="*{user.photo}"/>
-
-                    <input type="hidden" th:field="*{user.id}"/>
-
-                    <input type="hidden" th:field="*{user.role}"/>
-
                     <div class="col-md-6">
+                        <div th:replace="fragments/login_form :: login_form"></div>
+                        <div th:replace="fragments/tutor/status :: status"></div>
+
+                        <div th:replace="fragments/tutor/social :: social"></div>
+
                         <hr/>
-                        <div class="row">
-                            <div class="col-lg-4 text-right">
-                                <button class="btn btn-primary" type="submit">Регистрация</button>
-                            </div>
+                        <div class="text-right">
+                            <button class="btn btn-primary" type="submit">Регистрация</button>
                         </div>
                     </div>
                 </form>

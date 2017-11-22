@@ -29,11 +29,7 @@ public class DefaultUserService extends DefaultCrudService<User, UserRepository>
 
     @Override
     public User save(@NotNull User user) {
-        boolean isUserExists = null != findByEmail(user.getEmail());
-        if(isUserExists) {
-            return null;
-        }
-        user.setPassword(passwordEncoder.encodePassword(user.getPassword(), StringUtils.EMPTY));
+         user.setPassword(passwordEncoder.encodePassword(user.getPassword(), StringUtils.EMPTY));
         return super.save(user);
     }
 
