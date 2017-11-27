@@ -6,6 +6,7 @@ import by.bsu.tutor.repositories.HistoryLessonRepository;
 import by.bsu.tutor.service.administration.HistoryLessonService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.client.ClientTutorRelationService;
+import by.bsu.tutor.service.mailer.MailMessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,16 @@ public class DefaultHistoryLessonsService extends DefaultCrudService<HistoryLess
         implements HistoryLessonService {
 
     private final ClientTutorRelationService clientTutorRelationService;
+    private final MailMessageSenderService<HistoryLesson> historyLessonMailMessageSenderService;
 
 
     @Autowired
     public DefaultHistoryLessonsService(@NotNull HistoryLessonRepository repository,
-                                        ClientTutorRelationService clientTutorRelationService) {
+                                        ClientTutorRelationService clientTutorRelationService,
+                                        MailMessageSenderService<HistoryLesson> historyLessonMailMessageSenderService) {
         super(repository);
         this.clientTutorRelationService = clientTutorRelationService;
+        this.historyLessonMailMessageSenderService = historyLessonMailMessageSenderService;
     }
 
     @Override
@@ -32,8 +36,14 @@ public class DefaultHistoryLessonsService extends DefaultCrudService<HistoryLess
     }
 
     @Override
-    public HistoryLesson save(@NotNull Long id, @NotNull HistoryLesson historyLesson) throws LogicException {
+    public HistoryLesson save(Long id, HistoryLesson historyLesson) throws LogicException {
         historyLesson.setRelationId(id);
+        return super.save(historyLesson);
+    }
+
+    @Override
+    public HistoryLesson save(@NotNull HistoryLesson historyLesson) {
+        historyLessonMailMessageSenderService.send(historyLesson);
         return super.save(historyLesson);
     }
 

@@ -1,7 +1,7 @@
 package by.bsu.tutor.controller;
 
 import by.bsu.tutor.models.dto.ContactDto;
-import by.bsu.tutor.service.administration.MessageSenderService;
+import by.bsu.tutor.service.mailer.MailMessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,12 @@ import javax.mail.MessagingException;
 @RequestMapping(value = "/contacts")
 public class ContactController {
 
-    @Autowired private MessageSenderService messageSenderService;
+    private final MailMessageSenderService<ContactDto> messageSenderService;
+
+    @Autowired
+    public ContactController(MailMessageSenderService<ContactDto> messageSenderService) {
+        this.messageSenderService = messageSenderService;
+    }
 
 
     @RequestMapping

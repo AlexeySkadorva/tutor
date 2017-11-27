@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface ClientTutorRelationService extends CrudService<ClientTutorRelation> {
+
     @NotNull List<ClientTutorRelation> getByTutorId(@NotNull Long id);
 
     @NotNull List<ClientTutorRelation> getByClientId(@NotNull Long id);

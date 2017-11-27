@@ -3,13 +3,11 @@ package by.bsu.tutor.service.order.impl;
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.order.Order;
 import by.bsu.tutor.models.entity.order.OrderStatus;
-import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.repositories.OrderRepository;
 import by.bsu.tutor.repositories.OrderStatusRepository;
-import by.bsu.tutor.service.administration.MessageSenderService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
+import by.bsu.tutor.service.mailer.MailMessageSenderService;
 import by.bsu.tutor.service.order.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -19,18 +17,18 @@ import java.util.List;
 public class DefaultOrderService extends DefaultCrudService<Order, OrderRepository> implements OrderService {
 
     private final OrderStatusRepository orderStatusRepository;
-    @Autowired private MessageSenderService messageSenderService;
+    private final MailMessageSenderService<Order> messageSenderService;
 
 
-    @Autowired
-    public DefaultOrderService(@NotNull OrderRepository repository, OrderStatusRepository orderStatusRepository) {
+    public DefaultOrderService(@NotNull OrderRepository repository, OrderStatusRepository orderStatusRepository, MailMessageSenderService<Order> messageSenderService) {
         super(repository);
         this.orderStatusRepository = orderStatusRepository;
+        this.messageSenderService = messageSenderService;
     }
 
     @Override
     public Order save(@NotNull Order order) {
-        messageSenderService.sendToUser(order, order.getTutor().getUser());
+        messageSenderService.send(order);
         return super.save(order);
     }
 
@@ -48,6 +46,7 @@ public class DefaultOrderService extends DefaultCrudService<Order, OrderReposito
     public Order updateOrderStatus(@NotNull Long id, @NotNull OrderStatus.Code status) throws LogicException {
         Order order = super.get(id);
         order.setOrderStatus(orderStatusRepository.findByCode(status));
+        messageSenderService.send(order);
 
         return super.save(order);
     }

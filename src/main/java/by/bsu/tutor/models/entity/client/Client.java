@@ -38,4 +38,8 @@ public class Client extends BaseEntity {
             inverseJoinColumns = { @JoinColumn(name = "tutor_id") })
     private Tutor tutor;
 
+    public Client() {
+        clientParent = new ClientParent();
+    }
+
 }
