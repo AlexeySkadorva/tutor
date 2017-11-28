@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Контакты</title>
+    <title>Создание комментария</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link href="favicon.ico" rel="shortcut icon"/>
@@ -23,26 +23,23 @@
     <div id="content">
         <div class="container background-white">
             <div class="row margin-vert-30">
-                <!-- Main Column -->
                 <div class="col-md-9">
-                    <!-- Main Content -->
                     <div class="headline">
-                        <h2>Контактная форма</h2>
+                        <h2>Комментарий</h2>
                     </div>
-                    <p>Оставте нам сообщениеи и мы ответим Вам в максимально короткий срок.</p>
+                    <p>Оставте комментарий вашему репетитору. Это поможет другим клиентам сделать выбор при поиске
+                    репетитора.</p>
                     <br/>
-                    <!-- Contact Form -->
                     <form th:object="${note}" th:action="@{'/relations/note'}" method="POST">
-                        <label>Сообщение</label>
+                        <label>Комментарий</label>
                         <div class="row margin-bottom-20">
                             <div class="col-md-8 col-md-offset-0">
                                 <textarea rows="8" class="form-control" th:field="*{comment}"></textarea>
                             </div>
                         </div>
                         <input type="hidden" th:field="*{clientTutorRelation}"/>
-
                         <p>
-                            <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                            <button type="submit" class="btn btn-primary">Сохранить комментарий</button>
                         </p>
                     </form>
                 </div>
@@ -54,14 +51,14 @@
 
     <div th:replace="fragments/footer :: footer"></div>
 </div>
-<script th:src="@{/js/jquery.min.js}"/>
-<script th:src="@{/js/bootstrap.min.js}"/>
-<script th:src="@{/js/scripts.js}"/>
-<script th:src="@{/js/jquery.isotope.js}"/>
-<script th:src="@{/js/jquery.slicknav.js}"/>
-<script th:src="@{/js/jquery.visible.js}"/>
-<script th:src="@{/js/jquery.sticky.js}"/>
-<script th:src="@{/js/slimbox2.js}"/>
-<script th:src="@{/js/modernizr.custom.js}"/>
+<script th:src="@{/js/jquery/jquery.min.js}"/>
+<script th:src="@{/js//bootstrap/bootstrap.min.js}"/>
+<script th:src="@{/js//thirdparty/scripts.js}"/>
+<script th:src="@{/js/jquery/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery/jquery.visible.js}"/>
+<script th:src="@{/js/jquery/jquery.sticky.js}"/>
+<script th:src="@{/js//thirdparty/slimbox2.js}"/>
+<script th:src="@{/js//thirdparty/modernizr.custom.js}"/>
 </body>
 </html>
