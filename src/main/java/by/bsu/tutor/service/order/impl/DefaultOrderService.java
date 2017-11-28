@@ -21,7 +21,8 @@ public class DefaultOrderService extends DefaultCrudService<Order, OrderReposito
     private final MailMessageSenderService<Order> messageSenderService;
 
 
-    public DefaultOrderService(@NotNull OrderRepository repository, OrderStatusRepository orderStatusRepository, MailMessageSenderService<Order> messageSenderService) {
+    public DefaultOrderService(@NotNull OrderRepository repository, OrderStatusRepository orderStatusRepository,
+                               MailMessageSenderService<Order> messageSenderService) {
         super(repository);
         this.orderStatusRepository = orderStatusRepository;
         this.messageSenderService = messageSenderService;

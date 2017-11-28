@@ -10,18 +10,19 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Controller
+@RequestMapping("/users/{id}/photo/")
 public class PhotoController {
 
     @Autowired private UserService userService;
 
 
-    @PostMapping(value = "/users/{id}/photo/upload")
+    @PostMapping(value = "/upload")
     public String uploadFile(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException, LogicException {
         userService.addPhotoToUser(file, id);
         return "main";
     }
 
-    @GetMapping(value = "/users/{id}/photo/download")
+    @GetMapping(value = "/download")
     @ResponseBody
     public byte[] downloadFile(@PathVariable Long id) throws IOException, LogicException {
         return userService.getUserPhoto(id);

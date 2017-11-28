@@ -26,20 +26,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
-    @Autowired
-    private TutorService tutorService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ClientService clientService;
-    @Autowired
-    private ClientTutorRelationService clientTutorRelationService;
-    @Autowired
-    private LessonTypeRepository lessonTypeRepository;
-    @Autowired
-    private OrderStatusRepository orderStatusRepository;
+    @Autowired private UserService userService;
+    @Autowired private OrderService orderService;
+    @Autowired private TutorService tutorService;
+    @Autowired private ClientService clientService;
+    @Autowired private LessonTypeRepository lessonTypeRepository;
+    @Autowired private OrderStatusRepository orderStatusRepository;
+    @Autowired private ClientTutorRelationService clientTutorRelationService;
 
 
     @PostMapping(value = "/orders")

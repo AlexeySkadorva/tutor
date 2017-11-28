@@ -25,8 +25,12 @@ import java.util.EnumSet;
 @Order(2)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
+
+
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {

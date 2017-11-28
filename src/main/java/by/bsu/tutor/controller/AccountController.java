@@ -27,29 +27,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AccountController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private TutorService tutorService;
-    @Autowired
-    private ClientService clientService;
-    @Autowired
-    private TutorEvaluationService tutorEvaluationService;
-    @Autowired
-    private ClientParentRepository clientParentRepository;
-    @Autowired
-    private ClientTutorRelationService clientTutorRelationService;
-    @Autowired
-    private OrderService orderService;
+    @Autowired private UserService userService;
+    @Autowired private OrderService orderService;
+    @Autowired private TutorService tutorService;
+    @Autowired private ClientService clientService;
+    @Autowired private TutorEvaluationService tutorEvaluationService;
+    @Autowired private ClientParentRepository clientParentRepository;
+    @Autowired private ClientTutorRelationService clientTutorRelationService;
 
 
     @GetMapping
     public String getAccountInfo(Model model, @AuthenticationPrincipal UserDetails user) throws LogicException {
+        String roleName = getRoleName(user);
+
+        User currentUser = userService.findByEmail(user.getUsername());
+
         model.addAttribute("account", true);
-
-       String roleName = getRoleName(user);
-
-       User currentUser = userService.findByEmail(user.getUsername());
 
         if (Role.Code.CLIENT.name().equals(roleName)) {
             Client client = clientService.getByUser(currentUser);

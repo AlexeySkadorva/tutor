@@ -22,19 +22,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "tutors")
 public class TutorController {
 
-    @Autowired
-    private TutorService tutorService;
-    @Autowired
-    private TutorEvaluationService tutorEvaluationService;
-    @Autowired
-    private TutorNoteService tutorNoteService;
+    @Autowired private TutorService tutorService;
+    @Autowired private TutorNoteService tutorNoteService;
+    @Autowired private TutorEvaluationService tutorEvaluationService;
 
-    @Autowired
-    private LessonTypeRepository lessonTypeRepository;
-    @Autowired
-    private SubjectRepository subjectRepository;
-    @Autowired
-    private RoleRepository roleRepository;
+    @Autowired private RoleRepository roleRepository;
+    @Autowired private SubjectRepository subjectRepository;
+    @Autowired private LessonTypeRepository lessonTypeRepository;
 
     @GetMapping(value = "/new")
     public Object getNewUser(Model model) {

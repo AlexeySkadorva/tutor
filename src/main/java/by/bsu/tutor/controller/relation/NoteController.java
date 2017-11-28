@@ -20,19 +20,19 @@ public class NoteController extends ClientTutorRelationController {
     @Autowired private TutorNoteService tutorNoteService;
 
 
+    @PostMapping(value = "/note")
+    public String save(@ModelAttribute(value = "note") TutorNote note) throws IOException, LogicException {
+        tutorNoteService.save(note);
+        return "redirect:/account";
+    }
+
     @GetMapping("/{id}/note")
-    public String p(@PathVariable Long id, Model model) throws IOException, LogicException {
+    public String updatePage(@PathVariable Long id, Model model) throws IOException, LogicException {
         TutorNote tutorNote = new TutorNote();
         tutorNote.setClientTutorRelation(clientTutorRelationService.get(id));
 
         model.addAttribute("note", tutorNote);
         return "relation/note";
-    }
-
-    @PostMapping(value = "/note")
-    public String save(@ModelAttribute(value = "note") TutorNote note) throws IOException, LogicException {
-        tutorNoteService.save(note);
-        return "redirect:/account";
     }
 
 }

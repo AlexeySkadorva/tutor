@@ -21,20 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdministrationController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private TutorService tutorService;
-    @Autowired
-    private ClientService clientService;
-    @Autowired
-    private OrderService orderService;
-    @Autowired
-    private ClientTutorRelationService clientTutorRelationService;
-    @Autowired
-    private TutorInvoiceService tutorInvoiceService;
-    @Autowired
-    private HistoryLessonService historyLessonService;
+    @Autowired private UserService userService;
+    @Autowired private OrderService orderService;
+    @Autowired private TutorService tutorService;
+    @Autowired private ClientService clientService;
+    @Autowired private TutorInvoiceService tutorInvoiceService;
+    @Autowired private HistoryLessonService historyLessonService;
+    @Autowired private ClientTutorRelationService clientTutorRelationService;
 
 
     @GetMapping

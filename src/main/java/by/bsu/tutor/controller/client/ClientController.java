@@ -24,16 +24,11 @@ import java.util.List;
 @RequestMapping(value = "clients")
 public class ClientController {
 
-    @Autowired
-    private ClientService clientService;
-    @Autowired
-    private ClientParentRepository clientParentRepository;
-    @Autowired
-    private HistoryLessonService historyLessonService;
-    @Autowired
-    private ClientTutorRelationService clientTutorRelationService;
-    @Autowired
-    private RoleRepository roleRepository;
+    @Autowired private ClientService clientService;
+    @Autowired private RoleRepository roleRepository;
+    @Autowired private HistoryLessonService historyLessonService;
+    @Autowired private ClientParentRepository clientParentRepository;
+    @Autowired private ClientTutorRelationService clientTutorRelationService;
 
     @GetMapping(value = "/new")
     public Object getNewClient(Model model) throws LogicException {
