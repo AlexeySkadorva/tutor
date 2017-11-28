@@ -7,12 +7,10 @@ import by.bsu.tutor.repositories.TutorEvaluationRepository;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.client.ClientTutorRelationService;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +21,6 @@ public class DefaultTutorEvaluationService extends DefaultCrudService<TutorEvalu
     private final ClientTutorRelationService relationService;
 
 
-    @Autowired
     public DefaultTutorEvaluationService(@NotNull TutorEvaluationRepository repository,
                                          ClientTutorRelationService relationService) {
         super(repository);
@@ -32,12 +29,12 @@ public class DefaultTutorEvaluationService extends DefaultCrudService<TutorEvalu
 
     @NotNull
     @Override
-    public TutorEvaluation getMiddleEvaluation(@NotNull Tutor tutor){
+    public TutorEvaluation getMiddleEvaluation(@NotNull Tutor tutor) {
         List<ClientTutorRelation> relations = relationService.getByTutorId(tutor.getId());
 
         List<TutorEvaluation> evaluations = relations.stream().flatMap(r -> repository.findByRelation(r).stream()).collect(Collectors.toList());
         TutorEvaluation evaluation = new TutorEvaluation();
-        if(evaluations.size() != 0) {
+        if (evaluations.size() != 0) {
             evaluation.setEvaluation(evaluations.stream().mapToInt(TutorEvaluation::getEvaluation).sum() / evaluations.size());
             evaluation.setSociability(evaluations.stream().mapToInt(TutorEvaluation::getSociability).sum() / evaluations.size());
             evaluation.setInterest(evaluations.stream().mapToInt(TutorEvaluation::getInterest).sum() / evaluations.size());

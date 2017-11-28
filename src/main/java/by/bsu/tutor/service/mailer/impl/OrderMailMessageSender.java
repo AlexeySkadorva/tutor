@@ -1,7 +1,6 @@
 package by.bsu.tutor.service.mailer.impl;
 
 import by.bsu.tutor.models.dto.MailMessageDto;
-import by.bsu.tutor.models.entity.administration.HistoryLesson;
 import by.bsu.tutor.models.entity.order.Order;
 import by.bsu.tutor.models.entity.order.OrderStatus;
 import by.bsu.tutor.properties.GmailProperties;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class OrderMailMessageSender extends MailMessageSenderService<Order> {
 
     private static final String MESSAGE_SUBJECT = "Вам пришла заявка";
-    private static final String MESSAGE_SUBJECT_DECLINED= "Ваш заказ отклонен";
+    private static final String MESSAGE_SUBJECT_DECLINED = "Ваш заказ отклонен";
     private static final String MESSAGE_SUBJECT_APPROVED = "Ваш заказ подтвержден";
     private static final String MESSAGE_PREFIX = "Сообщение отклиента: ";
     private static final String URl_PREFIX = "Ссылка для перехода: ";
@@ -33,16 +32,19 @@ public class OrderMailMessageSender extends MailMessageSenderService<Order> {
     }
 
     private String getMessageContent(Order order) {
-        if(OrderStatus.Code.NEW == order.getOrderStatus().getCode()) {
+        if (OrderStatus.Code.NEW == order.getOrderStatus().getCode()) {
             return MESSAGE_PREFIX + order.getMessage() +
                     URl_PREFIX + String.format(URL_REDIRECT, order.getTutor().getId());
         }
-        if(OrderStatus.Code.APPROVED == order.getOrderStatus().getCode()) {
+
+        if (OrderStatus.Code.APPROVED == order.getOrderStatus().getCode()) {
             return MESSAGE_SUBJECT_APPROVED + order.getMessage();
         }
-        if(OrderStatus.Code.DECLINED == order.getOrderStatus().getCode()) {
+
+        if (OrderStatus.Code.DECLINED == order.getOrderStatus().getCode()) {
             return MESSAGE_SUBJECT_DECLINED + order.getMessage();
         }
+
         return StringUtils.EMPTY;
     }
 }

@@ -16,7 +16,7 @@
 <body>
 
 <div id="main">
-    <div id="container" >
+    <div id="container">
         <div id="content">
             <div>
                 <div id="dp"></div>
@@ -29,8 +29,8 @@
                     dp.startDate = "2013-03-25";  // or just dp.startDate = "2013-03-25";
                     dp.viewType = "Week";
                     dp.locale = "ru-ru";
-                    dp.dayBeginsHour=8
-                    dp.dayEndsHour=22;
+                    dp.dayBeginsHour = 8
+                    dp.dayEndsHour = 22;
                     // event creating
                     dp.onTimeRangeSelected = function (args) {
                         var name = prompt("New event name:", "Event");
@@ -45,7 +45,7 @@
                         dp.clearSelection();
                     };
 
-                    dp.onEventClick = function(args) {
+                    dp.onEventClick = function (args) {
                         alert("clicked: " + args.e.id());
                     };
 
@@ -68,9 +68,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var url = window.location.href;
-        var filename = url.substring(url.lastIndexOf('/')+1);
+        var filename = url.substring(url.lastIndexOf('/') + 1);
         if (filename === "") filename = "index.html";
         $(".menu a[href='" + filename + "']").addClass("selected");
     });

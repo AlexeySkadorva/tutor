@@ -6,7 +6,7 @@ import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.tutor.TutorInvoice;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.repositories.TutorRepository;
-import by.bsu.tutor.service.administration.UserService;
+import by.bsu.tutor.service.user.UserService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.tutor.TutorInvoiceService;
 import by.bsu.tutor.service.tutor.TutorService;
@@ -28,7 +28,6 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
     private final TutorInvoiceService tutorInvoiceService;
 
 
-    @Autowired
     public DefaultTutorService(@NotNull TutorRepository repository, TutorRepository tutorRepository,
                                UserService userService, TutorInvoiceService tutorInvoiceService) {
         super(repository);
@@ -38,6 +37,7 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
     }
 
     @Override
+    @NotNull
     public Tutor save(@NotNull Tutor tutor) {
         User user = userService.save(tutor.getUser());
         tutor.setUser(user);

@@ -1,7 +1,7 @@
 package by.bsu.tutor.security;
 
 import by.bsu.tutor.models.entity.user.User;
-import by.bsu.tutor.service.administration.UserService;
+import by.bsu.tutor.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +18,8 @@ import java.util.stream.Stream;
 @Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
 
 
     @Override

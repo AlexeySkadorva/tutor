@@ -13,17 +13,23 @@ import java.util.List;
  */
 public interface CrudService<T extends BaseEntity> {
 
-    @NotNull long getCount();
+    @NotNull
+    long getCount();
 
-    @NotNull List<T> getAll();
+    @NotNull
+    List<T> getAll();
 
-    @NotNull Iterable<T> getBySearchForm(@NotNull SearchForm searchForm);
+    @NotNull
+    Iterable<T> getBySearchForm(@NotNull SearchForm searchForm);
 
-    @NotNull T get(@NotNull Long id) throws LogicException;
+    @NotNull
+    T get(@NotNull Long id) throws LogicException;
 
-    @NotNull T save(@NotNull T entity);
+    @NotNull
+    T save(@NotNull T entity);
 
-    @NotNull List<T> save(@NotNull Collection<T> entities) throws LogicException;
+    @NotNull
+    List<T> save(@NotNull Collection<T> entities) throws LogicException;
 
     void delete(@NotNull Long id);
 

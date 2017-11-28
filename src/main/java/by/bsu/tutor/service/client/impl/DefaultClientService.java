@@ -6,8 +6,7 @@ import by.bsu.tutor.models.entity.client.ClientType;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.repositories.ClientParentRepository;
 import by.bsu.tutor.repositories.ClientRepository;
-import by.bsu.tutor.repositories.ClientTypeRepository;
-import by.bsu.tutor.service.administration.UserService;
+import by.bsu.tutor.service.user.UserService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ public class DefaultClientService extends DefaultCrudService<Client, ClientRepos
     private final ClientParentRepository clientParentRepository;
 
 
-    @Autowired
     public DefaultClientService(@NotNull ClientRepository repository, UserService userService,
                                 ClientParentRepository clientParentRepository) {
         super(repository);
@@ -31,21 +29,23 @@ public class DefaultClientService extends DefaultCrudService<Client, ClientRepos
     }
 
     @Override
+    @NotNull
     public Client getByUser(@NotNull User user) {
         return repository.findByUser(user);
     }
 
     @Override
+    @NotNull
     public Client save(@NotNull Client client) {
         User user = userService.save(client.getUser());
         client.setUser(user);
         Client savedClient = super.save(client);
-        if(ClientType.Code.PRESCHOOLER.equals(client.getClientType().getCode())){
+        if (ClientType.Code.PRESCHOOLER.equals(client.getClientType().getCode())) {
             ClientParent clientParent = client.getClientParent();
             clientParent.setClientId(savedClient.getId());
             clientParentRepository.save(clientParent);
         }
-        return  savedClient;
+        return savedClient;
     }
 
 }

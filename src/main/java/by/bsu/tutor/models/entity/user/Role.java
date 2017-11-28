@@ -1,6 +1,5 @@
 package by.bsu.tutor.models.entity.user;
 
-import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.base.BaseEnum;
 import lombok.Data;
 

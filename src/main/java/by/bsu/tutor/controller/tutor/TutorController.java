@@ -10,9 +10,7 @@ import by.bsu.tutor.models.enums.Gender;
 import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
-import by.bsu.tutor.service.order.OrderService;
 import by.bsu.tutor.service.tutor.TutorEvaluationService;
-import by.bsu.tutor.service.tutor.TutorInvoiceService;
 import by.bsu.tutor.service.tutor.TutorNoteService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +22,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "tutors")
 public class TutorController {
 
-    @Autowired private TutorService tutorService;
-    @Autowired private TutorEvaluationService tutorEvaluationService;
-    @Autowired private TutorInvoiceService tutorInvoiceService;
-    @Autowired private TutorNoteService tutorNoteService;
+    @Autowired
+    private TutorService tutorService;
+    @Autowired
+    private TutorEvaluationService tutorEvaluationService;
+    @Autowired
+    private TutorNoteService tutorNoteService;
 
-    @Autowired private LessonTypeRepository lessonTypeRepository;
-    @Autowired private SubjectRepository subjectRepository;
-    @Autowired private RoleRepository roleRepository;
+    @Autowired
+    private LessonTypeRepository lessonTypeRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping(value = "/new")
     public Object getNewUser(Model model) {
@@ -40,22 +43,22 @@ public class TutorController {
         model.addAttribute("tutor", new Tutor());
         model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("genders", Gender.values());
-        return "administration/tutor/new";
+        return "tutor/new";
     }
 
     @GetMapping(value = "/{id}/edit")
-    public Object р(@PathVariable Long id,  Model model) throws LogicException {
+    public Object р(@PathVariable Long id, Model model) throws LogicException {
         model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
         model.addAttribute("subjects", subjectRepository.findAll());
         model.addAttribute("tutor", tutorService.get(id));
         model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("genders", Gender.values());
-        return "administration/tutor/edit";
+        return "tutor/edit";
     }
 
 
     @PostMapping(value = "/{id}")
-    public Object s(@PathVariable Long id,  @ModelAttribute(value = "tutor") Tutor tutor) throws LogicException {
+    public Object s(@PathVariable Long id, @ModelAttribute(value = "tutor") Tutor tutor) throws LogicException {
         tutor.setId(id);
         tutorService.save(tutor);
         return "redirect:/account";
@@ -67,7 +70,7 @@ public class TutorController {
 
         tutorService.save(tutor);
         model.addAttribute("userId", tutor.getUser().getId());
-        return "photo";
+        return "user/photo";
     }
 
     @PostMapping(value = "/{id}/note")
@@ -83,21 +86,21 @@ public class TutorController {
         model.addAttribute("note", new TutorNote());
 
         model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
-        return "tutor";
+        return "tutor/tutor";
     }
 
     @GetMapping
-    public String getTutors(SearchForm searchForm, Model model){
+    public String getTutors(SearchForm searchForm, Model model) {
         Iterable<Tutor> tutors = tutorService.getBySearchForm(searchForm);
         searchForm.adjust(tutorService.getCount());
         model.addAttribute("tutors", tutors);
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("subjects", subjectRepository.findAll());
-        return "tutors";
+        return "tutor/list";
     }
 
-    @GetMapping(value ="/subjects/{id}")
-    public String getTutorsList(SearchForm searchForm, @PathVariable Integer id, Model model){
+    @GetMapping(value = "/subjects/{id}")
+    public String getTutorsList(SearchForm searchForm, @PathVariable Integer id, Model model) {
         Subject subject = subjectRepository.getOne(id);
         Iterable<Tutor> tutors = tutorService.getBySubject(subject, searchForm);
         searchForm.adjust(tutorService.getCountBySubject(subject));
@@ -106,7 +109,7 @@ public class TutorController {
         model.addAttribute("tutors", tutors);
         model.addAttribute("subjects", subjectRepository.findAll());
 
-        return "tutors";
+        return "tutor/list";
     }
 
 }

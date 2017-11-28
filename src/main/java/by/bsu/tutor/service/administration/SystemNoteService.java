@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 
 public interface SystemNoteService extends CrudService<SystemNote> {
 
-    SystemNote saveNoteForClient(@NotNull SystemNote note);
+    @NotNull SystemNote saveNoteForClient(@NotNull SystemNote note);
 
 }

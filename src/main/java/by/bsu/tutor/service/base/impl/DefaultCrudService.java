@@ -8,7 +8,6 @@ import by.bsu.tutor.repositories.BaseRepository;
 import by.bsu.tutor.service.base.CrudService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class DefaultCrudService<T extends BaseEntity, R extends BaseRepository<T
 
     @NotNull
     @Override
-    public Iterable<T> getBySearchForm(SearchForm searchForm){
+    public Iterable<T> getBySearchForm(SearchForm searchForm) {
         Pageable pageSpecification;
         int pageNumber = searchForm.getPageNumber() == null ? DEFAULT_PAGE : searchForm.getPageNumber() - 1;
         pageSpecification = new PageRequest(pageNumber, searchForm.getPageSize());

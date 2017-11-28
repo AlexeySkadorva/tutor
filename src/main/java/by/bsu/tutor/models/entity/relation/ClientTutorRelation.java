@@ -4,7 +4,6 @@ import by.bsu.tutor.models.entity.administration.HistoryLesson;
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -46,14 +45,14 @@ public class ClientTutorRelation extends BaseEntity {
 
 
     @PrePersist
-    private void updateCreatedDate(){
-        if(null == this.createdDate) {
+    private void updateCreatedDate() {
+        if (null == this.createdDate) {
             this.createdDate = new Date();
         }
     }
 
     @PostLoad
-    private void updateNotes(){
+    private void updateNotes() {
         notes = this.historyLessons.stream().map(HistoryLesson::getRating).collect(Collectors.toList());
     }
 

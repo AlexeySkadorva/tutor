@@ -17,14 +17,13 @@ public class DefaultTutorNoteService extends DefaultCrudService<TutorNote, Tutor
     private final TutorNoteRepository tutorNoteRepository;
 
 
-    @Autowired
     public DefaultTutorNoteService(@NotNull TutorNoteRepository repository, TutorNoteRepository tutorNoteRepository) {
         super(repository);
         this.tutorNoteRepository = tutorNoteRepository;
     }
 
     @Override
-    public List<TutorNote> getNotesForTutor(@NotNull Tutor tutor){
+    public List<TutorNote> getNotesForTutor(@NotNull Tutor tutor) {
         return tutorNoteRepository.findByClientTutorRelationTutor(tutor);
     }
 

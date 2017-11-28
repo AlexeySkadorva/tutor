@@ -1,9 +1,70 @@
-const relationRussianAndEnglishKeys = {"й":"q","ц":"w","у":"e","к":"r","е":"t","н":"y","г":"u","ш":"i","щ":"o","з":"p","х":"","ъ":"",
-            "ф":"a","ы":"s","в":"d","а":"f","п":"g","р":"h","о":"j","л":"k","д":"l","ж":"","э":"",
-            "я":"z","ч":"x","с":"c","м":"v","и":"b","т":"n","ь":"m","б":"","ю":"","/":"",
-            "Й":"Q","Ц":"W","У":"E","К":"R","Е":"T","Н":"Y","Г":"U","Ш":"I","Щ":"O","З":"P","Х":"","Ъ":"",
-            "Ф":"A","Ы":"S","В":"D","А":"F","П":"G","Р":"H","О":"J","Л":"K","Д":"L","Ж":"","Э":"",
-            "Я":"Z","Ч":"X","С":"C","М":"V","И":"B","Т":"N","Ь":"M","Б":"","Ю":"",",":""
+const relationRussianAndEnglishKeys = {
+    "й": "q",
+    "ц": "w",
+    "у": "e",
+    "к": "r",
+    "е": "t",
+    "н": "y",
+    "г": "u",
+    "ш": "i",
+    "щ": "o",
+    "з": "p",
+    "х": "",
+    "ъ": "",
+    "ф": "a",
+    "ы": "s",
+    "в": "d",
+    "а": "f",
+    "п": "g",
+    "р": "h",
+    "о": "j",
+    "л": "k",
+    "д": "l",
+    "ж": "",
+    "э": "",
+    "я": "z",
+    "ч": "x",
+    "с": "c",
+    "м": "v",
+    "и": "b",
+    "т": "n",
+    "ь": "m",
+    "б": "",
+    "ю": "",
+    "/": "",
+    "Й": "Q",
+    "Ц": "W",
+    "У": "E",
+    "К": "R",
+    "Е": "T",
+    "Н": "Y",
+    "Г": "U",
+    "Ш": "I",
+    "Щ": "O",
+    "З": "P",
+    "Х": "",
+    "Ъ": "",
+    "Ф": "A",
+    "Ы": "S",
+    "В": "D",
+    "А": "F",
+    "П": "G",
+    "Р": "H",
+    "О": "J",
+    "Л": "K",
+    "Д": "L",
+    "Ж": "",
+    "Э": "",
+    "Я": "Z",
+    "Ч": "X",
+    "С": "C",
+    "М": "V",
+    "И": "B",
+    "Т": "N",
+    "Ь": "M",
+    "Б": "",
+    "Ю": "",
+    ",": ""
 };
 
 const idOfBelarusInCountriesList = 61373;
@@ -13,10 +74,10 @@ var isPassportSeriesMasked = false;
 var isPassportNumberMasked = false;
 
 ko.bindingHandlers.inputmask = {
-    init: function(element, valueAccessor, allBindingsAccessor) {
+    init: function (element, valueAccessor, allBindingsAccessor) {
         var options = allBindingsAccessor().inputmaskOptions;
 
-        if(options.type == "number") {
+        if (options.type == "number") {
             $(element).inputmask({
                 mask: "99{2,6}",
                 definitions: {"9": {validator: "[0-9]"}},
@@ -24,13 +85,13 @@ ko.bindingHandlers.inputmask = {
             });
         }
 
-        if(options.type == "numberOrDash") {
+        if (options.type == "numberOrDash") {
             $(element).inputmask("Regex", {
                 regex: "^[1-9][0-9]?$|^0$|^100$|^-$"
             });
         }
 
-        if(options.type == "floatNumber") {
+        if (options.type == "floatNumber") {
             $(element).inputmask({
                 mask: "99{2,6}",
                 definitions: {"9": {validator: "[0-9,.]"}},
@@ -38,7 +99,7 @@ ko.bindingHandlers.inputmask = {
             });
         }
 
-        if(options.type == "mfi") {
+        if (options.type == "mfi") {
             $(element).inputmask({
                 mask: "(9{1,8})|(9{1,8}*9{1,3})",
                 definitions: {"9": {validator: "[0-9]"}, "*": {validator: "[.,]"}},
@@ -50,9 +111,9 @@ ko.bindingHandlers.inputmask = {
             $(element).inputmask("dd.mm.yyyy", {
                 placeholder: "дд.мм.гггг",
                 clearIncomplete: true,
-                yearrange: { minyear: 1900, maxyear: moment().year() },
+                yearrange: {minyear: 1900, maxyear: moment().year()},
                 onBeforePaste: function (pastedValue, opts) {
-                    var isValid = Inputmask.isValid(pastedValue, { alias: "dd.mm.yyyy"});
+                    var isValid = Inputmask.isValid(pastedValue, {alias: "dd.mm.yyyy"});
                     if (!isValid) {
                         $(element).trigger("clearDate", "inputmask");
                         return false;
@@ -62,7 +123,7 @@ ko.bindingHandlers.inputmask = {
             });
         }
 
-        if(options.type == "kpfCoefficient") {
+        if (options.type == "kpfCoefficient") {
             $(element).inputmask({
                 mask: "(9*9{1,6})|(z9*9{1,6})",
                 definitions: {"9": {validator: "[0-9]"}, "*": {validator: "[.,]"}, "z": {validator: "[-]"}},
@@ -70,34 +131,34 @@ ko.bindingHandlers.inputmask = {
             });
         }
 
-        if(checkUsingTranslation()){
-            if(options.type == "passportSeries") {
+        if (checkUsingTranslation()) {
+            if (options.type == "passportSeries") {
                 addPassportInputMask(element, "passportSeries");
                 isPassportSeriesMasked = true;
             }
 
-            if(options.type == "passportNumber") {
+            if (options.type == "passportNumber") {
                 addPassportInputMask(element, "passportNumber");
                 isPassportNumberMasked = true;
             }
         }
 
-        ko.utils.registerEventHandler(element, "change", function(event) {
-            if(options.type == "passportSeries") {
-                if(checkUsingTranslation() && !isPassportSeriesMasked){
+        ko.utils.registerEventHandler(element, "change", function (event) {
+            if (options.type == "passportSeries") {
+                if (checkUsingTranslation() && !isPassportSeriesMasked) {
                     addPassportInputMask(element, "passportSeries");
                     isPassportSeriesMasked = true;
-                } else if(!checkUsingTranslation() && isPassportSeriesMasked){
+                } else if (!checkUsingTranslation() && isPassportSeriesMasked) {
                     $(element).inputmask("remove");
                     isPassportSeriesMasked = false;
                 }
             }
 
-            if(options.type == "passportNumber") {
-                if(checkUsingTranslation() && !isPassportNumberMasked){
+            if (options.type == "passportNumber") {
+                if (checkUsingTranslation() && !isPassportNumberMasked) {
                     addPassportInputMask(element, "passportNumber");
                     isPassportNumberMasked = true;
-                } else if(!checkUsingTranslation() && isPassportNumberMasked){
+                } else if (!checkUsingTranslation() && isPassportNumberMasked) {
                     $(element).inputmask("remove");
                     isPassportNumberMasked = false;
                 }
@@ -108,9 +169,9 @@ ko.bindingHandlers.inputmask = {
 
 function addPassportInputMask(element, type) {
     var inputMask;
-    if(type == "passportNumber") {
+    if (type == "passportNumber") {
         inputMask = "9999999A999AA9";
-    } else if(type = "passportSeries") {
+    } else if (type = "passportSeries") {
         inputMask = "AA9999999";
     }
 
@@ -128,17 +189,17 @@ function addPassportInputMask(element, type) {
 
 };
 
-function checkUsingTranslation(){
-  return ($("#country").val() == idOfBelarusInCountriesList && $("#document").val() == passportTypeId);
+function checkUsingTranslation() {
+    return ($("#country").val() == idOfBelarusInCountriesList && $("#document").val() == passportTypeId);
 };
 
-function transliterate(word){
+function transliterate(word) {
     return word.split('').map(function (char) {
         return relationRussianAndEnglishKeys[char] || char;
     }).join("");
 };
 
-function transliterateChar(buffer, caretPos){
+function transliterateChar(buffer, caretPos) {
     var char = buffer[caretPos - 1];
     var result = relationRussianAndEnglishKeys[char] || char;
     buffer[caretPos - 1] = result;

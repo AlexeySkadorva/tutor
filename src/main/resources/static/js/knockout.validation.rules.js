@@ -1,5 +1,5 @@
 ko.validation.init({
-  grouping: {
+    grouping: {
         deep: true,
         live: true,
         observable: true
@@ -27,7 +27,7 @@ var emailMask = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 var loginMask = /^[A-Za-z0-9]{6,30}$/i;
 
 ko.validation.rules["passwordValidation"] = {
-    validator: function(password, params, callback) {
+    validator: function (password, params, callback) {
         var repeatPassword = params[0]();
         return password == repeatPassword;
     },
@@ -35,7 +35,7 @@ ko.validation.rules["passwordValidation"] = {
 };
 
 ko.validation.rules["passwordPattern"] = {
-    validator: function(value, params) {
+    validator: function (value, params) {
         return DUMMY_PASSWORD == value || passwordMask.test(value);
     },
     message: "Пароль должен содержать латинские буквы в обоих регистрах, цифры и спецсимволы (!@#$%^&*?_~-)"
@@ -43,14 +43,14 @@ ko.validation.rules["passwordPattern"] = {
 
 
 ko.validation.rules["emailPattern"] = {
-    validator: function(value, params) {
+    validator: function (value, params) {
         return emailMask.test(value);
     },
     message: "E-mail должен содержать буквы, символ @ и точку. Пример: example@gmail.com"
 };
 
 ko.validation.rules["required"] = {
-    validator: function(a,b) {
+    validator: function (a, b) {
         if (ko.isObservable(a)) {
             if (a() == null) return false;
             else return true;
@@ -62,23 +62,25 @@ ko.validation.rules["required"] = {
 };
 
 ko.validation.rules["minLength"] = {
-    validator: function(value, param) {
-        if (!value) { return true }
+    validator: function (value, param) {
+        if (!value) {
+            return true
+        }
         return value.toString().length >= param;
     },
     message: "Длина поля должна быть больше " + 1 + " символов"
 };
 
 ko.validation.rules["loginPattern"] = {
-    validator: function(value, params) {
+    validator: function (value, params) {
         return loginMask.test(value);
     },
     message: "Логин должен содержать латинские буквы или цифры"
 };
 
 ko.validation.rules["pastDate"] = {
-    validator: function(date, param) {
-        if(!date){
+    validator: function (date, param) {
+        if (!date) {
             return true;
         }
         var currentDate = new Date();

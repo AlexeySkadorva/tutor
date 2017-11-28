@@ -6,27 +6,27 @@
 </head>
 <body>
 <div th:fragment="status">
-        <div class="signup-page right-block">
-            <div class="signup-header">
-                <h3>Дополнительная информация</h3>
-            </div>
-            <div class="row">
-                <label>О себе
-                    <p>Здесь Вы можете указать любую информацию о себе, которую вы еще не указали при заполнении профиля</p>
-                </label>
-                <textarea class="form-control margin-bottom-20" rows="4" data-bind="value: comment"
-                          th:field="*{comment}"></textarea>
-            </div>
-            <div class="row">
-                <label>Статус
-                    <p>Статус будет отображаться в Вашем профиле и будет виден всем.
-                        Порой одной фразой можно сказать много и клиенту cможет сложить о Вас кое-какое впечатление
-                        уже на этапе просмотра Вашего профиля</p>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: status"
-                       th:field="*{status}"/>
-            </div>
+    <div class="signup-page right-block">
+        <div class="signup-header">
+            <h3>Дополнительная информация</h3>
         </div>
+        <div class="row">
+            <label>О себе
+                <p>Здесь Вы можете указать любую информацию о себе, которую вы еще не указали при заполнении профиля</p>
+            </label>
+            <textarea class="form-control margin-bottom-20" rows="4" data-bind="value: comment"
+                      th:field="*{comment}"></textarea>
+        </div>
+        <div class="row">
+            <label>Статус
+                <p>Статус будет отображаться в Вашем профиле и будет виден всем.
+                    Порой одной фразой можно сказать много и клиенту cможет сложить о Вас кое-какое впечатление
+                    уже на этапе просмотра Вашего профиля</p>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: status"
+                   th:field="*{status}"/>
+        </div>
+    </div>
 </div>
 </body>
 </html>

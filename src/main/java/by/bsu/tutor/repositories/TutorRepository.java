@@ -10,10 +10,13 @@ import java.util.List;
 
 public interface TutorRepository extends BaseRepository<Tutor> {
 
-    @NotNull List<Tutor> findBySubjects(List<Subject> subjects, Pageable pageable);
+    @NotNull
+    List<Tutor> findBySubjects(List<Subject> subjects, Pageable pageable);
 
-    @NotNull Tutor findByUser(User user);
+    @NotNull
+    Tutor findByUser(User user);
 
-    @NotNull List<Tutor> findBySubjects(List<Subject> subjects);
+    @NotNull
+    List<Tutor> findBySubjects(List<Subject> subjects);
 
 }

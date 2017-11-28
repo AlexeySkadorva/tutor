@@ -22,24 +22,24 @@
 
     <div th:replace="fragments/menu :: menu('tutors')"></div>
     <!--<div class="container">-->
-        <!--<div class="container background-white">-->
-            <!--<div class="row margin-vert-30">-->
-                <!--<h2>Заказ</h2>-->
-                <!--<p>Пожалуйста опишите что Вы хотите от занятий, как часто Вы хотели бы их проводить и в какое время,-->
-                <!--какой цели Вы хотите достичь по итогам занятий. Сообщение будет отправлено репетитору и при его согласии-->
-                    <!--он с вами свяжется в максимально короткое время.</p>-->
-                <!--<form th:action="@{'/tutors/' + ${id} + '/order'}" method="POST">-->
+    <!--<div class="container background-white">-->
+    <!--<div class="row margin-vert-30">-->
+    <!--<h2>Заказ</h2>-->
+    <!--<p>Пожалуйста опишите что Вы хотите от занятий, как часто Вы хотели бы их проводить и в какое время,-->
+    <!--какой цели Вы хотите достичь по итогам занятий. Сообщение будет отправлено репетитору и при его согласии-->
+    <!--он с вами свяжется в максимально короткое время.</p>-->
+    <!--<form th:action="@{'/tutors/' + ${id} + '/order'}" method="POST">-->
 
-                <!--<div class="row margin-bottom-20">-->
-                    <!--<div class="col-md-8 col-md-offset-0">-->
-                        <!--<textarea rows="8" class="form-control" name="message"></textarea>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                        <!--<button type="submit" class="btn btn-primary">Отправить</button>-->
-                <!--</div>-->
-                <!--</form>-->
-            <!--</div></div>-->
+    <!--<div class="row margin-bottom-20">-->
+    <!--<div class="col-md-8 col-md-offset-0">-->
+    <!--<textarea rows="8" class="form-control" name="message"></textarea>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--<button type="submit" class="btn btn-primary">Отправить</button>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div></div>-->
     <!--</div>-->
 
     <div class="container">
@@ -47,7 +47,8 @@
             <div class="row margin-vert-30">
                 <h2>Заказ</h2>
                 <p>Пожалуйста опишите что Вы хотите от занятий, как часто Вы хотели бы их проводить и в какое время,
-                    какой цели Вы хотите достичь по итогам занятий. Сообщение будет отправлено репетитору и при его согласии
+                    какой цели Вы хотите достичь по итогам занятий. Сообщение будет отправлено репетитору и при его
+                    согласии
                     он с вами свяжется в максимально короткое время.</p>
                 <form th:object="${order}" th:action="@{'/orders'}" method="POST">
 
@@ -57,7 +58,8 @@
                         </div>
                     </div>
 
-                    <label>Количество занятий в месяц (Если вы хотите заниматься 1 ра в неделю, то 4, если 2, то 8 и т.д.)
+                    <label>Количество занятий в месяц (Если вы хотите заниматься 1 ра в неделю, то 4, если 2, то 8 и
+                        т.д.)
                         <span class="color-red">*</span>
                     </label>
                     <input rows="8" class="form-control" th:field="*{pereodicity}"/>
@@ -66,7 +68,7 @@
                     <label>Тип занятия
                         <span class="color-red">*</span>
                     </label>
-                    <select id="roles" class="form-control margin-bottom-20" th:field="*{lessonType}" >
+                    <select id="roles" class="form-control margin-bottom-20" th:field="*{lessonType}">
                         <option value=""></option>
                         <option th:each="l : ${lessonTypes}" th:value="${l.id}" th:text="${l.name}"/>
                     </select>
@@ -79,7 +81,8 @@
                         <button type="submit" class="btn btn-primary">Отправить</button>
                     </div>
                 </form>
-            </div></div>
+            </div>
+        </div>
     </div>
     <div th:replace="fragments/footer :: contacts"></div>
 

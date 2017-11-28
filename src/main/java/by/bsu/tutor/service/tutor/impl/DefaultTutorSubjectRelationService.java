@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 public class DefaultTutorSubjectRelationService extends DefaultCrudService<TutorSubjectRelation, TutorSubjectRelationRepository>
         implements TutorSubjectRelationService {
 
-    @Autowired
     public DefaultTutorSubjectRelationService(@NotNull TutorSubjectRelationRepository repository) {
         super(repository);
     }

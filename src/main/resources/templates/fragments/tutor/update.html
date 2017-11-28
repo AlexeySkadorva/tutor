@@ -6,60 +6,60 @@
 </head>
 <body>
 <div th:fragment="update">
-        <div class="signup-page right-block">
-            <div class="signup-header">
-                <h3>Профессиональные данные</h3>
+    <div class="signup-page right-block">
+        <div class="signup-header">
+            <h3>Профессиональные данные</h3>
+        </div>
+        <div class="row">
+            <label>Образование
+                <span class="color-red">*</span>
+                <p> Если вы имеете высшее образование, то укажите место и год в которым Вы получили высшее образование.
+                    Если Вы студент укажите место обучения и курс на дыннй момент</p>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: education"
+                   th:field="*{education}" th:value="*{education}"/>
+        </div>
+        <div class="row">
+            <label>Опыт работы
+                <p>Год в котором Вы впервые занялись репетиторством.
+                    Если для Вас это первый опыт, то пропустить это поле</p>
+            </label>
+            <input class="form-control margin-bottom-20" type="text"
+                   data-bind="value: firstExperience"
+                   th:field="*{firstExperience}"/>
+        </div>
+        <div class="row">
+            <label>Средняя цена за занятие
+                <span class="color-red">*</span>
+                <p> Некоторые репетиторы берут разные суммы за
+                    занятия в зависимости от продолжительности.
+                    Вычислите среднее арифметическое стоимости за занятие
+                </p>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: price"
+                   th:field="*{price}"/>
+        </div>
+        <div class="row">
+            <label>Предметы
+                <span class="color-red">*</span>
+            </label>
+            <select class="form-control margin-bottom-20 selectpicker" multiple="multiple" th:field="*{subjects}"
+                    title="Выберите предметы" data-selected-text-format="count > 3">
+                <option th:each="sub,row : ${subjects}"
+                        th:value="${sub.id}"
+                        th:text="${sub.name}"></option>
+            </select>
+        </div>
+        <div class="row margin-top-20">
+            <label>Вид занятий
+                <span class="color-red">*</span>
+                <p>Выберите виды занятий которые Вы практикуете</p>
+            </label>
+            <div th:each="lessonType : ${lessonTypes}">
+                <input type="checkbox" th:field="*{lessonTypes}" th:value="${lessonType.id}"/>
+                <label th:text="${lessonType.name}"></label>
             </div>
-            <div class="row">
-                <label>Образование
-                    <span class="color-red">*</span>
-                    <p> Если вы имеете высшее образование, то укажите место и год в которым Вы получили высшее образование.
-                        Если Вы студент укажите место обучения и курс на дыннй момент</p>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: education"
-                       th:field="*{education}" th:value="*{education}"/>
-            </div>
-            <div class="row">
-                <label>Опыт работы
-                    <p>Год в котором Вы впервые занялись репетиторством.
-                        Если для Вас это первый опыт, то пропустить это поле</p>
-                </label>
-                <input class="form-control margin-bottom-20" type="text"
-                       data-bind="value: firstExperience"
-                       th:field="*{firstExperience}"/>
-            </div>
-            <div class="row">
-                <label>Средняя цена за занятие
-                    <span class="color-red">*</span>
-                    <p> Некоторые репетиторы берут разные суммы за
-                        занятия в зависимости от продолжительности.
-                        Вычислите среднее арифметическое стоимости за занятие
-                    </p>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: price"
-                       th:field="*{price}"/>
-            </div>
-            <div class="row">
-                <label>Предметы
-                    <span class="color-red">*</span>
-                </label>
-                <select class="form-control margin-bottom-20 selectpicker" multiple="multiple" th:field="*{subjects}"
-                        title="Выберите предметы" data-selected-text-format="count > 3">
-                    <option th:each="sub,row : ${subjects}"
-                            th:value="${sub.id}"
-                            th:text="${sub.name}"></option>
-                </select>
-            </div>
-            <div class="row margin-top-20">
-                <label>Вид занятий
-                    <span class="color-red">*</span>
-                    <p>Выберите виды занятий которые Вы практикуете</p>
-                </label>
-                <div th:each="lessonType : ${lessonTypes}">
-                    <input type="checkbox" th:field="*{lessonTypes}" th:value="${lessonType.id}" />
-                    <label th:text="${lessonType.name}"></label>
-                </div>
-            </div>
+        </div>
     </div>
 </div>
 </body>

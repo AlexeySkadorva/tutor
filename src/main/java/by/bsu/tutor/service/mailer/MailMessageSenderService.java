@@ -1,6 +1,5 @@
 package by.bsu.tutor.service.mailer;
 
-import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.dto.MailMessageDto;
 import by.bsu.tutor.properties.GmailProperties;
 import org.springframework.scheduling.annotation.Async;

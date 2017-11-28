@@ -3,7 +3,6 @@ package by.bsu.tutor.models.entity.base;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Data
 

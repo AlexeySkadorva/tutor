@@ -6,96 +6,96 @@
 </head>
 <body>
 <div th:fragment="update">
-        <div class="signup-page right-block">
-            <div class="signup-header">
-                <h3>Данные для обучения</h3>
-            </div>
-            <div class="row">
-                <input type="checkbox"
-                       data-bind="click: $root.changeClientType(1)" th:field="*{clientType}" th:value="1"/>
-                <label class="">Дошкольник</label>
-            </div>
-            <div class="row">
-                <input type="checkbox" data-bind="click: $root.changeClientType(2)" th:field="*{clientType}" th:value="2"/>
-                <label class="">Школьник</label>
-            </div>
-            <div class="row">
-                <input data-bind="click: $root.changeClientType(3)" type="checkbox" th:field="*{clientType}" th:value="3"/>
-                <label class="">Студент</label>
-            </div>
-            <div class="row">
-                <input data-bind="click: $root.changeClientType(4)" type="checkbox" th:field="*{clientType}" th:value="4"/>
-                <label class="">Взрослый</label>
-            </div>
-            <div class="row">
-                <label>Класс
-                    <span class="color-red">*</span>
-                </label>
-                <select id="genderSelect" class="form-control margin-bottom-20"
-                        data-bind="value: grade, attr : {'disabled' : isGradeDisabled}" name="course"
-                        th:field="*{course}">
-                    <option value=""></option>
-                    <option th:each="i : ${#numbers.sequence(1, 11)}" th:value="${i}" th:text="${i}">Класс</option>
-                </select>
-            </div>
-            <div class="row">
-                <label>Школа
-                    <span class="color-red">*</span>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" th:text="*{institutionOfEducation}"
-                       data-bind="attr : {'disabled' : isGradeDisabled}" maxlength="100"/>
-            </div>
-            <div class="row">
-                <label>Курс
-                    <span class="color-red">*</span>
-                </label>
-                <select id="genderSelect" class="form-control margin-bottom-20"
-                        data-bind="value: course, attr : {'disabled' : isCourseDisabled}" name="course"
-                        th:field="*{course}">
-                    <option value=""></option>
-                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}">Курс</option>
-                </select>
-            </div>
-            <div class="row">
-                <label>Университет и специальность
-                    <span class="color-red">*</span>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" th:text="*{institutionOfEducation}"
-                       data-bind="attr : {'disabled' : isCourseDisabled}" maxlength="100"/>
-            </div>
+    <div class="signup-page right-block">
+        <div class="signup-header">
+            <h3>Данные для обучения</h3>
+        </div>
+        <div class="row">
+            <input type="checkbox"
+                   data-bind="click: $root.changeClientType(1)" th:field="*{clientType}" th:value="1"/>
+            <label class="">Дошкольник</label>
+        </div>
+        <div class="row">
+            <input type="checkbox" data-bind="click: $root.changeClientType(2)" th:field="*{clientType}" th:value="2"/>
+            <label class="">Школьник</label>
+        </div>
+        <div class="row">
+            <input data-bind="click: $root.changeClientType(3)" type="checkbox" th:field="*{clientType}" th:value="3"/>
+            <label class="">Студент</label>
+        </div>
+        <div class="row">
+            <input data-bind="click: $root.changeClientType(4)" type="checkbox" th:field="*{clientType}" th:value="4"/>
+            <label class="">Взрослый</label>
+        </div>
+        <div class="row">
+            <label>Класс
+                <span class="color-red">*</span>
+            </label>
+            <select id="genderSelect" class="form-control margin-bottom-20"
+                    data-bind="value: grade, attr : {'disabled' : isGradeDisabled}" name="course"
+                    th:field="*{course}">
+                <option value=""></option>
+                <option th:each="i : ${#numbers.sequence(1, 11)}" th:value="${i}" th:text="${i}">Класс</option>
+            </select>
+        </div>
+        <div class="row">
+            <label>Школа
+                <span class="color-red">*</span>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" th:text="*{institutionOfEducation}"
+                   data-bind="attr : {'disabled' : isGradeDisabled}" maxlength="100"/>
+        </div>
+        <div class="row">
+            <label>Курс
+                <span class="color-red">*</span>
+            </label>
+            <select id="genderSelect" class="form-control margin-bottom-20"
+                    data-bind="value: course, attr : {'disabled' : isCourseDisabled}" name="course"
+                    th:field="*{course}">
+                <option value=""></option>
+                <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}">Курс</option>
+            </select>
+        </div>
+        <div class="row">
+            <label>Университет и специальность
+                <span class="color-red">*</span>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" th:text="*{institutionOfEducation}"
+                   data-bind="attr : {'disabled' : isCourseDisabled}" maxlength="100"/>
         </div>
     </div>
+</div>
 
-    <div class="col-md-6" id="parent-info">
-        <div class="signup-page">
-            <div class="signup-header">
-                <h3>Личные данные родителя (для дошкольников и школьников)</h3>
-            </div>
-
-            <div class="row">
-                <label>Фамилия</label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: parentLastName"
-                       th:field="*{clientParent.lastName}" maxlength="100"/>
-            </div>
-
-            <div class="row">
-                <label>Имя</label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: parentFirstName"
-                       th:field="*{clientParent.firstName}" maxlength="100"/>
-            </div>
-
-            <div class="row">
-                <label>Отчество</label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: parentSecondName"
-                       th:field="*{clientParent.secondName}" maxlength="100"/>
-            </div>
-            <div class="row">
-                <label>Номер телефона</label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: parentPhoneNumber"
-                       th:field="*{clientParent.phoneNumber}"
-                       maxlength="20"/>
-            </div>
+<div class="col-md-6" id="parent-info">
+    <div class="signup-page">
+        <div class="signup-header">
+            <h3>Личные данные родителя (для дошкольников и школьников)</h3>
         </div>
+
+        <div class="row">
+            <label>Фамилия</label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: parentLastName"
+                   th:field="*{clientParent.lastName}" maxlength="100"/>
+        </div>
+
+        <div class="row">
+            <label>Имя</label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: parentFirstName"
+                   th:field="*{clientParent.firstName}" maxlength="100"/>
+        </div>
+
+        <div class="row">
+            <label>Отчество</label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: parentSecondName"
+                   th:field="*{clientParent.secondName}" maxlength="100"/>
+        </div>
+        <div class="row">
+            <label>Номер телефона</label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: parentPhoneNumber"
+                   th:field="*{clientParent.phoneNumber}"
+                   maxlength="20"/>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -1,17 +1,17 @@
-(function($){
+(function ($) {
 
     /**
-* Copyright 2012, Digital Fusion
-* Licensed under the MIT license.
-* http://teamdf.com/jquery-plugins/license/
-*
-* @author Sam Sehnert
-* @desc A small plugin that checks whether elements are within
-* the user visible viewport of a web browser.
-* only accounts for vertical position, not horizontal.
-*/
+     * Copyright 2012, Digital Fusion
+     * Licensed under the MIT license.
+     * http://teamdf.com/jquery-plugins/license/
+     *
+     * @author Sam Sehnert
+     * @desc A small plugin that checks whether elements are within
+     * the user visible viewport of a web browser.
+     * only accounts for vertical position, not horizontal.
+     */
     var $w = $(window);
-    $.fn.visible = function(partial,hidden,direction){
+    $.fn.visible = function (partial, hidden, direction) {
 
         if (this.length < 1)
             return;
@@ -23,7 +23,7 @@
             direction = (direction) ? direction : 'both',
             clientSize = hidden === true ? t.offsetWidth * t.offsetHeight : true;
 
-        if (typeof t.getBoundingClientRect === 'function'){
+        if (typeof t.getBoundingClientRect === 'function') {
 
             // Use this native browser method, if available.
             var rec = t.getBoundingClientRect(),
@@ -34,11 +34,11 @@
                 vVisible = partial ? tViz || bViz : tViz && bViz,
                 hVisible = partial ? lViz || lViz : lViz && rViz;
 
-            if(direction === 'both')
+            if (direction === 'both')
                 return clientSize && vVisible && hVisible;
-            else if(direction === 'vertical')
+            else if (direction === 'vertical')
                 return clientSize && vVisible;
-            else if(direction === 'horizontal')
+            else if (direction === 'horizontal')
                 return clientSize && hVisible;
         } else {
 
@@ -56,43 +56,43 @@
                 compareLeft = partial === true ? _right : _left,
                 compareRight = partial === true ? _left : _right;
 
-            if(direction === 'both')
+            if (direction === 'both')
                 return !!clientSize && ((compareBottom <= viewBottom) && (compareTop >= viewTop)) && ((compareRight <= viewRight) && (compareLeft >= viewLeft));
-            else if(direction === 'vertical')
+            else if (direction === 'vertical')
                 return !!clientSize && ((compareBottom <= viewBottom) && (compareTop >= viewTop));
-            else if(direction === 'horizontal')
+            else if (direction === 'horizontal')
                 return !!clientSize && ((compareRight <= viewRight) && (compareLeft >= viewLeft));
         }
     };
 
-   var addAnimation = function(element){
-    $(element).each(function(i, el){
-      var el = $(el);
-      if (el.visible(true)) {
-        el.removeClass('visible').addClass('animated'); 
-      } 
+    var addAnimation = function (element) {
+        $(element).each(function (i, el) {
+            var el = $(el);
+            if (el.visible(true)) {
+                el.removeClass('visible').addClass('animated');
+            }
+        });
+    }
+
+    var checkVisible = function (element) {
+        $(element).each(function (i, el) {
+            var el = $(el);
+            if (el.visible(false)) {
+                el.addClass("visible");
+            }
+        });
+    }
+
+    $(window).load(function () {
+        checkVisible('.animate');
     });
-   }
 
-   var checkVisible = function(element){
-    $(element).each(function(i, el) {
-      var el = $(el);
-         if (el.visible(false)) {
-        el.addClass("visible"); 
-      } 
-    });     
-   }
+    $(window).load(function () {
+        addAnimation('.animate');
+    });
 
-   $(window).load(function(){
-    checkVisible('.animate');
-   });
-
-   $(window).load(function(){
-    addAnimation('.animate');
-   });
-
-   $(window).scroll(function(event) {
-      addAnimation('.animate');
-   });
+    $(window).scroll(function (event) {
+        addAnimation('.animate');
+    });
 
 })(jQuery);

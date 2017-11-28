@@ -33,7 +33,8 @@
             </thead>
             <tbody th:each="tutor : ${tutors}">
             <tr>
-                <td><a th:href="@{'/tutors/' + ${tutor.id}}"><span th:text="${tutor.user.getFullName()}"></span></a></td>
+                <td><a th:href="@{'/tutors/' + ${tutor.id}}"><span th:text="${tutor.user.getFullName()}"></span></a>
+                </td>
                 <td th:text="${tutor.user.age}"></td>
                 <td th:text="${tutor.user.email}"></td>
                 <td th:text="${tutor.user.active} ? '+' : '-'"></td>

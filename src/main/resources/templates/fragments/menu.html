@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="ru">
 <head>
 </head>
 <body>
@@ -10,22 +11,27 @@
                 <div class="visible-lg">
                     <ul id="hornavmenu" class="nav navbar-nav">
                         <li>
-                            <a class="fa-home" th:classappend="${activeTab == 'main'} ? 'active'" th:href="@{/}">Главная</a>
+                            <a class="fa-home" th:classappend="${activeTab == 'main'} ? 'active'"
+                               th:href="@{/}">Главная</a>
                         </li>
                         <!--<li>-->
-                            <!--<a class="fa-user" th:classappend="${activeTab == 'tutors'} ? 'active'" th:href="@{/tutors}">Репетиторы</a>-->
+                        <!--<a class="fa-user" th:classappend="${activeTab == 'tutors'} ? 'active'" th:href="@{/tutors}">Репетиторы</a>-->
                         <!--</li>-->
                         <li>
-                            <a class="fa-users" th:classappend="${activeTab == 'tutors'} ? 'active'" th:href="@{/tutors}">Репетиторы</a>
+                            <a class="fa-users" th:classappend="${activeTab == 'tutors'} ? 'active'"
+                               th:href="@{/tutors}">Репетиторы</a>
                         </li>
                         <li>
-                            <a class="fa-comment" th:classappend="${activeTab == 'notes'} ? 'active'" th:href="@{/notes}">Отзывы</a>
+                            <a class="fa-comment" th:classappend="${activeTab == 'notes'} ? 'active'"
+                               th:href="@{/notes}">Отзывы</a>
                         </li>
                         <li>
-                            <a class="fa-phone" th:classappend="${activeTab == 'contact'} ? 'active'" th:href="@{/contacts}">Контакты</a>
+                            <a class="fa-phone" th:classappend="${activeTab == 'contact'} ? 'active'"
+                               th:href="@{/contacts}">Контакты</a>
                         </li>
                         <li sec:authorize="isAuthenticated()">
-                            <a class="fa-phone" th:classappend="${activeTab == 'account'} ? 'active'" th:href="@{/account}">Кабинет</a>
+                            <a class="fa-phone" th:classappend="${activeTab == 'account'} ? 'active'"
+                               th:href="@{/account}">Кабинет</a>
                         </li>
                         <li sec:authorize="!isAuthenticated()">
                             <a class="fa-sign-in" th:href="@{/login}">Войти</a>
@@ -38,11 +44,11 @@
                 </div>
             </div>
             <!--<div class="col-md-2 no-padding">-->
-                <!--<ul class="social-icons pull-right">-->
-                    <!--<li class="glyphicon glyphicon-log-in">-->
-                        <!--<a href="#" target="_blank" title="login"></a>-->
-                    <!--</li>-->
-                <!--</ul>-->
+            <!--<ul class="social-icons pull-right">-->
+            <!--<li class="glyphicon glyphicon-log-in">-->
+            <!--<a href="#" target="_blank" title="login"></a>-->
+            <!--</li>-->
+            <!--</ul>-->
             <!--</div>-->
         </div>
     </div>

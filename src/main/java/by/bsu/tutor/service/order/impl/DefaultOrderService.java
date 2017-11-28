@@ -8,6 +8,7 @@ import by.bsu.tutor.repositories.OrderStatusRepository;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.mailer.MailMessageSenderService;
 import by.bsu.tutor.service.order.OrderService;
+import com.sun.istack.internal.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -27,22 +28,26 @@ public class DefaultOrderService extends DefaultCrudService<Order, OrderReposito
     }
 
     @Override
+    @NotNull
     public Order save(@NotNull Order order) {
         messageSenderService.send(order);
         return super.save(order);
     }
 
     @Override
+    @Nullable
     public List<Order> getNewByTutorId(@NotNull Long tutorId) {
         return repository.findByTutorIdAndOrderStatusCode(tutorId, OrderStatus.Code.NEW);
     }
 
     @Override
+    @Nullable
     public List<Order> getByTutorId(@NotNull Long tutorId) {
         return repository.findByTutorId(tutorId);
     }
 
     @Override
+    @NotNull
     public Order updateOrderStatus(@NotNull Long id, @NotNull OrderStatus.Code status) throws LogicException {
         Order order = super.get(id);
         order.setOrderStatus(orderStatusRepository.findByCode(status));

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactDto {
 
-    private String name;
     private String email;
+
+    private String name;
+
     private String message;
 
 }

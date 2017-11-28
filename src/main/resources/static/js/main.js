@@ -72,7 +72,7 @@ $(function () {
             changeYear: true,
             dateFormat: "dd.mm.yy"
         });
-        $(".datepicker").parent().find(".cal-link").on("click", function(e) {
+        $(".datepicker").parent().find(".cal-link").on("click", function (e) {
             e.preventDefault();
             $(this).parent().find(".datepicker").datepicker("show");
         })
@@ -176,7 +176,7 @@ function sort(sortField, oldSortField, sortDir, defaultSortDir) {
 
 function checkFlag(registerType, registerEntryId) {
     if (registerType == "request") {
-    var result = $('#result').attr("value");
+        var result = $('#result').attr("value");
         window.location.href = '/registry/' + registerType + '/' + registerEntryId + '/' + result + '/print';
     }
     else if (registerEntryId) {
@@ -195,7 +195,7 @@ function updateQueryParam(uri, key, value) {
     }
 }
 
-$( document ).ready(function() {
+$(document).ready(function () {
     if ($.fn.floatThead) {
         $("table").floatThead('reflow');
     }

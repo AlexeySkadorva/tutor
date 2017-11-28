@@ -27,5 +27,5 @@ public class Subject extends BaseEnum {
         HISTORY,
         PROGRAMMING
     }
-    
+
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Создание репетитора</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link th:href="@{/css/jquery-ui-datepicker.css}" rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"/>
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('register_tutor')"></div>
+
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-30">
+                <form data-bind="submit: save" th:object="${tutor}" th:action="@{/tutors}" method="POST">
+                    <div class="col-md-6">
+                        <div th:replace="fragments/user_form :: user_form"></div>
+
+                        <div th:replace="fragments/tutor/update :: update"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div th:replace="fragments/login_form :: login_form"></div>
+                        <div th:replace="fragments/tutor/status :: status"></div>
+
+                        <div th:replace="fragments/tutor/social :: social"></div>
+
+                        <hr/>
+                        <div class="text-right">
+                            <button class="btn btn-primary" type="submit">Регистрация</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/jquery-ui.min.js}"/>
+<script th:src="@{/js/moment.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+
+<script th:src="@{/js/jquery.inputmask.bundle.min.js}"/>
+<script th:src="@{/js/knockout/knockout.js}"/>
+<script th:src="@{/js/knockout/knockout.inputmask.js}"/>
+<script th:src="@{/js/knockout/knockout-validation-min.js}"/>
+<script th:src="@{/js/datepicker-ru.js}"/>
+<script th:src="@{/js/tutor.js}"/>
+<script th:src="@{/js/knockout.validation.rules.js}"/>
+<script th:src="@{/js/knockout/knockout.datepicker.js}"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+<script th:inline="javascript">
+    $(function () {
+        ko.applyBindings(new User([[${tutor}]]));
+    });
+</script>
+
+</body>
+</html>

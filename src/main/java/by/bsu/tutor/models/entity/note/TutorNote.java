@@ -1,9 +1,7 @@
 package by.bsu.tutor.models.entity.note;
 
 import by.bsu.tutor.models.entity.base.BaseEntity;
-import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
-import by.bsu.tutor.models.entity.tutor.Tutor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

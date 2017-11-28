@@ -43,20 +43,20 @@ public class Tutor extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @OneToMany(cascade = CascadeType.ALL)
+    //    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "client_tutor_relations", joinColumns = { @JoinColumn(name = "tutor_id", referencedColumnName = "id") },
 //            inverseJoinColumns = { @JoinColumn(name = "id", referencedColumnName = "client_tutor_id") })
     @Transient
     private List<TutorNote> notes;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "tutor_subject_relations", joinColumns = { @JoinColumn(name = "tutor_id") },
-            inverseJoinColumns = { @JoinColumn(name = "subject_id") })
+    @JoinTable(name = "tutor_subject_relations", joinColumns = {@JoinColumn(name = "tutor_id")},
+            inverseJoinColumns = {@JoinColumn(name = "subject_id")})
     private List<Subject> subjects;
 
     @OneToMany
-    @JoinTable(name = "tutors_lesson_types", joinColumns = { @JoinColumn(name = "tutor_id") },
-            inverseJoinColumns = { @JoinColumn(name = "lesson_type_id") })
+    @JoinTable(name = "tutors_lesson_types", joinColumns = {@JoinColumn(name = "tutor_id")},
+            inverseJoinColumns = {@JoinColumn(name = "lesson_type_id")})
     private List<LessonType> lessonTypes;
 
     @Column(name = "comment")
@@ -70,9 +70,11 @@ public class Tutor extends BaseEntity {
 
 
     @PostLoad
-    private void calculateFields(){
+    private void calculateFields() {
         LocalDate currentDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        if(null != this.firstExperience) { this.experienceInYear = currentDate.getYear() - this.firstExperience;}
+        if (null != this.firstExperience) {
+            this.experienceInYear = currentDate.getYear() - this.firstExperience;
+        }
     }
 
 }

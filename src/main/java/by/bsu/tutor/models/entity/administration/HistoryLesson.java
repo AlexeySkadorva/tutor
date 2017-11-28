@@ -1,11 +1,13 @@
 package by.bsu.tutor.models.entity.administration;
 
 import by.bsu.tutor.models.entity.base.BaseEntity;
-import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Data
@@ -33,8 +35,8 @@ public class HistoryLesson extends BaseEntity {
     private Boolean isPaid;
 
     @PrePersist
-    private void updateCreatedDate(){
-        if(null == this.date) {
+    private void updateCreatedDate() {
+        if (null == this.date) {
             this.date = new Date();
         }
     }

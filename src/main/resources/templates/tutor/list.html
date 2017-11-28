@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Репетиторы</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/nexus.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+</head>
+<body>
+<div id="body-bg">
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div th:replace="fragments/menu :: menu('tutors')"></div>
+
+    <form id="searchForm" method="get" th:object="${searchForm}">
+        <input type="hidden" id="pageNumber" th:field="*{pageNumber}"/>
+        <input type="hidden" id="pageSize" th:field="*{pageSize}"/>
+    </form>
+
+    <div id="content">
+        <div class="container background-white">
+            <div class="row margin-vert-30">
+                <div class="col-md-9">
+                    <div class="blog-post padding-bottom-20" th:each="tutor : ${tutors}">
+                        <div class="blog-item-header">
+                            <h2>
+                                <a th:href="@{'/tutors/' + ${tutor.id}}"><p th:text="${tutor.user.getFullName()}"></p>
+                                </a>
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="blog-post-details">
+                            <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags"
+                                 th:each="sub : ${tutor.subjects}">
+                                <i class="fa fa-tag color-gray-light"></i>
+                                <a th:href="@{'/tutors/subjects/' + ${sub.id}}" th:text="${sub.name}"></a>
+                            </div>
+                            <div th:if="!${#lists.isEmpty(tutor.notes)}"
+                                 class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last">
+                                <i class="fa fa-comments color-gray-light"
+                                   th:text="' ' + ${#lists.size(tutor.notes)} + ' комментариев'"></i>
+                            </div>
+                        </div>
+                        <div class="blog">
+                            <div class="clearfix"></div>
+                            <div class="blog-post-body row margin-top-15">
+                                <div class="col-md-5">
+                                    <img th:src="@{'/users/' + ${tutor.user.id} + '/photo/download'}" alt="thumb1"/>
+                                </div>
+                                <div class="col-md-7">
+                                    <p th:text="${tutor.comment}"></p>
+                                    <a th:href="@{'/tutors/' + ${tutor.id}}" class="btn btn-primary">
+                                        Перейти
+                                        <i class="icon-chevron-right readmore-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-post padding-top-60" th:if="${#lists.size(tutors) == 0}">
+                        <h3>К сожалению ни одного репетитора по данной предмету не найдено</h3>
+                    </div>
+
+
+                    <div th:replace="fragments/pagination :: pagination"></div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="blog-tags">
+                        <h3>Предметы</h3>
+                        <ul class="blog-tags">
+                            <li th:each="sub : ${subjects}">
+                                <a th:href="@{'/tutors/subjects/' + ${sub.id}}"
+                                   th:text="${#strings.toUpperCase(sub.name)}" class="blog-tag"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: contacts"></div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script th:src="@{/js/jquery.min.js}"/>
+<script th:src="@{/js/bootstrap.min.js}"/>
+<script th:src="@{/js/scripts.js}"/>
+<script th:src="@{/js/jquery.isotope.js}"/>
+<script th:src="@{/js/jquery.slicknav.js}"/>
+<script th:src="@{/js/jquery.visible.js}"/>
+<script th:src="@{/js/jquery.sticky.js}"/>
+<script th:src="@{/js/slimbox2.js}"/>
+<script th:src="@{/js/main.js}"/>
+<script th:src="@{/js/modernizr.custom.js}"/>
+</body>
+</html>

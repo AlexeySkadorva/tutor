@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
  */
 public interface TutorInvoiceRepository extends BaseRepository<TutorInvoice> {
 
-    @NotNull TutorInvoice findByTutorId(@NotNull Long id);
+    @NotNull
+    TutorInvoice findByTutorId(@NotNull Long id);
 
 }

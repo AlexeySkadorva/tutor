@@ -8,7 +8,7 @@ import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.OrderStatusRepository;
-import by.bsu.tutor.service.administration.UserService;
+import by.bsu.tutor.service.user.UserService;
 import by.bsu.tutor.service.client.ClientService;
 import by.bsu.tutor.service.client.ClientTutorRelationService;
 import by.bsu.tutor.service.order.OrderService;
@@ -26,13 +26,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class OrderController {
 
-    @Autowired private OrderService orderService;
-    @Autowired private TutorService tutorService;
-    @Autowired private UserService userService;
-    @Autowired private ClientService clientService;
-    @Autowired private ClientTutorRelationService clientTutorRelationService;
-    @Autowired private LessonTypeRepository lessonTypeRepository;
-    @Autowired private OrderStatusRepository orderStatusRepository;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private TutorService tutorService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private ClientTutorRelationService clientTutorRelationService;
+    @Autowired
+    private LessonTypeRepository lessonTypeRepository;
+    @Autowired
+    private OrderStatusRepository orderStatusRepository;
 
 
     @PostMapping(value = "/orders")
@@ -43,7 +50,7 @@ public class OrderController {
 
     @GetMapping(value = "/tutors/{id}/order")
     public String saveOrder(@PathVariable Long id, @AuthenticationPrincipal UserDetails user, Model model) throws LogicException {
-        if(null == user) {
+        if (null == user) {
             return "redirect:/clients/new";
         }
         Tutor tutor = tutorService.get(id);
@@ -54,17 +61,6 @@ public class OrderController {
         model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
         return "/order/new";
     }
-
-//    @PostMapping(value = "/tutors/{id}/order")
-//    public String addOrder(@PathVariable Long id, String message,
-//                           @AuthenticationPrincipal UserDetails user) throws LogicException {
-//        Tutor tutor = tutorService.get(id);
-//        Client client = clientService.getByUser(userService.findByLogin(user.getUsername()));
-//        Order order = new Order(tutor, client, message);
-//
-//        orderService.saveNewOrder(order);
-//        return "/order/send";
-//    }
 
     @GetMapping(value = "/tutors/{id}/orders")
     public String getOrders(@PathVariable Long id, Model model) throws LogicException {

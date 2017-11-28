@@ -8,7 +8,8 @@
 <div th:fragment="pagination" th:if="*{searchForm.pageCount &gt; 1}">
     <ul class="pagination">
         <li>
-            <a href="#" class="pageable" th:attr="data-page-num=${searchForm.pageNumber - 1}" th:if="*{searchForm.pageNumber &gt; 1}">&laquo;</a>
+            <a href="#" class="pageable" th:attr="data-page-num=${searchForm.pageNumber - 1}"
+               th:if="*{searchForm.pageNumber &gt; 1}">&laquo;</a>
         </li>
         <li th:each="i : ${#numbers.sequence( 1, searchForm.pageCount == 0 ? 1 : searchForm.pageCount)}"
             th:classappend="${searchForm.pageNumber == i} ? 'active' : ''">

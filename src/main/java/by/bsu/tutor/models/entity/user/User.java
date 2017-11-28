@@ -33,7 +33,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "secondname")
     private String secondName;
 
-    @DateTimeFormat(pattern="dd.MM.yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "birthdate")
     private Date birthDate;
 
@@ -73,8 +73,8 @@ public class User extends BaseEntity implements UserDetails {
 //    }
 
     @PostLoad
-    private void calculateAge(){
-        if(null != this.birthDate) {
+    private void calculateAge() {
+        if (null != this.birthDate) {
             LocalDate currentDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate birthDate = this.birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             this.age = currentDate.getYear() - birthDate.getYear() + 1;

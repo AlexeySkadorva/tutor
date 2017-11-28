@@ -14,7 +14,6 @@ import java.util.List;
 public class DefaultClinicalTutorRelationService extends DefaultCrudService<ClientTutorRelation, ClientTutorRelationRepository>
         implements ClientTutorRelationService {
 
-    @Autowired
     public DefaultClinicalTutorRelationService(@NotNull ClientTutorRelationRepository repository) {
         super(repository);
     }

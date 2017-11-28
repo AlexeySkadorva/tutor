@@ -14,6 +14,6 @@ public interface TutorService extends CrudService<Tutor> {
 
     @NotNull Tutor getByUser(@NotNull User user);
 
-    @NotNull long getCountBySubject(Subject subject);
+    @NotNull Long getCountBySubject(@NotNull Subject subject);
 
 }

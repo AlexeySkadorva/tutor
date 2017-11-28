@@ -6,36 +6,36 @@
 </head>
 <body>
 <div th:fragment="social">
-        <div class="signup-page right-block">
-            <div class="signup-header">
-                <h3>Социальные сети</h3>
-            </div>
-            <div class="row">
-                <label>Вконтакте
-                    <p>Рекомендуется заполнить это поле, для удобства коммуникации с клиентам.
-                        Ссылка будет видна только Вашим клиентам.</p>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: vkLink"
-                       th:field="*{vkLink}"/>
-            </div>
-            <div class="row">
-                <label>Skype
-                    <p>Если Вы проводите занятий по skype, то обязательно заполните это поле.
-                        Если же нет, то рекомендуется его заполнить для коммуникации с клиентом.
-                        Ссылка будет видна только Вашим клиентам.</p>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: skypeLink"
-                       th:field="*{skypeLink}"/>
-            </div>
-            <div class="row">
-                <label>Telegram
-                    <p>Укажите Ваш логин в telegram, подписавшись на нашего бота Вы сможете узнавать список Ваших ближайших
-                        занятий, узнавать количество проведенных занятий в этом месяце и многое другое.</p>
-                </label>
-                <input class="form-control margin-bottom-20" type="text" data-bind="value: telegram"
-                       th:field="*{telegram}"/>
-            </div>
+    <div class="signup-page right-block">
+        <div class="signup-header">
+            <h3>Социальные сети</h3>
         </div>
+        <div class="row">
+            <label>Вконтакте
+                <p>Рекомендуется заполнить это поле, для удобства коммуникации с клиентам.
+                    Ссылка будет видна только Вашим клиентам.</p>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: vkLink"
+                   th:field="*{vkLink}"/>
+        </div>
+        <div class="row">
+            <label>Skype
+                <p>Если Вы проводите занятий по skype, то обязательно заполните это поле.
+                    Если же нет, то рекомендуется его заполнить для коммуникации с клиентом.
+                    Ссылка будет видна только Вашим клиентам.</p>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: skypeLink"
+                   th:field="*{skypeLink}"/>
+        </div>
+        <div class="row">
+            <label>Telegram
+                <p>Укажите Ваш логин в telegram, подписавшись на нашего бота Вы сможете узнавать список Ваших ближайших
+                    занятий, узнавать количество проведенных занятий в этом месяце и многое другое.</p>
+            </label>
+            <input class="form-control margin-bottom-20" type="text" data-bind="value: telegram"
+                   th:field="*{telegram}"/>
+        </div>
+    </div>
 </div>
 </body>
 </html>

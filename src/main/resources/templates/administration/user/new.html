@@ -34,9 +34,9 @@
                         <div class="row">
 
                             <label>Логин</label>
-                        <input class="form-control margin-bottom-20" type="text" th:field="*{login}"
-                               data-bind="value: login" maxlength="100"/>
-</div>
+                            <input class="form-control margin-bottom-20" type="text" th:field="*{login}"
+                                   data-bind="value: login" maxlength="100"/>
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Пароль
@@ -50,7 +50,7 @@
                                     <span class="color-red">*</span>
                                 </label>
                                 <input class="form-control margin-bottom-20" type="password"
-                                      data-bind="value: repeatpassword" />
+                                       data-bind="value: repeatpassword"/>
                             </div>
                         </div>
 
@@ -126,14 +126,14 @@
                         </div>
                         <div class="row">
 
-                        <label>Роль
-                            <span class="color-red">*</span>
-                        </label>
-                        <select id="roles" class="form-control margin-bottom-20" th:field="*{role}" >
-                            <option value=""></option>
-                            <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.name}"/>
-                        </select>
-                            </div>
+                            <label>Роль
+                                <span class="color-red">*</span>
+                            </label>
+                            <select id="roles" class="form-control margin-bottom-20" th:field="*{role}">
+                                <option value=""></option>
+                                <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.name}"/>
+                            </select>
+                        </div>
 
                         <hr/>
 

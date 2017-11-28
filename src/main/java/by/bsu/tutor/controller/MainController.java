@@ -7,18 +7,18 @@ import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
 
-    @Autowired private HistoryLessonService historyLessonService;
-    @Autowired private ClientService clientService;
     @Autowired private TutorService tutorService;
+    @Autowired private ClientService clientService;
     @Autowired private SubjectRepository subjectRepository;
+    @Autowired private HistoryLessonService historyLessonService;
 
 
-    @RequestMapping(value = "/")
+    @GetMapping(value = "/")
     public String main(Model model) {
         model.addAttribute("subjects", subjectRepository.findAll());
         model.addAttribute("countOfLessons", historyLessonService.getCount());
