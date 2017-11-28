@@ -10,7 +10,7 @@ import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.OrderStatusRepository;
 import by.bsu.tutor.service.user.UserService;
 import by.bsu.tutor.service.client.ClientService;
-import by.bsu.tutor.service.client.ClientTutorRelationService;
+import by.bsu.tutor.service.relation.ClientTutorRelationService;
 import by.bsu.tutor.service.order.OrderService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;

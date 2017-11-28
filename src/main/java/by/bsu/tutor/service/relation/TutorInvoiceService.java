@@ -1,4 +1,4 @@
-package by.bsu.tutor.service.tutor;
+package by.bsu.tutor.service.relation;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.tutor.TutorInvoice;

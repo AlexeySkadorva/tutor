@@ -1,11 +1,10 @@
-package by.bsu.tutor.service.tutor.impl;
+package by.bsu.tutor.service.relation.impl;
 
 import by.bsu.tutor.models.entity.note.TutorNote;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.repositories.TutorNoteRepository;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
-import by.bsu.tutor.service.tutor.TutorNoteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import by.bsu.tutor.service.relation.TutorNoteService;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;

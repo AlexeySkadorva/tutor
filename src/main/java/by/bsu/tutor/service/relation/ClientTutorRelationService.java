@@ -1,4 +1,4 @@
-package by.bsu.tutor.service.client;
+package by.bsu.tutor.service.relation;
 
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.service.base.CrudService;

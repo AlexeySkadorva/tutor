@@ -1,7 +1,7 @@
 package by.bsu.tutor.controller;
 
 import by.bsu.tutor.repositories.SubjectRepository;
-import by.bsu.tutor.service.administration.HistoryLessonService;
+import by.bsu.tutor.service.relation.HistoryLessonService;
 import by.bsu.tutor.service.client.ClientService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;

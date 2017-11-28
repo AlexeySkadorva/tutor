@@ -2,7 +2,7 @@ package by.bsu.tutor.controller.relation;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.note.TutorNote;
-import by.bsu.tutor.service.tutor.TutorNoteService;
+import by.bsu.tutor.service.relation.TutorNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

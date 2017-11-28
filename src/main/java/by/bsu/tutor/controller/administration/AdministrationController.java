@@ -1,11 +1,11 @@
 package by.bsu.tutor.controller.administration;
 
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
-import by.bsu.tutor.service.administration.HistoryLessonService;
+import by.bsu.tutor.service.relation.HistoryLessonService;
 import by.bsu.tutor.service.client.ClientService;
-import by.bsu.tutor.service.client.ClientTutorRelationService;
+import by.bsu.tutor.service.relation.ClientTutorRelationService;
 import by.bsu.tutor.service.order.OrderService;
-import by.bsu.tutor.service.tutor.TutorInvoiceService;
+import by.bsu.tutor.service.relation.TutorInvoiceService;
 import by.bsu.tutor.service.tutor.TutorService;
 import by.bsu.tutor.service.user.UserService;
 import io.swagger.annotations.Api;

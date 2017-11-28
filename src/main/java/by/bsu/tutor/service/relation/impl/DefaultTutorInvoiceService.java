@@ -1,13 +1,13 @@
-package by.bsu.tutor.service.tutor.impl;
+package by.bsu.tutor.service.relation.impl;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.tutor.TutorInvoice;
 import by.bsu.tutor.repositories.TutorInvoiceRepository;
-import by.bsu.tutor.service.administration.HistoryLessonService;
+import by.bsu.tutor.service.relation.HistoryLessonService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
-import by.bsu.tutor.service.client.ClientTutorRelationService;
-import by.bsu.tutor.service.tutor.TutorInvoiceService;
+import by.bsu.tutor.service.relation.ClientTutorRelationService;
+import by.bsu.tutor.service.relation.TutorInvoiceService;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;

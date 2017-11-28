@@ -2,7 +2,7 @@ package by.bsu.tutor.controller.relation;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.administration.HistoryLesson;
-import by.bsu.tutor.service.administration.HistoryLessonService;
+import by.bsu.tutor.service.relation.HistoryLessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

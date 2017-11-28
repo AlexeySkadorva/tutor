@@ -1,4 +1,4 @@
-package by.bsu.tutor.service.tutor;
+package by.bsu.tutor.service.relation;
 
 import by.bsu.tutor.models.entity.note.TutorNote;
 import by.bsu.tutor.models.entity.tutor.Tutor;

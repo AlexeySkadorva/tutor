@@ -1,4 +1,4 @@
-package by.bsu.tutor.service.administration;
+package by.bsu.tutor.service.relation;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.administration.HistoryLesson;

@@ -3,7 +3,7 @@ package by.bsu.tutor.service.mailer.impl;
 import by.bsu.tutor.models.dto.MailMessageDto;
 import by.bsu.tutor.models.entity.administration.HistoryLesson;
 import by.bsu.tutor.properties.GmailProperties;
-import by.bsu.tutor.service.client.ClientTutorRelationService;
+import by.bsu.tutor.service.relation.ClientTutorRelationService;
 import by.bsu.tutor.service.mailer.MailMessageSenderService;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
