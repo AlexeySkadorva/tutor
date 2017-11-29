@@ -8,7 +8,6 @@ front/tmp/
 front/node/
 front/dist/
 front/config/config.js
-src/main/resources/static/*
 src/main/resources/application-local.properties
 src/main/resources/templates/index.ftl
 cardo.log*
