@@ -49,7 +49,7 @@ public class AccountController {
             model.addAttribute("client", client);
             model.addAttribute("clientParent", clientParentRepository.findByClientId(client.getId()));
             model.addAttribute("relations", clientTutorRelationService.getByClientId(client.getId()));
-            return "/client";
+            return "/client/client";
         }
 
         if (Role.Code.TUTOR.name().equals(roleName)) {
@@ -57,7 +57,7 @@ public class AccountController {
             model.addAttribute("tutor", tutor);
             model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
             model.addAttribute("hasNewOrder", !CollectionUtils.isEmpty(orderService.getNewByTutorId(tutor.getId())));
-            return "/tutor";
+            return "/tutor/tutor";
         }
         return "redirect:/";
     }

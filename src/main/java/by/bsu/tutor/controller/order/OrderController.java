@@ -4,6 +4,7 @@ import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.order.Order;
 import by.bsu.tutor.models.entity.order.OrderStatus;
+import by.bsu.tutor.models.entity.relation.ClientTutorLesson;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.repositories.LessonTypeRepository;
@@ -37,7 +38,7 @@ public class OrderController {
 
     @PostMapping(value = "/orders")
     public String saveOrder(@ModelAttribute Order order) throws LogicException {
-        orderService.save(order);
+        orderService.createNewOrder(order);
         return "/order/send";
     }
 
@@ -64,10 +65,7 @@ public class OrderController {
     @GetMapping(value = "/orders/{id}/approve")
     public String approveOrder(@PathVariable Long id, Model model) throws LogicException {
         Order order = orderService.updateOrderStatus(id, OrderStatus.Code.APPROVED);
-
-        ClientTutorRelation clientTutorRelation = new ClientTutorRelation(order.getClient(), order.getTutor());
-        clientTutorRelationService.save(clientTutorRelation);
-
+        ClientTutorRelation clientTutorRelation = clientTutorRelationService.createByOrder(order);
         model.addAttribute("client", clientTutorRelation.getClient());
         return "/order/approved";
     }

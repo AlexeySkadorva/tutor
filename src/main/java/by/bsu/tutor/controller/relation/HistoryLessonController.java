@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class HistoryLessonController {
+public class HistoryLessonController extends ClientTutorRelationController {
 
     @Autowired private HistoryLessonService historyLessonService;
 
@@ -35,13 +35,13 @@ public class HistoryLessonController {
         return "redirect:/account";
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/history/{id}")
     public String updatePage(Model model, @PathVariable Long id) throws LogicException {
         model.addAttribute("history", historyLessonService.get(id));
         return "relation/history/edit";
     }
 
-    @PostMapping(value = "/{id}")
+    @PostMapping(value = "/history/{id}")
     public String update(@ModelAttribute(value = "history") HistoryLesson historyLesson, @PathVariable Long id) throws LogicException {
         HistoryLesson history = historyLessonService.get(id);
         history.setCompletedMaterial(historyLesson.getCompletedMaterial());

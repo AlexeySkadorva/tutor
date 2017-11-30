@@ -3,9 +3,12 @@ package by.bsu.tutor.models.entity.relation;
 import by.bsu.tutor.models.entity.administration.HistoryLesson;
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.client.Client;
+import by.bsu.tutor.models.entity.order.LessonType;
+import by.bsu.tutor.models.entity.order.OrderLesson;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,19 +22,20 @@ import java.util.stream.Collectors;
 @Table(name = "client_tutor_relations")
 public class ClientTutorRelation extends BaseEntity {
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id")
     private Tutor tutor;
 
+    @OneToMany
+    @JoinColumn(name = "order_id")
+    private List<ClientTutorLesson> clientTutorLessons;
+
     @Column(name = "actual")
     private Boolean actual = true;
-
-    @Column(name = "periodicity")
-    private Integer periodicity;
 
     @Column(name = "created_date")
     private Date createdDate;

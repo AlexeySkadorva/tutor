@@ -1,6 +1,7 @@
 package by.bsu.tutor.config;
 
 import by.bsu.tutor.security.UserDetailsServiceImpl;
+import by.bsu.tutor.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -25,11 +26,13 @@ import java.util.EnumSet;
 @Order(2)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserService userService;
     private final UserDetailsServiceImpl userDetailsService;
 
 
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, UserService userService) {
         this.userDetailsService = userDetailsService;
+        this.userService = userService;
     }
 
     @Autowired
@@ -65,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService getUserDetailsService() {
-        return new UserDetailsServiceImpl();
+        return new UserDetailsServiceImpl(userService);
     }
 
     @Bean

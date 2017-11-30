@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="ru">
 <head>
     <title>История занятий</title>
-    <meta charset="utf-8"/>
+    <meta charse
+="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
@@ -24,14 +26,14 @@
         <div class="container background-white">
             <div class="row margin-vert-30">
                 <h2>История занятий</h2>
-                <table class="table">
+                <table class="table" >
                     <thead>
                     <tr>
                         <th>Дата</th>
                         <th>Домашнее задание</th>
                         <th>Пройденый материал</th>
                         <th>Оценка</th>
-                        <th>Изменить</th>
+                        <th  sec:authorize="${hasAuthority('TUTOR') or hasAuthority('ADMIN')}">Изменить</th>
                     </tr>
                     </thead>
                     <tbody th:each="h : ${history}">
@@ -40,7 +42,7 @@
                         <td th:text="${h.homework}"></td>
                         <td th:text="${h.completedMaterial}"></td>
                         <td th:text="${h.rating}"></td>
-                        <td><a th:href="@{'relations/history/' + ${h.id}}">Изменить</a></td>
+                        <td  sec:authorize="${hasAuthority('TUTOR') or hasAuthority('ADMIN')}"><a th:href="@{'/relations/history/' + ${h.id}}">Изменить</a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -53,13 +55,13 @@
     <div th:replace="fragments/footer :: footer"></div>
 </div>
 <script th:src="@{/js/jquery/jquery.min.js}"/>
-<script th:src="@{/js//bootstrap/bootstrap.min.js}"/>
-<script th:src="@{/js//thirdparty/scripts.js}"/>
+<script th:src="@{/js/bootstrap/bootstrap.min.js}"/>
+<script th:src="@{/js/thirdparty/scripts.js}"/>
 <script th:src="@{/js/jquery/jquery.isotope.js}"/>
 <script th:src="@{/js/jquery/jquery.slicknav.js}"/>
 <script th:src="@{/js/jquery/jquery.visible.js}"/>
 <script th:src="@{/js/jquery/jquery.sticky.js}"/>
-<script th:src="@{/js//thirdparty/slimbox2.js}"/>
-<script th:src="@{/js//thirdparty/modernizr.custom.js}"/>
+<script th:src="@{/js/thirdparty/slimbox2.js}"/>
+<script th:src="@{/js/thirdparty/modernizr.custom.js}"/>
 </body>
 </html>

@@ -4,9 +4,11 @@ import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.repositories.UserRepository;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
+import by.bsu.tutor.service.mailer.MailMessageSenderService;
 import by.bsu.tutor.service.mailer.impl.UserMailMessageSender;
 import by.bsu.tutor.service.user.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +24,7 @@ public class DefaultUserService extends DefaultCrudService<User, UserRepository>
     private final UserMailMessageSender userMailMessageSender;
 
 
-    public DefaultUserService(@NotNull UserRepository repository, ShaPasswordEncoder passwordEncoder,
+    public DefaultUserService(@NotNull UserRepository repository, @Lazy ShaPasswordEncoder passwordEncoder,
                               UserMailMessageSender userMailMessageSender) {
         super(repository);
         this.passwordEncoder = passwordEncoder;

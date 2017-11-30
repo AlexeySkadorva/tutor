@@ -4,12 +4,14 @@ import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.tutor.TutorEvaluation;
 import by.bsu.tutor.service.relation.TutorEvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Alexey Skadorva
  */
+@Controller
 public class EvaluationController extends ClientTutorRelationController {
 
     @Autowired private TutorEvaluationService tutorEvaluationService;

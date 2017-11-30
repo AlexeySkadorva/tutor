@@ -71,6 +71,7 @@
                                 </div>
                             </div>
                             <div th:if="${clientParent != null}">
+
                                 <h3 class="padding-top-10 pull-left">
                                     Родитель: <p th:text="*{user.getFullName()}"></p>
                                 </h3>
@@ -88,58 +89,93 @@
                     </div>
                 </div>
 
-                <hr/>
                 <div class="col-md-12">
-                    <div th:each="relation : ${relations}">
+                    <div th:each="relation : ${relations}" class="row">
                         <hr/>
-                        <div class="row">
-                            <div class="col-md-1 margin-vert-20">
+                        <div class="col-md-11 margin-vert-30">
+                            <h3>
+                                <p th:text="'Проведено занятий ' + ${#lists.size(relation.historyLessons)}"></p>
+                            </h3>
+                        </div>
+                        <div class="col-md-6">
+
+                        <div>
+                            <div class="col-md-2 margin-vert-20">
                                 <i class="fa-user fa-3x color-primary"></i>
                             </div>
-                            <div class="col-md-11 margin-vert-30">
+                            <div class="col-md-10 margin-vert-30">
                                 <h3>Репетитор <a th:text="${relation.tutor.user.getFullName()}"
                                                  th:href="@{'/tutors/' + ${relation.tutor.id}}"></a></h3>
                             </div>
                         </div>
-                        <div class="row" th:if="!${#lists.isEmpty(relation.historyLessons)}">
-                            <div class="col-md-1 margin-vert-20">
+
+                        <div th:if="!${#lists.isEmpty(relation.historyLessons)}">
+                            <div class="col-md-2 margin-vert-20">
                                 <i class="fa-home fa-3x color-primary"></i>
                             </div>
 
-                            <div class="col-md-11 margin-vert-30">
+                            <div class="col-md-10 margin-vert-30">
+                                <h3 class="panel-title"
+                                    th:text="${'Дата последнего занятия: ' + #dates.format(relation.historyLessons[0].date, 'dd-MM-yyyy')}"></h3>
+                            </div>
+
+                            <div class="col-md-2 margin-vert-20">
+                                <i class="fa-home fa-3x color-primary"></i>
+                            </div>
+
+                            <div class="col-md-10 margin-vert-30">
+                                <h3 class="panel-title"
+                                    th:text="${'Пройденный материал: ' + relation.historyLessons[0].completedMaterial}"></h3>
+                            </div>
+
+                            <div class="col-md-2 margin-vert-20">
+                                <i class="fa-home fa-3x color-primary"></i>
+                            </div>
+
+                            <div class="col-md-10 margin-vert-30">
                                 <h3 class="panel-title"
                                     th:text="${'Домашнее задание: ' + relation.historyLessons[0].homework}"></h3>
                             </div>
                         </div>
-                        <div class="row" th:if="!${#lists.isEmpty(relation.historyLessons)}">
-                            <div class="col-md-1 margin-vert-20">
-                                <i class="fa-list fa-3x color-primary"></i>
-                            </div>
+                        </div>
+                        <div class="col-md-6">
 
-                            <div class="col-md-11 margin-vert-30">
+                        <div th:if="!${#lists.isEmpty(relation.historyLessons)}">
+
+
+                            <div class="col-md-10 margin-vert-30">
                                 <h3>
                                     История занятий
                                     <a th:href="@{'/relations/' + ${relation.id} + '/history/list'}">Просмотреть</a>
                                 </h3>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1 margin-vert-20">
-                                <i class="fa-signal fa-3x color-primary"></i>
-                            </div>
-                            <div class="col-md-11 margin-vert-30">
-                                <h3><a th:href="@{'/relations/' + ${relation.id} + '/evaluation'}">Оценить
-                                    репетитора</a></h3>
+
+                            <div class="col-md-2 margin-vert-20">
+                                <i class="fa-list fa-3x color-primary"></i>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-1 margin-vert-20">
+                        <div>
+
+                            <div class="col-md-10 margin-vert-30">
+                                <h3><a th:href="@{'/relations/' + ${relation.id} + '/evaluation'}">Оценить
+                                    репетитора</a></h3>
+                            </div>
+                            <div class="col-md-2 margin-vert-20">
                                 <i class="fa-signal fa-3x color-primary"></i>
                             </div>
-                            <div class="col-md-11 margin-vert-30">
+                        </div>
+
+                        <div>
+
+                            <div class="col-md-10 margin-vert-30">
                                 <h3><a th:href="@{'/relations/' + ${relation.id} + '/note'}">Оставить коммент</a></h3>
                             </div>
+
+                            <div class="col-md-2 margin-vert-20">
+                                <i class="fa-signal fa-3x color-primary"></i>
+                            </div>
+                        </div>
                         </div>
 
                     </div>
@@ -153,13 +189,13 @@
 
 <div th:replace="fragments/footer :: footer"></div>
 <script th:src="@{/js/jquery/jquery.min.js}"/>
-<script th:src="@{/js//bootstrap/bootstrap.min.js}"/>
-<script th:src="@{/js//thirdparty/scripts.js}"/>
+<script th:src="@{/js/bootstrap/bootstrap.min.js}"/>
+<script th:src="@{/js/thirdparty/scripts.js}"/>
 <script th:src="@{/js/jquery/jquery.isotope.js}"/>
 <script th:src="@{/js/jquery/jquery.slicknav.js}"/>
 <script th:src="@{/js/jquery/jquery.visible.js}"/>
 <script th:src="@{/js/jquery/jquery.sticky.js}"/>
-<script th:src="@{/js//thirdparty/slimbox2.js}"/>
-<script th:src="@{/js//thirdparty/modernizr.custom.js}"/>
+<script th:src="@{/js/thirdparty/slimbox2.js}"/>
+<script th:src="@{/js/thirdparty/modernizr.custom.js}"/>
 </body>
 </html>

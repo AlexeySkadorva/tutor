@@ -29,7 +29,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <form th:object="${history}"
-                                      th:action="@{'relations/history'}" method="POST">
+                                      th:action="@{'/relations/history'}" method="POST">
                                     <div th:replace="fragments/history/update :: update"></div>
                                 </form>
                             </div>
@@ -44,14 +44,14 @@
     <div th:replace="fragments/footer :: footer"></div>
 </div>
 <script th:src="@{/js/jquery/jquery.min.js}"/>
-<script th:src="@{/js//bootstrap/bootstrap.min.js}"/>
-<script th:src="@{/js//thirdparty/scripts.js}"/>
+<script th:src="@{/js/bootstrap/bootstrap.min.js}"/>
+<script th:src="@{/js/thirdparty/scripts.js}"/>
 <script th:src="@{/js/jquery/jquery.isotope.js}"/>
 <script th:src="@{/js/jquery/jquery.slicknav.js}"/>
 <script th:src="@{/js/jquery/jquery.visible.js}"/>
 <script th:src="@{/js/jquery/jquery.sticky.js}"/>
-<script th:src="@{/js//thirdparty/slimbox2.js}"/>
-<script th:src="@{/js//thirdparty/modernizr.custom.js}"/>
+<script th:src="@{/js/thirdparty/slimbox2.js}"/>
+<script th:src="@{/js/thirdparty/modernizr.custom.js}"/>
 
 </body>
 </html>

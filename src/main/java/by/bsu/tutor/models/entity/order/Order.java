@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,15 +29,12 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "status_id")
     private OrderStatus orderStatus;
 
-    @OneToOne
-    @JoinColumn(name = "lesson_type_id")
-    private LessonType lessonType;
+    @OneToMany
+    @JoinColumn(name = "order_id")
+    private List<OrderLesson> orderLessons;
 
     @Column(name = "message")
     private String message;
-
-    @Column(name = "pereodicity")
-    private String pereodicity;
 
     @Column(name = "created_date")
     private Date createdDate;

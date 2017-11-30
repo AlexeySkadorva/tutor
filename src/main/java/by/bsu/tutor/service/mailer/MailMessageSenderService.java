@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import javax.validation.constraints.NotNull;
 import java.util.Properties;
 
-@Service
+
 public abstract class MailMessageSenderService<T> {
 
     private final static String MAIL_CHARSET = "charset=UTF-8";
@@ -29,12 +29,12 @@ public abstract class MailMessageSenderService<T> {
 
     @Async
     public void send(@NotNull T contact) {
-        Session mailSession = getMailSession();
-
-        MailMessageDto mailDto = buildMailDto(contact);
-        MimeMessage mailMessage = getGenerateMailMessage(mailSession, mailDto);
-
-        sendMailMessage(mailSession, mailMessage);
+//        Session mailSession = getMailSession();
+//
+//        MailMessageDto mailDto = buildMailDto(contact);
+//        MimeMessage mailMessage = getGenerateMailMessage(mailSession, mailDto);
+//
+//        sendMailMessage(mailSession, mailMessage);
     }
 
 

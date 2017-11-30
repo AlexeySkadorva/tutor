@@ -4,10 +4,12 @@ import by.bsu.tutor.models.dto.MailMessageDto;
 import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.properties.GmailProperties;
 import by.bsu.tutor.service.mailer.MailMessageSenderService;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Alexey Skadorva
  */
+@Service
 public class UserMailMessageSender extends MailMessageSenderService<User> {
 
     private static final String MESSAGE_SUBJECT = "Добро пожаловать в нашу семью";
