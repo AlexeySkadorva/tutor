@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tutors")
@@ -26,9 +26,6 @@ public class Tutor extends BaseEntity {
 
     @Column(name = "first_experience")
     private Integer firstExperience;
-
-    @Column(name = "price")
-    private Integer price;
 
     @Column(name = "vk_link")
     private String vkLink;
@@ -54,6 +51,10 @@ public class Tutor extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "subject_id")})
     private List<Subject> subjects;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tutor_id")
+    private List<TutorSubject> tutorSubjects;
+
     @OneToMany
     @JoinTable(name = "tutors_lesson_types", joinColumns = {@JoinColumn(name = "tutor_id")},
             inverseJoinColumns = {@JoinColumn(name = "lesson_type_id")})
@@ -75,6 +76,11 @@ public class Tutor extends BaseEntity {
         if (null != this.firstExperience) {
             this.experienceInYear = currentDate.getYear() - this.firstExperience;
         }
+    }
+
+    public Tutor() {
+        tutorSubjects = new ArrayList<>(1);
+        tutorSubjects.add(new TutorSubject());
     }
 
 }

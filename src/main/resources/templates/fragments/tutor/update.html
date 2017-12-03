@@ -28,28 +28,35 @@
                    data-bind="value: firstExperience"
                    th:field="*{firstExperience}"/>
         </div>
-        <div class="row">
-            <label>Средняя цена за занятие
-                <span class="color-red">*</span>
-                <p> Некоторые репетиторы берут разные суммы за
-                    занятия в зависимости от продолжительности.
-                    Вычислите среднее арифметическое стоимости за занятие
-                </p>
-            </label>
-            <input class="form-control margin-bottom-20" type="text" data-bind="value: price"
-                   th:field="*{price}"/>
+        <div class="grafts" >
+            <div class="graft" th:each="r,status : *{tutorSubjects}">
+                <div class="select-input required" th:classappend="${#fields.hasErrors('tutorSubjects[__${status.index}__].subject')}? error-validation">
+                    <label th:for="'subject' + ${status.index}">Предметы</label>
+                    <select th:id="'subject' + ${status.index}" th:name="'tutorSubjects[' + ${status.index} + '].subject'" data-id-template="subjectSelect" data-name-template="tutorSubjects[{x}].subject">
+                        <option value=""></option>
+                        <option th:each="t : ${subjects}" th:value="${t.id}" th:text="${t.name}" th:selected="${t.id == r.subject?.id}" />
+                    </select>
+                    <p class="error-tip" th:if="${#fields.hasErrors('tutorSubjects[__${status.index}__].subject')}" th:errors="*{tutorSubjects[__${status.index}__].subject}"></p>
+                </div>
+
+                <div class="ch-input">
+                    <div th:each="duration,rowD : ${durations}">
+                    <input class="form-control margin-bottom-20" type="text"
+                           th:id="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
+                           th:name="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
+                           data-id-template="retransplantationCheckbox" data-name-template="tutorSubjects[{x}].tutorSubjectDurations[__${rowD.index}__].price" /> <label
+                        th:for="'retransplantationCheckbox' + ${status.index}"><i
+                        class="ic ic-checkbox"></i><span>Ретрансплантация</span></label>
+                    </div>
+                </div>
+                <div class="graft-actions">
+                    <button type="button" class="add button-1">+ Добавить</button>
+                    <button type="button" th:if="${status.index gt 0}" class="graft-delete button-2">Удалить</button>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <label>Предметы
-                <span class="color-red">*</span>
-            </label>
-            <select class="form-control margin-bottom-20 selectpicker" multiple="multiple" th:field="*{subjects}"
-                    title="Выберите предметы" data-selected-text-format="count > 3">
-                <option th:each="sub,row : ${subjects}"
-                        th:value="${sub.id}"
-                        th:text="${sub.name}"></option>
-            </select>
         </div>
+
         <div class="row margin-top-20">
             <label>Вид занятий
                 <span class="color-red">*</span>
@@ -58,6 +65,30 @@
             <div th:each="lessonType : ${lessonTypes}">
                 <input type="checkbox" th:field="*{lessonTypes}" th:value="${lessonType.id}"/>
                 <label th:text="${lessonType.name}"></label>
+            </div>
+        </div>
+
+    <div class="templates" style="display: none;">
+        <div class="graft">
+            <div class="select-input required" >
+                <label>Трансплантат</label>
+                <select data-id-template="subjectSelect" data-name-template="tutorSubjects[{x}].subject">
+                    <option value=""></option>
+                    <option th:each="t : ${subjects}" th:value="${t.id}" th:text="${t.name}" />
+                </select>
+            </div>
+
+            <div class="ch-input">
+                <div th:each="duration,row : ${durations}">
+                    <input class="form-control margin-bottom-20" type="text"
+                           data-id-template="retransplantationCheckbox" data-name-template="tutorSubjects[{x}].tutorSubjectDurations[__${row.index}__].price" />
+                    <i class="ic ic-checkbox"></i><span>Ретрансплантация</span>
+                </div>
+            </div>
+
+            <div class="graft-actions">
+                <button type="button" class="add button-1">+ Добавить</button>
+                <button type="button" class="graft-delete button-2">Удалить</button>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ import by.bsu.tutor.models.entity.tutor.Subject;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.enums.Gender;
+import by.bsu.tutor.repositories.LessonDurationRepository;
 import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.RoleRepository;
 import by.bsu.tutor.repositories.SubjectRepository;
@@ -29,6 +30,7 @@ public class TutorController {
     @Autowired private RoleRepository roleRepository;
     @Autowired private SubjectRepository subjectRepository;
     @Autowired private LessonTypeRepository lessonTypeRepository;
+    @Autowired private LessonDurationRepository lessonDurationRepository;
 
     @GetMapping(value = "/new")
     public Object getNewUser(Model model) {
@@ -37,6 +39,7 @@ public class TutorController {
         model.addAttribute("tutor", new Tutor());
         model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("genders", Gender.values());
+        model.addAttribute("durations", lessonDurationRepository.findAll());
         return "tutor/new";
     }
 

@@ -7,6 +7,7 @@ import by.bsu.tutor.models.entity.order.OrderStatus;
 import by.bsu.tutor.models.entity.relation.ClientTutorLesson;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.tutor.Tutor;
+import by.bsu.tutor.models.entity.tutor.TutorSubject;
 import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.OrderStatusRepository;
 import by.bsu.tutor.service.user.UserService;
@@ -23,6 +24,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class OrderController {
@@ -48,10 +52,20 @@ public class OrderController {
             return "redirect:/clients/new";
         }
         Tutor tutor = tutorService.get(id);
+        Tutor smallTutor = new Tutor();
+        smallTutor.setId(id);
+        List<OrderDto> orderDtos = new ArrayList<>();
+        for(TutorSubject tutorSubject : tutor.getTutorSubjects()) {
+            orderDtos.add(new OrderDto(tutorSubject.getSubject(), tutorSubject.getTutorSubjectDurations()));
+        }
         Client client = clientService.getByUser(userService.findByEmail(user.getUsername()));
-        Order order = new Order(tutor, client, orderStatusRepository.findByCode(OrderStatus.Code.NEW));
+        Client smallClient = new Client();
+        smallClient.setId(client.getId());
+        Order order = new Order(smallTutor, smallClient, orderStatusRepository.findByCode(OrderStatus.Code.NEW));
 
         model.addAttribute("order", order);
+        model.addAttribute("orderDtos", orderDtos);
+
         model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
         return "/order/new";
     }

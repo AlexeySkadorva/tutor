@@ -1,11 +1,13 @@
 package by.bsu.tutor.service.tutor.impl;
 
 import by.bsu.tutor.models.dto.SearchForm;
-import by.bsu.tutor.models.entity.tutor.Subject;
-import by.bsu.tutor.models.entity.tutor.Tutor;
-import by.bsu.tutor.models.entity.tutor.TutorInvoice;
+import by.bsu.tutor.models.entity.LessonDuration;
+import by.bsu.tutor.models.entity.tutor.*;
 import by.bsu.tutor.models.entity.user.User;
+import by.bsu.tutor.repositories.LessonDurationRepository;
 import by.bsu.tutor.repositories.TutorRepository;
+import by.bsu.tutor.repositories.TutorSubjectDurationRepository;
+import by.bsu.tutor.repositories.TutorSubjectRepository;
 import by.bsu.tutor.service.user.UserService;
 import by.bsu.tutor.service.base.impl.DefaultCrudService;
 import by.bsu.tutor.service.relation.TutorInvoiceService;
@@ -25,22 +27,46 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
     private final TutorRepository tutorRepository;
     private final UserService userService;
     private final TutorInvoiceService tutorInvoiceService;
+    private final TutorSubjectRepository tutorSubjectRepository;
+    private final TutorSubjectDurationRepository tutorSubjectDurationRepository;
+    private final LessonDurationRepository lessonDurationRepository;
 
 
     public DefaultTutorService(@NotNull TutorRepository repository, TutorRepository tutorRepository,
-                               UserService userService, TutorInvoiceService tutorInvoiceService) {
+                               UserService userService, TutorInvoiceService tutorInvoiceService,
+                               TutorSubjectRepository tutorSubjectRepository, TutorSubjectDurationRepository tutorSubjectDurationRepository, LessonDurationRepository lessonDurationRepository) {
         super(repository);
         this.tutorRepository = tutorRepository;
         this.userService = userService;
         this.tutorInvoiceService = tutorInvoiceService;
+        this.tutorSubjectRepository = tutorSubjectRepository;
+        this.tutorSubjectDurationRepository = tutorSubjectDurationRepository;
+        this.lessonDurationRepository = lessonDurationRepository;
     }
 
     @Override
     @NotNull
     public Tutor save(@NotNull Tutor tutor) {
+        List<TutorSubject> tutorSubjects = tutor.getTutorSubjects();
+
         User user = userService.save(tutor.getUser());
         tutor.setUser(user);
+        tutor.setTutorSubjects(null);
         Tutor savesTutor = super.save(tutor);
+
+        List<LessonDuration> lessonDurations = lessonDurationRepository.findAll();
+        for(TutorSubject tutorSubject : tutorSubjects) {
+            tutorSubject.setTutor(savesTutor);
+            List<TutorSubjectDuration> tutorSubjectDurations = tutorSubject.getTutorSubjectDurations();
+            tutorSubject.setTutorSubjectDurations(null);
+            TutorSubject savedTutorSubject = tutorSubjectRepository.save(tutorSubject);
+            for(int i = 0; i < lessonDurations.size(); i++) {
+                TutorSubjectDuration tutorSubjectDuration = tutorSubjectDurations.get(i);
+                tutorSubjectDuration.setTutorSubject(savedTutorSubject);
+                tutorSubjectDuration.setDuration(lessonDurations.get(i));
+                tutorSubjectDurationRepository.save(tutorSubjectDuration);
+            }
+        }
 
         tutorInvoiceService.save(new TutorInvoice(savesTutor));
 

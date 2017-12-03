@@ -51,7 +51,7 @@ public class DefaultTutorInvoiceService extends DefaultCrudService<TutorInvoice,
             int countOfLessons = (int) historyLessonService.getByRelationId(relation.getId()).stream()
                     .filter(lesson -> !lesson.getIsPaid())
                     .count();
-            sum += (relation.getTutor().getPrice() * countOfLessons * tutorInvoice.getRate()) / 100;
+            //sum += (relation.getTutor().getPrice() * countOfLessons * tutorInvoice.getRate()) / 100;
         }
         tutorInvoice.setAmount(sum - tutorInvoice.getPaid());
         return super.save(tutorInvoice);

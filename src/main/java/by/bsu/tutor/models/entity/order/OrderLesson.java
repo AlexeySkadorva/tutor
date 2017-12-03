@@ -42,4 +42,9 @@ public class OrderLesson extends BaseEntity {
         this.lessonType = lessonType;
         this.pereodicity = pereodicity;
     }
+
+    public OrderLesson(Subject subject, LessonDuration duration) {
+        this.subject = subject;
+        this.duration = duration;
+    }
 }

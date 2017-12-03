@@ -4,6 +4,7 @@ import by.bsu.tutor.models.entity.base.BaseEnum;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 
@@ -14,6 +15,9 @@ public class LessonDuration extends BaseEnum {
     @Enumerated(EnumType.STRING)
     @Column(name = "code", nullable = false)
     private Code code;
+
+    @Column(name = "duration")
+    private String duration;
 
     public enum Code {
         ACADEMIC_HOUR,

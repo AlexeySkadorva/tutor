@@ -18,7 +18,6 @@ var User = function (tutor) {
     self.vkLink = ko.observable(tutor.vkLink);
     self.skypeLink = ko.observable(tutor.skypeLink);
     self.telegram = ko.observable(tutor.telegram);
-    self.price = ko.observable(tutor.price).extend({required: true});
     self.comment = ko.observable(tutor.comment);
     self.status = ko.observable(tutor.status);
 };
@@ -32,3 +31,40 @@ User.prototype.save = function () {
         self.errors.showAllMessages();
     }
 };
+
+$(function() {
+
+    var updateGraft = function(i, graft, empty) {
+        graft.find(".select-input, .ch-input").each(function(j, e) {
+            var $e = $(e),
+                $input = $e.find("input, select"),
+                $label = $e.find("label"),
+                idTemplate = $input.attr("data-id-template"),
+                nameTemplate = $input.attr("data-name-template");
+            $label.attr("for", idTemplate + i);
+            $input.attr("id", idTemplate + i);
+            $input.attr("name", nameTemplate.replace("{x}", i));
+            if (empty) {
+                $input.val("");
+            }
+        });
+        graft.find("select").selectric();
+        return graft;
+    };
+
+    $(".grafts").on("click", ".graft button.add", function(e) {
+        e.preventDefault();
+        var graftCount = $(".grafts .graft").length,
+            template = $(".templates .graft").clone(true, true);
+        $(".grafts").append(updateGraft(graftCount, template, false));
+    });
+
+    $(".grafts").on("click", ".graft button.graft-delete", function(event) {
+        event.preventDefault();
+        $(this).closest(".graft").remove();
+        $(".grafts .graft").each(function (i, e) {
+            updateGraft(i, $(e), false);
+        });
+    });
+
+});
