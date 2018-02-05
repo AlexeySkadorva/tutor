@@ -28,36 +28,43 @@
                    data-bind="value: firstExperience"
                    th:field="*{firstExperience}"/>
         </div>
-        <div class="grafts" >
+        <div class="grafts">
             <div class="graft" th:each="r,status : *{tutorSubjects}">
-                <div class="select-input required" th:classappend="${#fields.hasErrors('tutorSubjects[__${status.index}__].subject')}? error-validation">
-                    <label th:for="'subject' + ${status.index}">Предметы</label>
-                    <select th:id="'subject' + ${status.index}" th:name="'tutorSubjects[' + ${status.index} + '].subject'" data-id-template="subjectSelect" data-name-template="tutorSubjects[{x}].subject">
+                <div class="select-input required"
+                     th:classappend="${#fields.hasErrors('tutorSubjects[__${status.index}__].subject')}? error-validation">
+                    <label>Предметы</label>
+                    <select th:id="'subject' + ${status.index}"
+                            th:name="'tutorSubjects[' + ${status.index} + '].subject'" data-id-template="subjectSelect"
+                            data-name-template="tutorSubjects[{x}].subject">
                         <option value=""></option>
-                        <option th:each="t : ${subjects}" th:value="${t.id}" th:text="${t.name}" th:selected="${t.id == r.subject?.id}" />
+                        <option th:each="t : ${subjects}" th:value="${t.id}" th:text="${t.name}"
+                                th:selected="${t.id == r.subject?.id}"/>
                     </select>
-                    <p class="error-tip" th:if="${#fields.hasErrors('tutorSubjects[__${status.index}__].subject')}" th:errors="*{tutorSubjects[__${status.index}__].subject}"></p>
+                    <p class="error-tip" th:if="${#fields.hasErrors('tutorSubjects[__${status.index}__].subject')}"
+                       th:errors="*{tutorSubjects[__${status.index}__].subject}"></p>
                 </div>
 
                 <div class="ch-input">
+                    <span>Укажите предметы по которым вы будете заниматься и цену за занятия в зависимости от
+                     продолжительности</span>
                     <div th:each="duration,rowD : ${durations}">
-                    <input class="form-control margin-bottom-20" type="text"
-                           th:id="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
-                           th:name="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
-                           data-id-template="retransplantationCheckbox" data-name-template="tutorSubjects[{x}].tutorSubjectDurations[__${rowD.index}__].price" /> <label
-                        th:for="'retransplantationCheckbox' + ${status.index}"><i
-                        class="ic ic-checkbox"></i><span>Ретрансплантация</span></label>
+                        <div class="col-md-6"><span th:text="${duration.name} + ' ' + ${duration.duration}"></span>
+                        </div>
+                        <div class="col-md-6"><input class="form-control margin-bottom-20" type="text"
+                                                     th:id="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
+                                                     th:name="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
+                                                     data-id-template="retransplantationCheckbox"
+                                                     th:data-name-template="'tutorSubjects[{x}].tutorSubjectDurations[' + ${rowD.index} + '].price'"/>
+                        </div>
                     </div>
                 </div>
                 <div class="graft-actions">
-                    <button type="button" class="add button-1">+ Добавить</button>
-                    <button type="button" th:if="${status.index gt 0}" class="graft-delete button-2">Удалить</button>
+                    <button type="button" class="add button-1">+ Добавить предмет</button>
+                    <button type="button" th:if="${status.index gt 0}" class="graft-delete button-2">Удалить предмет</button>
                 </div>
             </div>
         </div>
-        </div>
-
-        <div class="row margin-top-20">
+        <div class="row">
             <label>Вид занятий
                 <span class="color-red">*</span>
                 <p>Выберите виды занятий которые Вы практикуете</p>
@@ -67,28 +74,55 @@
                 <label th:text="${lessonType.name}"></label>
             </div>
         </div>
+    </div>
 
     <div class="templates" style="display: none;">
         <div class="graft">
-            <div class="select-input required" >
-                <label>Трансплантат</label>
+            <div class="select-input required">
                 <select data-id-template="subjectSelect" data-name-template="tutorSubjects[{x}].subject">
                     <option value=""></option>
-                    <option th:each="t : ${subjects}" th:value="${t.id}" th:text="${t.name}" />
+                    <option th:each="t : ${subjects}" th:value="${t.id}" th:text="${t.name}"/>
                 </select>
             </div>
 
             <div class="ch-input">
-                <div th:each="duration,row : ${durations}">
-                    <input class="form-control margin-bottom-20" type="text"
-                           data-id-template="retransplantationCheckbox" data-name-template="tutorSubjects[{x}].tutorSubjectDurations[__${row.index}__].price" />
-                    <i class="ic ic-checkbox"></i><span>Ретрансплантация</span>
+                <div class="col-md-6">
+                    <span>Академический час 00:45:00</span>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control margin-bottom-20 ff" type="text"
+                           data-id-template="retransplantationCheckbox"
+                           data-name-template="tutorSubjects[{x}].tutorSubjectDurations[0].price"/>
+                </div>
+                <div class="col-md-6">
+                    <span>Полный час 01:00:00</span>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control margin-bottom-20 ff" type="text"
+                           data-id-template="retransplantationCheckbox"
+                           data-name-template="tutorSubjects[{x}].tutorSubjectDurations[1].price"/>
+                </div>
+                <div class="col-md-6">
+                    <span>Два академических часа 01:30:00</span>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control margin-bottom-20 ff" type="text"
+                           data-id-template="retransplantationCheckbox"
+                           data-name-template="tutorSubjects[{x}].tutorSubjectDurations[2].price"/>
+                </div>
+                <div class="col-md-6">
+                    <span>Два полных часа 02:00:00</span>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control margin-bottom-20 ff" type="text"
+                           data-id-template="retransplantationCheckbox"
+                           data-name-template="tutorSubjects[{x}].tutorSubjectDurations[3].price"/>
                 </div>
             </div>
 
             <div class="graft-actions">
-                <button type="button" class="add button-1">+ Добавить</button>
-                <button type="button" class="graft-delete button-2">Удалить</button>
+                <button type="button" class="add button-1">+ Добавить предмет</button>
+                <button type="button" class="graft-delete button-2">Удалить предмет</button>
             </div>
         </div>
     </div>

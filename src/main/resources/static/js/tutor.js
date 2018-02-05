@@ -43,12 +43,29 @@ $(function() {
                 nameTemplate = $input.attr("data-name-template");
             $label.attr("for", idTemplate + i);
             $input.attr("id", idTemplate + i);
-            $input.attr("name", nameTemplate.replace("{x}", i));
+            if(idTemplate.indexOf("retransplantationCheckbox")!=-1) {
+
+
+
+                 for (var j = 0; j < $input.length; j++) {
+                     nameTemplate = $input[j].getAttribute("data-name-template");
+                     $input[j].setAttribute("name", nameTemplate.replace("{x}", i));
+                 }
+
+
+
+            }else {
+
+                $input.attr("name", nameTemplate.replace("{x}", i));
+
+
+
+            }
             if (empty) {
                 $input.val("");
             }
         });
-        graft.find("select").selectric();
+        //graft.find("select").selectric();
         return graft;
     };
 

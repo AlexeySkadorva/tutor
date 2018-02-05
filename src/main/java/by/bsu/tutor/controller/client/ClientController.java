@@ -5,6 +5,7 @@ import by.bsu.tutor.models.entity.administration.HistoryLesson;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.user.Role;
+import by.bsu.tutor.models.entity.user.User;
 import by.bsu.tutor.models.enums.Gender;
 import by.bsu.tutor.repositories.ClientParentRepository;
 import by.bsu.tutor.repositories.RoleRepository;
@@ -50,14 +51,14 @@ public class ClientController {
     }
 
     @PostMapping(value = "/{id}")
-    public String saveClient(@PathVariable Long id, @ModelAttribute(value = "client") Client client, Model model) {
+    public String saveClient(@PathVariable Long id, @ModelAttribute(value = "client") Client client, Model model) throws LogicException {
         client.setId(id);
         clientService.save(client);
         return "redirect:/account";
     }
 
     @PostMapping
-    public String saveClient(@ModelAttribute(value = "client") Client client, Model model) {
+    public String saveClient(@ModelAttribute(value = "client") Client client, Model model) throws LogicException {
         client.getUser().setRole(roleRepository.findByCode(Role.Code.CLIENT));
 
         clientService.save(client);

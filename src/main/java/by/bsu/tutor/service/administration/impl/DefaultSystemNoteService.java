@@ -1,5 +1,6 @@
 package by.bsu.tutor.service.administration.impl;
 
+import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.note.SystemNote;
 import by.bsu.tutor.repositories.SystemNoteRepository;
 import by.bsu.tutor.service.administration.SystemNoteService;
@@ -24,7 +25,7 @@ public class DefaultSystemNoteService extends DefaultCrudService<SystemNote, Sys
 
     @Override
     @NotNull
-    public SystemNote saveNoteForClient(@NotNull SystemNote note) {
+    public SystemNote saveNoteForClient(@NotNull SystemNote note) throws LogicException {
         note.setCreatedDate(new Date());
         return save(note);
     }

@@ -71,20 +71,16 @@
 <script th:src="@{/js/jquery/jquery.inputmask.bundle.min.js}"/>
 <script th:src="@{/js/knockout/knockout.js}"/>
 <script th:src="@{/js/knockout/knockout.inputmask.js}"/>
-<script th:src="@{/js/knockout/validation/knockout-validation-min.js}"/>
+<script th:src="@{/js/knockout/knockout-validation-min.js}"/>
 <script th:src="@{/js/thirdparty/datepicker-ru.js}"/>
 <script th:src="@{/js/client.js}"/>
-<script th:src="@{/js/knockout.validation.rules.js}"/>
+<script th:src="@{/js/knockout/validation/knockout.validation.rules.js}"/>
 <script th:src="@{/js/knockout/knockout.datepicker.js}"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
 <script th:inline="javascript">
     $(function () {
         ko.applyBindings(new User([[${client}]]));
-    });
-
-    $('input[type="checkbox"]').on('change', function () {
-        $('input[type="checkbox"]').not(this).prop('checked', false);
     });
 </script>
 </body>

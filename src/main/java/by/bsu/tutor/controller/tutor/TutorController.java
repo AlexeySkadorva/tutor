@@ -62,7 +62,7 @@ public class TutorController {
     }
 
     @PostMapping
-    public String saveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) {
+    public String saveTutor(@ModelAttribute(value = "tutor") Tutor tutor, Model model) throws LogicException {
         tutor.getUser().setRole(roleRepository.findByCode(Role.Code.TUTOR));
 
         tutorService.save(tutor);
@@ -71,7 +71,7 @@ public class TutorController {
     }
 
     @PostMapping(value = "/{id}/note")
-    public String saveNote(@ModelAttribute(value = "tutor") TutorNote tutorNote, Model model) {
+    public String saveNote(@ModelAttribute(value = "tutor") TutorNote tutorNote, Model model) throws LogicException {
         tutorNoteService.save(tutorNote);
         return "main";
     }

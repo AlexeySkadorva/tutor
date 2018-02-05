@@ -6,6 +6,11 @@ var User = function (client) {
         passwordValidation: [self.password],
         passwordPattern: true
     });
+    if(client.user.password != null){
+        self.password("dummy123");
+        self.repeatpassword("dummy123");
+    }
+
     self.birthDate = ko.observable(client.user.birthDate).extend({required: true, pastDate: true});
     self.address = ko.observable(client.user.address).extend({required: true});
     self.phoneNumber = ko.observable(client.user.phoneNumber).extend({required: true});
@@ -16,19 +21,39 @@ var User = function (client) {
     self.grade = ko.observable(client.grade);
 
     self.course = ko.observable(client.course);
-    self.clientType = ko.observable(0).extend({required: true});
+    if(client.clientType!=null) {
+        self.clientType = ko.observable(client.clientType.id);
+    } else {
+        self.clientType = ko.observable(0);
+
+    }
 
     self.isGradeDisabled = ko.observable(true);
     self.isCourseDisabled = ko.observable(true);
 
-    self.parentSecondName = ko.observable(client.clientParent.secondName);
-    self.paretnFirstName = ko.observable(client.clientParent.firstName);
-    self.parentLastName = ko.observable(client.clientParent.lastName);
-    self.parentPhoneNumber = ko.observable(client.clientParent.phoneNumber);
+    self.parentSecondName = ko.observable();
+    self.parentFirstName = ko.observable();
+    self.parentLastName = ko.observable();
+    self.parentPhoneNumber = ko.observable();
+    if (client.clientParent.firstName != null) {
+        self.parentSecondName = ko.observable(client.clientParent.secondName);
+        self.parentFirstName = ko.observable(client.clientParent.firstName);
+        self.parentLastName = ko.observable(client.clientParent.lastName);
+        self.parentPhoneNumber = ko.observable(client.clientParent.phoneNumber);
+    }
 
-
-    if (client.clientType != null && (client.clientType.id == 1 || client.clientType.id == 2)) {
-        $("#parent-info").show();
+    if (client.clientType != null) {
+        if(client.clientType.id == 1 || client.clientType.id == 2){
+            $("#parent-info").show();
+        }
+        if (client.clientType.id == 2 || client.clientType.id == 3) {
+            self.isGradeDisabled(false);
+            self.isCourseDisabled(false);
+        }
+        if (client.clientType.id == 1 || client.clientType.id == 4) {
+            self.isCourseDisabled(true);
+            self.isGradeDisabled(true);
+        }
     }
 
 };
@@ -44,23 +69,35 @@ User.prototype.save = function () {
 };
 
 User.prototype.changeClientType = function (clientType) {
+
     if (clientType == 1 || clientType == 2) {
         $("#parent-info").show();
     } else {
         $("#parent-info").hide();
     }
     var self = this;
-    if (clientType == 2) {
+    if (clientType == 2 || clientType == 3) {
         self.isGradeDisabled(false);
-        self.isCourseDisabled(true);
-    }
-    if (clientType == 3) {
         self.isCourseDisabled(false);
-        self.isGradeDisabled(true);
     }
     if (clientType == 1 || clientType == 4) {
         self.isCourseDisabled(true);
         self.isGradeDisabled(true);
+    }
+    if (clientType == 4 && this.clientType() != null) {
+        if (this.clientType() == 1 || this.clientType() == 2) {
+
+            $("#parent-info").show();
+        }
+        if (this.clientType() == 3 || this.clientType() == 2) {
+            self.isCourseDisabled(false);
+            self.isGradeDisabled(false);
+        }
+        if (this.clientType() == 1 || this.clientType() == 4) {
+            self.isCourseDisabled(true);
+            self.isGradeDisabled(true);
+        }
+        this.clientType(null);
     }
     self.grade(null);
     self.course(null);

@@ -96,6 +96,19 @@
                                 <span type="span" class="label label-primary" th:each="l : *{lessonTypes}"
                                       th:text="${l.name}"></span>
                             </div>
+
+                            <div>
+                                <b>Цена:</b>
+                                <div th:each="t : *{tutorSubjects}">
+                                    <div th:text="${t.subject.name}"></div>
+                                    <div th:each="duration : ${t.tutorSubjectDurations}">
+                                        <span th:text="${duration.duration.name}"></span>
+                                        <span th:text="${duration.duration.duration}"></span>
+                                        <span th:text="${duration.price}"></span>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div th:if="!*{#strings.isEmpty(status)}">

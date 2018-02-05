@@ -73,11 +73,11 @@
                             <div th:if="${clientParent != null}">
 
                                 <h3 class="padding-top-10 pull-left">
-                                    Родитель: <p th:text="*{user.getFullName()}"></p>
+                                    Родитель: <p th:text="${clientParent.getFullName()}"></p>
                                 </h3>
                                 <div class="clearfix"></div>
                                 <div>
-                                    <b>Номер телефона:</b> <span th:text="*{user.phoneNumber}"></span>
+                                    <b>Номер телефона:</b> <span th:text="${clientParent.phoneNumber}"></span>
                                 </div>
                             </div>
                         </div>
@@ -92,10 +92,21 @@
                 <div class="col-md-12">
                     <div th:each="relation : ${relations}" class="row">
                         <hr/>
-                        <div class="col-md-11 margin-vert-30">
+
+                        <div class="col-md-12 margin-vert-30">
+                            <div class="col-md-6">
                             <h3>
                                 <p th:text="'Проведено занятий ' + ${#lists.size(relation.historyLessons)}"></p>
                             </h3>
+                            </div>
+                                <div class="col-md-6">
+                            <div th:each="lesson : ${relation.clientTutorLessons}">
+                                <span class="label label-primary"  th:text="${lesson.subject.name}"></span>
+                                <span class="label label-primary" th:text="${lesson.duration.duration}"></span>
+                                <span class="label label-primary" th:text="${lesson.periodicity} + ' раза в месяц'"></span>
+                                <span class="label label-primary" th:text="${lesson.lessonType.name}"></span>
+                            </div>
+                                </div>
                         </div>
                         <div class="col-md-6">
 
@@ -183,6 +194,41 @@
             </div>
         </div>
     </div>
+
+    <div id='root'>
+        <header>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid hui">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Mini Chat</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-center">
+                            <li>
+                                <a href="#">
+                                    <div id="current"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container-fluid main-content">
+            <div id='online' class="container col-lg-2 col-md-3 col-sm-4"></div>
+            <div id='messages' class="container message-block col-lg-9 col-md-8 col-sm-7"></div>
+        </div>
+
+        <footer>
+            <div id="message-form"></div>
+        </footer>
+    </div>
+
 </div>
 
 <div th:replace="fragments/footer :: contacts"></div>
@@ -197,5 +243,16 @@
 <script th:src="@{/js/jquery/jquery.sticky.js}"/>
 <script th:src="@{/js/thirdparty/slimbox2.js}"/>
 <script th:src="@{/js/thirdparty/modernizr.custom.js}"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://fb.me/react-15.0.1.js"></script>
+<script src="https://fb.me/react-dom-15.0.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+<script type="text/babel" th:src="@{/js/users.jsx}"></script>
+<script type="text/babel" th:src="@{/js/current.jsx}"></script>
+<script type="text/babel" th:src="@{/js/messages.jsx}"></script>
+<script type="text/babel" th:src="@{/js/message-form.jsx}"></script>
 </body>
 </html>

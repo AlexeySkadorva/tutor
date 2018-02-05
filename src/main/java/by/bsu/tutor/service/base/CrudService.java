@@ -26,7 +26,7 @@ public interface CrudService<T extends BaseEntity> {
     T get(@NotNull Long id) throws LogicException;
 
     @NotNull
-    T save(@NotNull T entity);
+    T save(@NotNull T entity) throws LogicException;
 
     @NotNull
     List<T> save(@NotNull Collection<T> entities) throws LogicException;

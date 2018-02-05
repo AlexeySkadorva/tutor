@@ -25,14 +25,30 @@
         <div class="container background-white">
             <div class="row margin-vert-30">
                 <h2>Заказ</h2>
-                <p></p>
-                <div class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30"
-                     th:each="order : ${orders}">
-                    <div class="row margin-bottom-20">
-                        <div class="col-md-8 col-md-offset-0">
-                            <textarea disabled="true" rows="8" class="form-control"
-                                      th:text="${order.message}"></textarea>
-                        </div>
+                <div th:each="order : ${orders}">
+                <div class="col-md-12 margin-bottom-10 animate fadeInRight">
+                    <div class="col-md-6">
+                         <textarea disabled="true" rows="8" class="form-control"
+                                   th:text="${order.message}"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                    <div>
+                        <b>ФИО клиента:</b> <span th:text="${order.client.user.getFullName()}"></span>
+                    </div>
+                    <div>
+                        <b>Адресс:</b> <span th:text="${order.client.user.address}"></span>
+                    </div>
+                    <div th:each="orderLesson : ${order.orderLessons}">
+                    <div>
+                       <b>Предмет:</b> <span th:text="${orderLesson.subject.name}"></span>
+                    </div>
+                    <div>
+                        <b>Колиечство занятий в месяц:</b> <span th:text="${orderLesson.periodicity}"></span>
+                    </div>
+                    <div>
+                        <b>Вид занятия:</b> <span th:text="${orderLesson.lessonType.name}"></span>
+                    </div>
+                    </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 text-right">
@@ -41,8 +57,11 @@
                                th:href="@{'/orders/' + ${order.id} + '/approve'}">Согласиться</a>
                         </div>
                     </div>
+                    <hr/>
+
                 </div>
 
+                </div>
             </div>
         </div>
     </div>

@@ -20,7 +20,7 @@ public class TutorSubjectDuration extends BaseEntity {
     @JoinColumn(name = "lesson_duration_id")
     private LessonDuration duration;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "tutor_subject_id")
     private TutorSubject tutorSubject;
 

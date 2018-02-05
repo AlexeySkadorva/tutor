@@ -33,11 +33,16 @@ public class DefaultUserService extends DefaultCrudService<User, UserRepository>
 
     @Override
     @NotNull
-    public User save(@NotNull User user) {
+    public User save(@NotNull User user) throws LogicException {
         if (null == user.getId()) {
             userMailMessageSender.send(user);
+            user.setPassword(passwordEncoder.encodePassword(user.getPassword(), StringUtils.EMPTY));
+        } else {
+            User currentUser = get(user.getId());
+            if(!"dummy123".equals(user.getPassword())) {
+                user.setPassword(passwordEncoder.encodePassword(user.getPassword(), StringUtils.EMPTY));
+            } else {user.setPassword(currentUser.getPassword());}
         }
-        user.setPassword(passwordEncoder.encodePassword(user.getPassword(), StringUtils.EMPTY));
         return super.save(user);
     }
 

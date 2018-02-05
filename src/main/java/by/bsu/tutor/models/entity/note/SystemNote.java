@@ -14,10 +14,6 @@ import javax.persistence.Table;
 @Table(name = "notes")
 public class SystemNote extends Note {
 
-//    @ManyToOne
-//    @JoinColumn(name = "client_id")
-//    private Client client;
-
     @Column(name = "name")
     private String name;
 

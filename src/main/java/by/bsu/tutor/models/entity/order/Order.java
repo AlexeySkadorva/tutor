@@ -3,10 +3,12 @@ package by.bsu.tutor.models.entity.order;
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.tutor.Tutor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class Order extends BaseEntity {
     private Tutor tutor;
 
     @OneToOne
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
 
     @OneToMany

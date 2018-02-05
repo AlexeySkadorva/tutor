@@ -3,6 +3,7 @@ package by.bsu.tutor.controller.order;
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.order.Order;
+import by.bsu.tutor.models.entity.order.OrderLesson;
 import by.bsu.tutor.models.entity.order.OrderStatus;
 import by.bsu.tutor.models.entity.relation.ClientTutorLesson;
 import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
@@ -16,16 +17,15 @@ import by.bsu.tutor.service.relation.ClientTutorRelationService;
 import by.bsu.tutor.service.order.OrderService;
 import by.bsu.tutor.service.tutor.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -40,8 +40,8 @@ public class OrderController {
     @Autowired private ClientTutorRelationService clientTutorRelationService;
 
 
-    @PostMapping(value = "/orders")
-    public String saveOrder(@ModelAttribute Order order) throws LogicException {
+    @PostMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String saveOrder(@RequestBody Order order) throws LogicException {
         orderService.createNewOrder(order);
         return "/order/send";
     }
@@ -63,10 +63,10 @@ public class OrderController {
         smallClient.setId(client.getId());
         Order order = new Order(smallTutor, smallClient, orderStatusRepository.findByCode(OrderStatus.Code.NEW));
 
-        model.addAttribute("order", order);
+        model.addAttribute("orderrr", order);
         model.addAttribute("orderDtos", orderDtos);
+        model.addAttribute("lessonTypes", tutor.getLessonTypes());
 
-        model.addAttribute("lessonTypes", lessonTypeRepository.findAll());
         return "/order/new";
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface OrderService extends CrudService<Order> {
 
-    @NotNull Order createNewOrder(@NotNull Order order);
+    @NotNull Order createNewOrder(@NotNull Order order) throws LogicException;
 
     List<Order> getNewByTutorId(@NotNull Long tutorId);
 

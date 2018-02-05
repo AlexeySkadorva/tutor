@@ -30,10 +30,10 @@ public class Client extends BaseEntity {
     @Column(name = "institution_of_education")
     private String institutionOfEducation;
 
-    @OneToOne
-    @JoinTable(name = "client_tutor_relations", joinColumns = {@JoinColumn(name = "client_id")},
-            inverseJoinColumns = {@JoinColumn(name = "tutor_id")})
-    private Tutor tutor;
+//    @OneToOne
+//    @JoinTable(name = "client_tutor_relations", joinColumns = {@JoinColumn(name = "client_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "tutor_id")})
+//    private Tutor tutor;
 
     public Client() {
         clientParent = new ClientParent();

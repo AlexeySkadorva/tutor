@@ -31,7 +31,7 @@ public class ClientTutorRelation extends BaseEntity {
     private Tutor tutor;
 
     @OneToMany
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "relation_id")
     private List<ClientTutorLesson> clientTutorLessons;
 
     @Column(name = "actual")

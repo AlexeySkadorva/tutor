@@ -26,35 +26,64 @@
         <div class="container background-white">
             <div class="row margin-vert-30">
                 <h2>Заказ</h2>
-                <p>Пожалуйста опишите что Вы хотите от занятий, как часто Вы хотели бы их проводить и в какое время,
-                    какой цели Вы хотите достичь по итогам занятий. Сообщение будет отправлено репетитору и при его
-                    согласии
-                    он с вами свяжется в максимально короткое время.</p>
-                <form th:object="${order}" th:action="@{'/orders'}" method="POST">
 
+                <form data-bind="submit: function(){$root.save();}" method="POST">
+                    <p>Пожалуйста опишите что Вы хотите от занятий, как часто Вы хотели бы их проводить и в какое время,
+                        какой цели Вы хотите достичь по итогам занятий. Сообщение будет отправлено репетитору и при его
+                        согласии
+                        он с вами свяжется в максимально короткое время.</p>
                     <div class="row margin-bottom-20">
                         <div class="col-md-8 col-md-offset-0">
-                            <textarea rows="8" class="form-control" th:field="*{message}"></textarea>
+                            <textarea rows="8" class="form-control" data-bind="value: $root.message"></textarea>
                         </div>
                     </div>
 
-                    <div data-bind="foreach : $root.orderDtos()" class="row margin-bottom-20">
-                        <p data-bind="text : $root.orderDtos()[$index()].subject.name"></p>
-                        <div data-bind="foreach : $root.orderDtos()[$index()].tutorSubjectDurations" class="col-md-8 col-md-offset-0">
-                            <input type="checkbox" data-bind="click: function() { $root.selectDuration($parentContext.$index(), $index())}"/>
-                            <p data-bind="text : $root.orderDtos()[$parentContext.$index()].tutorSubjectDurations[$index()].duration.code.name"></p>
-                            <p data-bind="text : $root.orderDtos()[$parentContext.$index()].tutorSubjectDurations[$index()].price"></p>
-                        </div>
-                        <select id="dialysisSelect" data-bind="event: {change: function(){$root.addPeriodicity($root.orderDtos()[$index()].subject.id, $data.item)}},
-                        options: $root.periodicities, optionsCaption: '&nbsp;', selectize: {'allowEmptyOption': true}">
+                    <p>Пожалуйста выберите продолжительность занятий и место проведения занятий.</p>
+                    <div data-bind="foreach : $root.orderDtos()">
+                         <p data-bind="text : 'Предмет: ' + $root.orderDtos()[$index()].subject.name"></p>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Продолжительность</th>
+                                <th></th>
+                                <th>Цена</th>
+                                <th>Выбор</th>
+                            </tr>
+                            </thead>
+                            <tbody data-bind="foreach : $root.orderDtos()[$index()].tutorSubjectDurations">
+                            <tr>
+                                <td data-bind="text : $root.orderDtos()[$parentContext.$index()].tutorSubjectDurations[$index()].duration.name"></td>
+
+                                <td data-bind="text :  $root.orderDtos()[$parentContext.$index()].tutorSubjectDurations[$index()].duration.duration"></td>
+                                <td data-bind="text : $root.orderDtos()[$parentContext.$index()].tutorSubjectDurations[$index()].price"></td>
+                                <td>
+                                    <input type="checkbox" data-bind="
+                                click: function() { $root.selectDuration($parentContext.$index(), $index())}"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="margin-bottom-20">
+                        <p>Выберите количество занятий в месяц</p>
+                        <select id="dialysisSelect" data-bind="value: $root.orderLessons()[$index()].periodicity,
+                        options: $root.periodicities">
                         </select>
+                        </div>
+                        <div class="margin-bottom-20">
+                        <p>Выберите вид проведения занятий</p>
+                        <select class="" id="dialysisSelect" data-bind="value: $root.orderLessons()[$index()].lessonType,
+                        optionsText: 'name', options: $root.lt">
+                        </select>
+            </div>
                     </div>
+
 
                     <!--<label>Количество занятий в месяц (Если вы хотите заниматься 1 ра в неделю, то 4, если 2, то 8 и-->
                     <!--т.д.)-->
                     <!--<span class="color-red">*</span>-->
                     <!--</label>-->
-                    <!--<input rows="8" class="form-control" th:field="*{pereodicity}"/>-->
+                    <!--<input rows="8" class="form-control" th:field="*{periodicity}"/>-->
 
 
                     <!--<label>Тип занятия-->
@@ -64,13 +93,8 @@
                     <!--<option value=""></option>-->
                     <!--<option th:each="l : ${lessonTypes}" th:value="${l.id}" th:text="${l.name}"/>-->
                     <!--</select>-->
-
-                    <input type="hidden" th:field="*{client}"/>
-                    <input type="hidden" th:field="*{tutor}"/>
-                    <input type="hidden" th:field="*{orderStatus}"/>
-
-                    <div class="row">
-                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    <div>
+                        <button id="save" type="submit" class="btn btn-primary">Отправить</button>
                     </div>
                 </form>
             </div>
@@ -82,27 +106,28 @@
 </div>
 <script th:src="@{/js/jquery/jquery.min.js}"/>
 <script th:src="@{/js/jquery/jquery-ui.min.js}"/>
-<script th:src="@{/js/thirdparty/moment.min.js}"/>
-<script th:src="@{/js/bootstrap/bootstrap.min.js}"/>
-<script th:src="@{/js/thirdparty/scripts.js}"/>
+<script th:src="@{/js/jquery/jquery.inputmask.bundle.min.js}"/>
 <script th:src="@{/js/jquery/jquery.isotope.js}"/>
 <script th:src="@{/js/jquery/jquery.slicknav.js}"/>
 <script th:src="@{/js/jquery/jquery.visible.js}"/>
 <script th:src="@{/js/jquery/jquery.sticky.js}"/>
+
+<script th:src="@{/js/thirdparty/moment.min.js}"/>
+<script th:src="@{/js/bootstrap/bootstrap.min.js}"/>
+<script th:src="@{/js/thirdparty/scripts.js}"/>
 <script th:src="@{/js/thirdparty/slimbox2.js}"/>
 <script th:src="@{/js/thirdparty/modernizr.custom.js}"/>
 
-<script th:src="@{/js/jquery/jquery.inputmask.bundle.min.js}"/>
 <script th:src="@{/js/knockout/knockout.js}"/>
 <script th:src="@{/js/knockout/knockout.inputmask.js}"/>
-<script th:src="@{/js/knockout/validation/knockout-validation-min.js}"/>
+<script th:src="@{/js/knockout/knockout-validation-min.js}"/>
 <script th:src="@{/js/thirdparty/datepicker-ru.js}"/>
 <script th:src="@{/js/order.js}"/>
-<script th:src="@{/js/knockout.validation.rules.js}"/>
+<script th:src="@{/js/knockout/validation/knockout.validation.rules.js}"/>
 <script th:src="@{/js/knockout/knockout.datepicker.js}"/>
 <script th:inline="javascript">
     $(function () {
-        ko.applyBindings(new User([[${order}]], [[${orderDtos}]]));
+        ko.applyBindings(new User([[${orderrr}]], [[${orderDtos}]], [[${lessonTypes}]]));
     });
 </script>
 </body>

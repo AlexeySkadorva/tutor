@@ -1,9 +1,11 @@
 package by.bsu.tutor.service.order.impl;
 
 import by.bsu.tutor.exceptions.LogicException;
+import by.bsu.tutor.models.entity.order.LessonType;
 import by.bsu.tutor.models.entity.order.Order;
 import by.bsu.tutor.models.entity.order.OrderLesson;
 import by.bsu.tutor.models.entity.order.OrderStatus;
+import by.bsu.tutor.repositories.LessonTypeRepository;
 import by.bsu.tutor.repositories.OrderLessonRepository;
 import by.bsu.tutor.repositories.OrderRepository;
 import by.bsu.tutor.repositories.OrderStatusRepository;
@@ -21,23 +23,29 @@ public class DefaultOrderService extends DefaultCrudService<Order, OrderReposito
     private final OrderStatusRepository orderStatusRepository;
     private final MailMessageSenderService<Order> messageSenderService;
     private final OrderLessonRepository orderLessonRepository;
+    private final LessonTypeRepository lessonTypeRepository;
 
 
     public DefaultOrderService(@NotNull OrderRepository repository, OrderStatusRepository orderStatusRepository,
-                               MailMessageSenderService<Order> messageSenderService, OrderLessonRepository orderLessonRepository) {
+                               MailMessageSenderService<Order> messageSenderService, OrderLessonRepository orderLessonRepository, LessonTypeRepository lessonTypeRepository) {
         super(repository);
         this.orderStatusRepository = orderStatusRepository;
         this.messageSenderService = messageSenderService;
         this.orderLessonRepository = orderLessonRepository;
+        this.lessonTypeRepository = lessonTypeRepository;
     }
 
     @Override
-    public Order createNewOrder(Order order) {
-        messageSenderService.send(order);
+    public Order createNewOrder(Order order) throws LogicException {
+     //   messageSenderService.send(order);
+        List<OrderLesson> orderLessons = order.getOrderLessons();
+        order.setOrderLessons(null);
+        order.setOrderStatus(orderStatusRepository.findByCode(OrderStatus.Code.NEW));
         Order savedOrder = super.save(order);
-        for(OrderLesson orderLesson : order.getOrderLessons()) {
-            OrderLesson orderLessonForSave = new OrderLesson(savedOrder, orderLesson.getSubject(), orderLesson.getDuration(),
-                    orderLesson.getLessonType(), orderLesson.getPereodicity());
+        for(OrderLesson orderLesson : orderLessons) {
+            OrderLesson orderLessonForSave = new OrderLesson(Math.toIntExact(savedOrder.getId()), orderLesson.getSubject(), orderLesson.getDuration(),
+                    orderLesson.getLessonType(), orderLesson.getPeriodicity());
+            orderLessonForSave.setLessonType(lessonTypeRepository.findOne(1));
             orderLessonRepository.save(orderLessonForSave);
         }
         return order;

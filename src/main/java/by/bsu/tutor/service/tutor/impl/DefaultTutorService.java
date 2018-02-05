@@ -1,5 +1,6 @@
 package by.bsu.tutor.service.tutor.impl;
 
+import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.dto.SearchForm;
 import by.bsu.tutor.models.entity.LessonDuration;
 import by.bsu.tutor.models.entity.tutor.*;
@@ -46,7 +47,7 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
 
     @Override
     @NotNull
-    public Tutor save(@NotNull Tutor tutor) {
+    public Tutor save(@NotNull Tutor tutor) throws LogicException {
         List<TutorSubject> tutorSubjects = tutor.getTutorSubjects();
 
         User user = userService.save(tutor.getUser());
@@ -56,7 +57,7 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
 
         List<LessonDuration> lessonDurations = lessonDurationRepository.findAll();
         for(TutorSubject tutorSubject : tutorSubjects) {
-            tutorSubject.setTutor(savesTutor);
+            tutorSubject.setTutorId(savesTutor.getId());
             List<TutorSubjectDuration> tutorSubjectDurations = tutorSubject.getTutorSubjectDurations();
             tutorSubject.setTutorSubjectDurations(null);
             TutorSubject savedTutorSubject = tutorSubjectRepository.save(tutorSubject);

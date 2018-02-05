@@ -1,5 +1,6 @@
 package by.bsu.tutor.service.relation.impl;
 
+import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.order.Order;
 import by.bsu.tutor.models.entity.order.OrderLesson;
 import by.bsu.tutor.models.entity.relation.ClientTutorLesson;
@@ -26,12 +27,12 @@ public class DefaultClinicalTutorRelationService extends DefaultCrudService<Clie
     }
 
     @Override
-    public ClientTutorRelation createByOrder(Order order) {
+    public ClientTutorRelation createByOrder(Order order) throws LogicException {
         ClientTutorRelation savedClientTutorRelation =
                 super.save(new ClientTutorRelation(order.getClient(), order.getTutor()));
         for(OrderLesson orderLesson : order.getOrderLessons()) {
             ClientTutorLesson clientTutorLesson = new ClientTutorLesson(savedClientTutorRelation,
-                    orderLesson.getLessonType(), orderLesson.getPereodicity(),
+                    orderLesson.getLessonType(), orderLesson.getPeriodicity(),
                     orderLesson.getSubject(), orderLesson.getDuration());
             clientTutorLessonRepository.save(clientTutorLesson);
         }

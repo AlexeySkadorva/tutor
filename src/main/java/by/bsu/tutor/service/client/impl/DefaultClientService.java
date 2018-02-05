@@ -1,5 +1,6 @@
 package by.bsu.tutor.service.client.impl;
 
+import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.client.Client;
 import by.bsu.tutor.models.entity.client.ClientParent;
 import by.bsu.tutor.models.entity.client.ClientType;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Service
 public class DefaultClientService extends DefaultCrudService<Client, ClientRepository> implements ClientService {
@@ -36,14 +38,18 @@ public class DefaultClientService extends DefaultCrudService<Client, ClientRepos
 
     @Override
     @NotNull
-    public Client save(@NotNull Client client) {
+    public Client save(@NotNull Client client) throws LogicException {
         User user = userService.save(client.getUser());
         client.setUser(user);
         Client savedClient = super.save(client);
-        if (ClientType.Code.PRESCHOOLER.equals(client.getClientType().getCode())) {
+        if (ClientType.Code.PRESCHOOLER.equals(client.getClientType().getCode()) ||
+                ClientType.Code.SCHOOLBOY.equals(client.getClientType().getCode())) {
             ClientParent clientParent = client.getClientParent();
             clientParent.setClientId(savedClient.getId());
             clientParentRepository.save(clientParent);
+        } else {
+            ClientParent clientParent = clientParentRepository.findByClientId(savedClient.getId());
+            clientParentRepository.delete(clientParent.getId());
         }
         return savedClient;
     }

@@ -66,11 +66,8 @@
                 <span class="color-red">*</span>
             </label>
             <div>
-                <div th:each="gender : ${genders}">
-                    <input th:checked="*{user.gender}" type="checkbox" th:field="*{user.gender}"
-                           th:value="${gender.value}"/>
-                    <label th:text="${gender.text}"></label>
-                </div>
+                <input th:text="${genders[0].text}" type="radio" th:field="*{user.gender}" th:value="true" />
+                <input th:text="${genders[1].text}" type="radio" th:field="*{user.gender}" th:value="false"/>
             </div>
         </div>
     </div>

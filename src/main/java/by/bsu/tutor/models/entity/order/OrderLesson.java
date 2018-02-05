@@ -3,6 +3,7 @@ package by.bsu.tutor.models.entity.order;
 import by.bsu.tutor.models.entity.LessonDuration;
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.tutor.Subject;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,12 +13,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "orders")
+@Table(name = "order_lesson")
 public class OrderLesson extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @Column(name = "order_id")
+    private Integer orderId;
 
     @OneToOne
     @JoinColumn(name = "subject_id")
@@ -31,16 +31,16 @@ public class OrderLesson extends BaseEntity {
     @JoinColumn(name = "lesson_type_id")
     private LessonType lessonType;
 
-    @Column(name = "pereodicity")
-    private Integer pereodicity;
+    @Column(name = "periodicity")
+    private Integer periodicity;
 
-    public OrderLesson(Order order, Subject subject, LessonDuration duration,
-                       LessonType lessonType, Integer pereodicity) {
-        this.order = order;
+    public OrderLesson(Integer order, Subject subject, LessonDuration duration,
+                       LessonType lessonType, Integer periodicity) {
+        this.orderId = order;
         this.subject = subject;
         this.duration = duration;
         this.lessonType = lessonType;
-        this.pereodicity = pereodicity;
+        this.periodicity = periodicity;
     }
 
     public OrderLesson(Subject subject, LessonDuration duration) {

@@ -61,7 +61,7 @@ public class DefaultCrudService<T extends BaseEntity, R extends BaseRepository<T
 
     @NotNull
     @Override
-    public T save(@NotNull T entity) {
+    public T save(@NotNull T entity) throws LogicException {
         return repository.save(entity);
     }
 

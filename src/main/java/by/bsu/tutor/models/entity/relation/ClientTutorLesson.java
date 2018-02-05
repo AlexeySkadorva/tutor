@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "client_tutor_relations")
+@Table(name = "client_tutor_lesson")
 public class ClientTutorLesson extends BaseEntity {
 
     @ManyToOne

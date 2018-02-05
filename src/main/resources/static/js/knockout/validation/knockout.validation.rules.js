@@ -22,7 +22,7 @@ const DUMMY_PASSWORD = "DUMMY_PASSWORD";
 
 var passportSeriesMask = /^[A-Z]{2}[0-9]{7}$/i;
 var passportNumberMask = /^[0-9]{7}[A-Z][0-9]{3}[A-Z]{2}[0-9]$/i;
-var passwordMask = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?_~-])[A-Za-z\d!@#$%^&*?_~-]{1,}/i;
+var passwordMask = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i;
 var emailMask = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 var loginMask = /^[A-Za-z0-9]{6,30}$/i;
 
@@ -38,7 +38,7 @@ ko.validation.rules["passwordPattern"] = {
     validator: function (value, params) {
         return DUMMY_PASSWORD == value || passwordMask.test(value);
     },
-    message: "Пароль должен содержать латинские буквы в обоих регистрах, цифры и спецсимволы (!@#$%^&*?_~-)"
+    message: "Пароль должен содержать минимум 8 символов (буквы латинского алфавита и числа)"
 };
 
 

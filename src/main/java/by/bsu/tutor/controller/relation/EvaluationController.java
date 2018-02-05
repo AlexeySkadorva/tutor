@@ -26,7 +26,7 @@ public class EvaluationController extends ClientTutorRelationController {
     }
 
     @PostMapping(value = "/evaluation")
-    public String save(@ModelAttribute TutorEvaluation evaluation) {
+    public String save(@ModelAttribute TutorEvaluation evaluation) throws LogicException {
         tutorEvaluationService.save(evaluation);
         return "redirect:/account";
     }

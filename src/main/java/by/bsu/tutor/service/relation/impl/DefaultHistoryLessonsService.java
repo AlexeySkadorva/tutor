@@ -38,7 +38,7 @@ public class DefaultHistoryLessonsService extends DefaultCrudService<HistoryLess
 
     @Override
     @NotNull
-    public HistoryLesson save(@NotNull HistoryLesson historyLesson) {
+    public HistoryLesson save(@NotNull HistoryLesson historyLesson) throws LogicException {
         historyLessonMailMessageSenderService.send(historyLesson);
         return super.save(historyLesson);
     }

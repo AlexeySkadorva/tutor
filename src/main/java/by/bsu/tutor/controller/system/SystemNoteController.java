@@ -1,5 +1,6 @@
 package by.bsu.tutor.controller.system;
 
+import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.note.SystemNote;
 import by.bsu.tutor.service.administration.SystemNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class SystemNoteController {
     }
 
     @PostMapping
-    public String saveNote(@ModelAttribute(value = "note") SystemNote note) throws IOException {
+    public String saveNote(@ModelAttribute(value = "note") SystemNote note) throws IOException, LogicException {
         noteService.saveNoteForClient(note);
         return "redirect:/notes";
     }

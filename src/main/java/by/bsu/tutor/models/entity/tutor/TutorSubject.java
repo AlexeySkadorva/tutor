@@ -2,6 +2,7 @@ package by.bsu.tutor.models.entity.tutor;
 
 import by.bsu.tutor.models.entity.base.BaseEntity;
 import by.bsu.tutor.models.entity.order.OrderLesson;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,10 +19,11 @@ public class TutorSubject extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
-
-    @OneToOne
-    @JoinColumn(name = "tutor_id")
-    private Tutor tutor;
+//
+//    @JsonIgnoreProperties("tutor")
+//    @OneToOne
+    @Column(name = "tutor_id")
+    private Long tutorId;
 
     @OneToMany
     @JoinColumn(name = "tutor_subject_id")
