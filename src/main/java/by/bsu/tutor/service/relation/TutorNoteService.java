@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface TutorNoteService extends CrudService<TutorNote> {
 
-    List<TutorNote> getNotesForTutor(@NotNull Tutor tutor);
+    //List<TutorNote> getNotesForTutor(@NotNull Tutor tutor);
 }

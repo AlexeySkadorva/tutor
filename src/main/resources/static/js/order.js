@@ -11,7 +11,7 @@ var User = function (order, orderDtos, lessonTypes) {
     self.orderStatus = ko.observable(order.orderStatus);
 
     self.client = ko.observable(order.client);
-    self.orderLessons = ko.observableArray();
+    self.orderLessons = ko.observableArray().extend({required: true});
     for(var i=0;i<this.orderDtos().length;i++) {
         self.orderLessons.push(new OrderLesson(this.orderDtos()[i].subject, this.orderDtos()[0].tutorSubjectDurations[i].duration));
     }
@@ -19,12 +19,12 @@ var User = function (order, orderDtos, lessonTypes) {
 
 User.prototype.save = function () {
     var self = this;
-    //self.errors = ko.validation.group(self);
-    //if (self.errors().length === 0) {
+    self.errors = ko.validation.group(self);
+    if (self.errors().length === 0) {
         self.saveRequest();
-    // } else {
-    //     self.errors.showAllMessages();
-    // }
+    } else {
+        self.errors.showAllMessages();
+    }
 };
 
 User.prototype.selectDuration = function(tutorSubjectIndex, durationIndex) {
@@ -49,6 +49,7 @@ User.prototype.saveRequest = function(){
         async: false,
         type: "POST"
     }).success(function (){
+        window.location.replace("/order/send");
     });
 };
 User.prototype._serialize = function() {

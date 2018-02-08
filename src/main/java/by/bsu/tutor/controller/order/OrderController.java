@@ -41,8 +41,13 @@ public class OrderController {
 
 
     @PostMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String saveOrder(@RequestBody Order order) throws LogicException {
+    public String saveOrder(@RequestBody Order order) throws LogicException {
         orderService.createNewOrder(order);
+        return "/order/send";
+    }
+
+    @GetMapping(value = "/order/send")
+    public String get() throws LogicException {
         return "/order/send";
     }
 

@@ -31,7 +31,7 @@ public class NoteController extends ClientTutorRelationController {
     @GetMapping("/{id}/note")
     public String updatePage(@PathVariable Long id, Model model) throws IOException, LogicException {
         TutorNote tutorNote = new TutorNote();
-        tutorNote.setClientTutorRelation(clientTutorRelationService.get(id));
+        tutorNote.setClientTutorRelationId(id);
 
         model.addAttribute("note", tutorNote);
         return "relation/note";

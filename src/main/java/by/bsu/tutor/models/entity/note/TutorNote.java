@@ -22,8 +22,7 @@ public class TutorNote extends BaseEntity {
     @Column(name = "created_date")
     private Date createdDate;
 
-    @ManyToOne
-    @JoinColumn(name = "client_tutor_id")
-    private ClientTutorRelation clientTutorRelation;
+    @Column(name = "client_tutor_id")
+    private Long clientTutorRelationId;
 
 }

@@ -33,6 +33,9 @@ public class Tutor extends BaseEntity {
     @Column(name = "skype_link")
     private String skypeLink;
 
+    @Column(name = "duty")
+    private Integer duty;
+
     @Column(name = "telegram")
     private String telegram;
 

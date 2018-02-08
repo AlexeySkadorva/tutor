@@ -19,6 +19,9 @@ public class HistoryLesson extends BaseEntity {
     @Column(name = "date")
     private Date date;
 
+    @Column(name = "client_tutor_lesson_id")
+    private Long lessonId;
+
     @Column(name = "client_tutor_relation_id")
     private Long relationId;
 
@@ -30,6 +33,12 @@ public class HistoryLesson extends BaseEntity {
 
     @Column(name = "rating")
     private Integer rating;
+
+    @Column(name = "price")
+    private Integer price;
+
+    @Column(name = "duty")
+    private Double duty;
 
     @Column(name = "paid")
     private Boolean isPaid;

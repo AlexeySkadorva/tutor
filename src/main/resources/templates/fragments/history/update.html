@@ -19,6 +19,9 @@
         <input class="form-control margin-bottom-20"
                th:field="*{rating}" type="text" maxlength="100"/>
 
+        <p>Просим Вас со всей ответственностью относиться к оформлению домашних задания, так как ученик будет
+        каждый месяц получать рассылку с пройденным материалом и прогрессом.
+            Рекомендуем в самом конце занятия, заполнить эту форму вместе с учеником.</p>
         <div class="row">
             <div class="col-lg-12 text-right">
                 <button class="btn btn-primary" type="submit">Сохранить</button>
@@ -26,6 +29,12 @@
         </div>
 
         <input type="hidden" th:field="*{relationId}"/>
+        <input type="hidden" th:field="*{price}"/>
+
+        <input type="hidden" th:field="*{duty}"/>
+
+        <input type="hidden" th:field="*{lessonId}"/>
+
     </div>
 </div>
 </body>

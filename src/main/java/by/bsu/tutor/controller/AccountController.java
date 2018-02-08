@@ -2,6 +2,7 @@ package by.bsu.tutor.controller;
 
 import by.bsu.tutor.exceptions.LogicException;
 import by.bsu.tutor.models.entity.client.Client;
+import by.bsu.tutor.models.entity.relation.ClientTutorRelation;
 import by.bsu.tutor.models.entity.tutor.Tutor;
 import by.bsu.tutor.models.entity.user.Role;
 import by.bsu.tutor.models.entity.user.User;
@@ -22,6 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @RequestMapping("/account")
 @Controller
@@ -56,7 +59,8 @@ public class AccountController {
             Tutor tutor = tutorService.getByUser(currentUser);
             model.addAttribute("tutor", tutor);
             model.addAttribute("evaluation", tutorEvaluationService.getMiddleEvaluation(tutor));
-            model.addAttribute("hasNewOrder", !CollectionUtils.isEmpty(orderService.getNewByTutorId(tutor.getId())));
+            model.addAttribute("orders", orderService.getNewByTutorId(tutor.getId()));
+            model.addAttribute("relations", clientTutorRelationService.getByTutorId(tutor.getId()));
             return "/tutor/tutor";
         }
         return "redirect:/";
