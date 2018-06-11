@@ -63,7 +63,7 @@ public class DefaultTutorService extends DefaultCrudService<Tutor, TutorReposito
             TutorSubject savedTutorSubject = tutorSubjectRepository.save(tutorSubject);
             for(int i = 0; i < lessonDurations.size(); i++) {
                 TutorSubjectDuration tutorSubjectDuration = tutorSubjectDurations.get(i);
-                tutorSubjectDuration.setTutorSubject(savedTutorSubject);
+                tutorSubjectDuration.setTutorSubjectId(savedTutorSubject.getId());
                 tutorSubjectDuration.setDuration(lessonDurations.get(i));
                 tutorSubjectDurationRepository.save(tutorSubjectDuration);
             }

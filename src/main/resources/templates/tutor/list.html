@@ -39,9 +39,10 @@
                         </div>
                         <div class="blog-post-details">
                             <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags"
-                                 th:each="sub : ${tutor.subjects}">
+                                 th:each="sub : ${tutor.tutorSubjects}">
                                 <i class="fa fa-tag color-gray-light"></i>
-                                <a th:href="@{'/tutors/subjects/' + ${sub.id}}" th:text="${sub.name}"></a>
+                                <a th:href="@{'/tutors/subjects/' + ${sub.subject.id}}" th:text="${sub.subject.name}"></a>
+                                <i th:text="'Цена за час ' + ${sub.tutorSubjectDurations[1].price}"></i>
                             </div>
                             <div th:if="!${#lists.isEmpty(tutor.notes)}"
                                  class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last">

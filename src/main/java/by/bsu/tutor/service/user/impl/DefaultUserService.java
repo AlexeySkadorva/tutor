@@ -35,7 +35,7 @@ public class DefaultUserService extends DefaultCrudService<User, UserRepository>
     @NotNull
     public User save(@NotNull User user) throws LogicException {
         if (null == user.getId()) {
-            userMailMessageSender.send(user);
+           // userMailMessageSender.send(user);
             user.setPassword(passwordEncoder.encodePassword(user.getPassword(), StringUtils.EMPTY));
         } else {
             User currentUser = get(user.getId());

@@ -15,6 +15,26 @@
     <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
     <link th:href="@{/css/custom.css}" rel="stylesheet"/>
     <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"/>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: center;
+            font-weight: 300;
+            padding: 8px;
+        }
+
+        tr:nth-child(even){background-color: #f2f2f2}
+
+        th {
+            background-color: #33747a;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <div id="body-bg">
@@ -97,18 +117,8 @@
                                       th:text="${l.name}"></span>
                             </div>
 
-                            <div>
-                                <b>Цена:</b>
-                                <div th:each="t : *{tutorSubjects}">
-                                    <div th:text="${t.subject.name}"></div>
-                                    <div th:each="duration : ${t.tutorSubjectDurations}">
-                                        <span th:text="${duration.duration.name}"></span>
-                                        <span th:text="${duration.duration.duration}"></span>
-                                        <span th:text="${duration.price}"></span>
-                                    </div>
 
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="col-lg-6 text-right" th:if="${account}">
@@ -122,38 +132,62 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div th:if="!*{#strings.isEmpty(status)}">
-                        <hr/>
-                        <div class="row animate fadeInUp">
-                            <h2 class="text-center margin-top-10" th:text="*{status}"></h2>
+
+                        <div class="col-lg-6" th:if="${account}">
+                                <h3 class="margin-top-10" th:text="'Ваша текущая ставка ' + *{duty} + '%'"></h3>
                         </div>
-                        <hr/>
+
                     </div>
 
-                    <div th:if="${account}">
-                        <hr/>
-                        <div class="row animate fadeInUp">
-                            <h2 class="text-center margin-top-10" th:text="'Ваша текущая ставка ' + *{duty} + '%'"></h2>
-                        </div>
-                        <hr/>
+                    <div class="row animate fadeInUp">
+                        <table>
+                            <tr >
+                                <th>Предмет</th>
+                                <th>Цена за 45 минут</th>
+                                <th>Цена за час</th>
+                                <th>Цена за полтора часа</th>
+                                <th>Цена за два часа</th>
+                            </tr>
+                            <tr th:each="t : *{tutorSubjects}">
+                                <td th:text="${t.subject.name}"></td>
+                                <div th:each="duration : ${t.tutorSubjectDurations}">
+                                    <td th:text="${duration.price}"></td>
+                                </div>
+                            </tr>
+                        </table>
+                        <!--<div th:each="t : *{tutorSubjects}">-->
+                        <!--<div th:text="${t.subject.name}"></div>-->
+                        <!--<div th:each="duration : ${t.tutorSubjectDurations}">-->
+                        <!--<span th:text="${duration.duration.name}"></span>-->
+                        <!--<span th:text="${duration.duration.duration}"></span>-->
+                        <!--<span th:text="${duration.price}"></span>-->
+                        <!--</div>-->
+
+                        <!--</div>-->
                     </div>
+
+                    <!--<div th:if="!*{#strings.isEmpty(status)}">-->
+                        <!--<hr/>-->
+                        <!--<div class="row animate fadeInUp">-->
+                            <!--<h2 class="text-center margin-top-10" th:text="*{status}"></h2>-->
+                        <!--</div>-->
+                        <!--<hr/>-->
+                    <!--</div>-->
+
+
+
 
                     <div class="col-md-12">
                         <div th:each="relation : ${relations}">
                             <hr/>
 
                             <div class="col-md-12 margin-vert-30">
-                                <div class="col-md-6" >
-                                    <h3>
-                                        <p th:text="'Проведено занятий ' + ${#lists.size(relation.historyLessons)}"></p>
-                                    </h3>
-                                    <h3>
-                                        <p th:text="'Заработано ' + ${#aggregates.sum(relation.historyLessons.![price])} + ' BYN'"></p>
-                                    </h3>
-                                    <h3>
-                                        <p th:text="'Необходимо уплатить ' + ${#aggregates.sum(relation.historyLessons.![duty])} + ' BYN'"></p>
-                                    </h3>
+                                <div class="col-md-6">
+                                    <div>
+                                        <span class="label label-primary"  th:text="'Проведено занятий ' + ${#lists.size(relation.historyLessons)}"></span>
+                                        <span class="label label-primary" th:text="'Заработано ' + ${#aggregates.sum(relation.historyLessons.![price])?:0} + ' BYN'"></span>
+                                        <span class="label label-primary" th:text="'Необходимо уплатить ' + ${#aggregates.sum(relation.historyLessons.![duty])?:0} + ' BYN'"></span>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div th:each="lesson : ${relation.clientTutorLessons}">
@@ -178,12 +212,12 @@
                             <div class="row">
                                 <div class="col-md-2 margin-vert-20">
                                     <a th:href="@{'/relations/' + ${relation.id} + '/history'}">
-                                        <i class="fa-plus-square fa-2x color-primary"></i>
+                                        <i class="fa-plus-square fa-3x color-primary"></i>
                                     </a>
                                 </div>
-                                <div class="col-md-10 margin-vert-10">
-                                    <h4><a th:href="@{'/relations/' + ${relation.id} + '/history'}">Добавить новое
-                                        занятие</a></h4>
+                                <div class="col-md-10 margin-vert-30">
+                                    <h3><a th:href="@{'/relations/' + ${relation.id} + '/history'}">Добавить новое
+                                        занятие</a></h3>
                                 </div>
                             </div>
                             </div>
@@ -206,13 +240,14 @@
 
                                 <div class="col-md-10 margin-vert-30">
                                     <h3>
-                                        История занятий
-                                        <a th:href="@{'/relations/' + ${relation.id} + '/history/list'}">Просмотреть</a>
+                                        <a th:href="@{'/relations/' + ${relation.id} + '/history/list'}">История занятий</a>
                                     </h3>
                                 </div>
                             </div>
                             </div>
                         </div>
+                        <hr/>
+
                     </div>
 
                     <div sec:authorize="${!hasAuthority('TUTOR')}" class="row">

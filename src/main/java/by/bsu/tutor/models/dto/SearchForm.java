@@ -2,6 +2,9 @@ package by.bsu.tutor.models.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class SearchForm {
 
@@ -13,6 +16,10 @@ public class SearchForm {
     private Integer pageCount;
     private String sortField;
     private String sortOrder;
+
+    private List<Integer> subjectIds = new ArrayList<>();
+    private List<Integer> cityIds = new ArrayList<>();
+
 
     public void adjust(long recordCount) {
         pageCount = (int) Math.ceil((double) recordCount / pageSize);

@@ -20,9 +20,8 @@ public class TutorSubjectDuration extends BaseEntity {
     @JoinColumn(name = "lesson_duration_id")
     private LessonDuration duration;
 
-    @ManyToOne
-    @JoinColumn(name = "tutor_subject_id")
-    private TutorSubject tutorSubject;
+    @Column(name = "tutor_subject_id")
+    private Long tutorSubjectId;
 
     @Column(name = "price")
     private int price;

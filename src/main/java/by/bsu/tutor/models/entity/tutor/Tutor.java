@@ -1,6 +1,7 @@
 package by.bsu.tutor.models.entity.tutor;
 
 import by.bsu.tutor.models.entity.base.BaseEntity;
+import by.bsu.tutor.models.entity.base.City;
 import by.bsu.tutor.models.entity.note.TutorNote;
 import by.bsu.tutor.models.entity.order.LessonType;
 import by.bsu.tutor.models.entity.user.User;
@@ -42,6 +43,10 @@ public class Tutor extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+//    @ManyToOne
+//    @JoinColumn(name = "city_id")
+//    private City city;
 
     //    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "client_tutor_relations", joinColumns = { @JoinColumn(name = "tutor_id", referencedColumnName = "id") },

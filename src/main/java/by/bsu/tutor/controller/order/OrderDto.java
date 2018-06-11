@@ -19,7 +19,7 @@ public class OrderDto {
 
     public OrderDto(Subject subject, List<TutorSubjectDuration> tutorSubjectDurations) {
         this.subject = subject;
-        tutorSubjectDurations.forEach(t->t.setTutorSubject(null));
+        tutorSubjectDurations.forEach(t->t.setTutorSubjectId(null));
         this.tutorSubjectDurations = tutorSubjectDurations;
     }
 }

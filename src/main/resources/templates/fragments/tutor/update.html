@@ -44,6 +44,23 @@
                        th:errors="*{tutorSubjects[__${status.index}__].subject}"></p>
                 </div>
 
+
+                <div class="ch-input">
+                    <span>Укажите предметы по которым вы будете заниматься и цену за занятия в зависимости от
+                     продолжительности</span>
+                    <div th:each="d,rowD : ${r.tutorSubjectDurations}">
+
+                        <div class="col-md-6"><input class="form-control margin-bottom-20" type="text"
+                                                     th:value="${d.price}"
+
+                                                     th:id="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
+                                                     th:name="'tutorSubjects[' + ${status.index} + '].tutorSubjectDurations[' + ${rowD.index} + '].price'"
+                                                     data-id-template="retransplantationCheckbox"
+                                                     th:data-name-template="'tutorSubjects[{x}].tutorSubjectDurations[' + ${rowD.index} + '].price'"/>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="ch-input">
                     <span>Укажите предметы по которым вы будете заниматься и цену за занятия в зависимости от
                      продолжительности</span>
@@ -74,6 +91,16 @@
                 <label th:text="${lessonType.name}"></label>
             </div>
         </div>
+        <!--<div class="row">-->
+            <!--<label>Город-->
+                <!--<span class="color-red">*</span>-->
+            <!--</label>-->
+            <!--<select id="genderSelect" class="form-control margin-bottom-20" th:field="*{city}">-->
+                <!--<option value=""></option>-->
+                <!--<option th:each="c : ${city}"  th:selected="(*{city} == ${c})"-->
+                        <!--th:value="${c.id}" th:text="${c.name}">Курс</option>-->
+            <!--</select>-->
+        <!--</div>-->
     </div>
 
     <div class="templates" style="display: none;">
@@ -119,7 +146,9 @@
                            data-name-template="tutorSubjects[{x}].tutorSubjectDurations[3].price"/>
                 </div>
             </div>
-
+            <input type="hidden" th:field="*{user.id}"/>
+            <input type="hidden" th:field="*{user.role.id}"/>
+            <input type="hidden" th:field="*{user.photo}"/>
             <div class="graft-actions">
                 <button type="button" class="add button-1">+ Добавить предмет</button>
                 <button type="button" class="graft-delete button-2">Удалить предмет</button>

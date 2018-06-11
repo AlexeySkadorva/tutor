@@ -49,6 +49,7 @@ public class DefaultClientService extends DefaultCrudService<Client, ClientRepos
             clientParentRepository.save(clientParent);
         } else {
             ClientParent clientParent = clientParentRepository.findByClientId(savedClient.getId());
+            if(clientParent != null)
             clientParentRepository.delete(clientParent.getId());
         }
         return savedClient;
